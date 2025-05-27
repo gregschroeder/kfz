@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -19,7 +18,7 @@ for table in tables:
                 region = cols[1].text.strip()
                 state = cols[3].text.strip()
                 for code in codes:
-                    print(f"row: {code}=[{region}][{state}]")
+                    #print(f"row: {code}=[{region}][{state}]")
                     data[code] = [region, state]
                     if code == "ZZ":
                         raise StopIteration
