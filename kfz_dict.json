@@ -1,728 +1,2912 @@
 {
-  "A": "Augsburg\nStadt Augsburg, Landkreis Augsburg\nBayern",
-  "AA": "AAlen\nOstalbkreis\nBaden-Württemberg",
-  "AB": "AschaffenBurg\nStadt Aschaffenburg, Landkreis Aschaffenburg\nBayern",
-  "ABG": "AltenBurG\nLandkreis Altenburger Land\nThüringen",
-  "ABI": "Anhalt, BItterfeld\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
-  "AC": "AaChen\nStädteregion Aachen\nNordrhein-Westfalen",
-  "AE": "AuErbach\nVogtlandkreis\nSachsen",
-  "AH": "AHaus\nKreis Borken\nNordrhein-Westfalen",
-  "AIB": "AIBling\nLandkreis München, Landkreis Rosenheim\nBayern",
-  "AIC": "AIChach\nLandkreis Aichach-Friedberg\nBayern",
-  "AK": "AltenKirchen\nLandkreis Altenkirchen (Westerwald)\nRheinland-Pfalz",
-  "ALF": "ALFeld\nLandkreis Hildesheim\nNiedersachsen",
-  "ALZ": "ALZenau\nLandkreis Aschaffenburg\nBayern",
-  "AM": "AMberg\nStadt Amberg\nBayern",
-  "AN": "ANsbach\nStadt Ansbach, Landkreis Ansbach\nBayern",
-  "ANA": "ANnAberg\nErzgebirgskreis\nSachsen",
-  "ANG": "ANGermünde\nLandkreis Uckermark\nBrandenburg",
-  "ANK": "ANKlam\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "AÖ": "AltÖtting\nLandkreis Altötting\nBayern",
-  "AP": "APolda\nLandkreis Weimarer Land\nThüringen",
-  "APD": "APolDa\nLandkreis Weimarer Land\nThüringen",
-  "ARN": "ARNstadt\nIlm-Kreis\nThüringen",
-  "ART": "ARTern\nKyffhäuserkreis\nThüringen",
-  "AS": "Amberg, Sulzbach\nLandkreis Amberg-Sulzbach\nBayern",
-  "ASL": "ASchersLeben\nSalzlandkreis\nSachsen-Anhalt",
-  "ASZ": "Aue, SchwarZenberg\nErzgebirgskreis\nSachsen",
-  "AT": "AltenTreptow\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "AU": "AUe\nErzgebirgskreis\nSachsen",
-  "AUR": "AURich\nLandkreis Aurich\nNiedersachsen",
-  "AW": "AhrWeiler\nLandkreis Ahrweiler\nRheinland-Pfalz",
-  "AZ": "AlZey\nLandkreis Alzey-Worms\nRheinland-Pfalz",
-  "AZE": "Anhalt-ZErbst\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
-  "B": "Berlin\nBerlin\nBerlin",
-  "BA": "BAmberg\nStadt Bamberg, Landkreis Bamberg\nBayern",
-  "BAD": "BADen-Baden\nStadt Baden-Baden\nBaden-Württemberg",
-  "BAR": "BARnim\nLandkreis Barnim\nBrandenburg",
-  "BB": "BöBlingen\nLandkreis Böblingen\nBaden-Württemberg",
-  "BBG": "BernBurG\nSalzlandkreis\nSachsen-Anhalt",
-  "BBL": "BrandenBurgische Landesregierung\nBrandenburg, Landesregierung, Landtag und Polizei\nBrandenburg",
-  "BC": "BiberaCh\nLandkreis Biberach\nBaden-Württemberg",
-  "BCH": "BuCHen\nNeckar-Odenwald-Kreis\nBaden-Württemberg",
-  "BD": "BundesDienst\nDeutscher Bundestag, Bundesrat, Bundespräsidialamt, Bundesregierung, Bundesministerien, Bundesfinanzverwaltung und Bundesverfassungsgericht\nbundesweit",
-  "BE": "BEckum\nKreis Warendorf\nNordrhein-Westfalen",
-  "BED": "Brand-ErbisDorf\nLandkreis Mittelsachsen\nSachsen",
-  "BER": "BERnau\nLandkreis Barnim\nBrandenburg",
-  "BF": "BurgsteinFurt\nKreis Steinfurt\nNordrhein-Westfalen",
-  "BGD": "BerchtesGaDen\nLandkreis Berchtesgadener Land\nBayern",
-  "BGL": "BerchtesGadener Land\nLandkreis Berchtesgadener Land\nBayern",
-  "BH": "BüHl\nOrtenaukreis, Landkreis Rastatt\nBaden-Württemberg",
-  "BI": "BIelefeld\nStadt Bielefeld\nNordrhein-Westfalen",
-  "BID": "BIeDenkopf\nLandkreis Marburg-Biedenkopf\nHessen",
-  "BIN": "BINgen\nLandkreis Mainz-Bingen\nRheinland-Pfalz",
-  "BIR": "BIRkenfeld\nLandkreis Birkenfeld\nRheinland-Pfalz",
-  "BIT": "BITburg\nEifelkreis Bitburg-Prüm\nRheinland-Pfalz",
-  "BIW": "BIschofsWerda\nLandkreis Bautzen\nSachsen",
-  "BK": "BacKnang\nLandkreis Backnang\nBaden-Württemberg",
-  "BKS": "BernKaStel\nLandkreis Bernkastel-Wittlich\nRheinland-Pfalz",
-  "BL": "BaLingen\nZollernalbkreis\nBaden-Württemberg",
-  "BLB": "BerLeBurg\nKreis Siegen-Wittgenstein\nNordrhein-Westfalen",
-  "BLK": "BurgenLandKreis\nBurgenlandkreis\nSachsen-Anhalt",
-  "BM": "BergheiM\nRhein-Erft-Kreis\nNordrhein-Westfalen",
-  "BN": "BonN\nStadt Bonn, Diplomaten\nNordrhein-Westfalen",
-  "BNA": "BorNA\nLandkreis Leipzig\nSachsen",
-  "BO": "BOchum\nStadt Bochum\nNordrhein-Westfalen",
-  "BÖ": "BÖrde\nLandkreis Börde\nSachsen-Anhalt",
-  "BOG": "BOGen\nLandkreis Straubing-Bogen\nBayern",
-  "BOH": "BOcHolt\nKreis Borken\nNordrhein-Westfalen",
-  "BOR": "BORken\nKreis Borken\nNordrhein-Westfalen",
-  "BOT": "BOTtrop\nStadt Bottrop\nNordrhein-Westfalen",
-  "BP": "BundesPolizei\nBundespolizei\nbundesweit",
-  "BRA": "BRAke\nLandkreis Wesermarsch\nNiedersachsen",
-  "BRB": "BRandenBurg\nStadt Brandenburg an der Havel\nBrandenburg",
-  "BRG": "BuRG\nLandkreis Jerichower Land\nSachsen-Anhalt",
-  "BRK": "BRücKenau\nLandkreis Bad Kissingen\nBayern",
-  "BRL": "BRaunLage\nLandkreis Goslar\nNiedersachsen",
-  "BRV": "BRemerVörde\nLandkreis Rotenburg (Wümme)\nNiedersachsen",
-  "BS": "BraunSchweig\nStadt Braunschweig, Polizeidirektion Braunschweig (PD 100–9999)\nNiedersachsen",
-  "BSB": "BerSenBrück\nLandkreis Osnabrück\nNiedersachsen",
-  "BSK": "BeeSKow\nLandkreis Oder-Spree\nBrandenburg",
-  "BT": "BayreuTh\nStadt Bayreuth, Landkreis Bayreuth\nBayern",
-  "BTF": "BitTerFeld\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
-  "BÜD": "BÜDingen\nWetteraukreis\nHessen",
-  "BUL": "BUrgLengenfeld\nLandkreis Amberg-Sulzbach (B, F und G 1–999), Landkreis Schwandorf\nBayern",
-  "BÜR": "BÜRen\nKreis Paderborn\nNordrhein-Westfalen",
-  "BÜS": "BÜSingen\nGemeinde Büsingen am Hochrhein (Gemeinde im Landkreis Konstanz, deutsche Exklave in der Schweiz) (A und Z 1–999)\nBaden-Württemberg",
-  "BÜZ": "BÜtZow\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "BW": "Bundes-Wasserstraßen- und Schifffahrtsverwaltung\nWasserstraßen- und Schifffahrtsverwaltung des Bundes\nbundesweit",
-  "BWL": "Baden-Württembergischer Landtag\nBaden-Württemberg, Landesregierung, Landtag und Polizei\nBaden-Württemberg",
-  "BYL": "BaYerischer Landtag\nBayern, Landesregierung und Landtag\nBayern",
-  "BZ": "BautZen\nLandkreis Bautzen\nSachsen",
-  "C": "Chemnitz\nStadt Chemnitz\nSachsen",
-  "CA": "CAlau\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
-  "CAS": "CAStrop\nKreis Recklinghausen\nNordrhein-Westfalen",
-  "CB": "CottBus\nStadt Cottbus\nBrandenburg",
-  "CE": "CElle\nLandkreis Celle\nNiedersachsen",
-  "CHA": "CHAm\nLandkreis Cham\nBayern",
-  "CLP": "CLopPenburg\nLandkreis Cloppenburg\nNiedersachsen",
-  "CLZ": "CLausthal-Zellerfeld\nLandkreis Goslar\nNiedersachsen",
-  "CO": "COburg\nStadt Coburg und Landkreis Coburg\nBayern",
-  "COC": "COChem\nLandkreis Cochem-Zell\nRheinland-Pfalz",
-  "COE": "COEsfeld\nKreis Coesfeld\nNordrhein-Westfalen",
-  "CR": "CRailsheim\nLandkreis Schwäbisch Hall\nBaden-Württemberg",
-  "CUX": "CUXhaven\nLandkreis Cuxhaven\nNiedersachsen",
-  "CW": "CalW\nLandkreis Calw\nBaden-Württemberg",
-  "D": "Düsseldorf\nStadt Düsseldorf\nNordrhein-Westfalen",
-  "DA": "DArmstadt\nLandkreis Darmstadt-Dieburg und Stadt Darmstadt\nHessen",
-  "DAH": "DAcHau\nLandkreis Dachau\nBayern",
-  "DAN": "DANnenberg\nLandkreis Lüchow-Dannenberg\nNiedersachsen",
-  "DAU": "DAUn\nLandkreis Vulkaneifel\nRheinland-Pfalz",
-  "DBR": "DoBeRan\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "DD": "DresDen\nStadt Dresden, Polizei Sachsen (Q 1000–9999)\nSachsen",
-  "DE": "DEssau\nStadt Dessau-Roßlau\nSachsen-Anhalt",
-  "DEG": "DEGgendorf\nLandkreis Deggendorf\nBayern",
-  "DEL": "DELmenhorst\nStadt Delmenhorst\nNiedersachsen",
-  "DGF": "DinGolFing\nLandkreis Dingolfing-Landau\nBayern",
-  "DH": "DiepHolz\nLandkreis Diepholz\nNiedersachsen",
-  "DI": "DIeburg\nLandkreis Darmstadt-Dieburg\nHessen",
-  "DIL": "DILlenburg\nLahn-Dill-Kreis ohne die Stadt Wetzlar\nHessen",
-  "DIN": "DINslaken\nKreis Wesel\nNordrhein-Westfalen",
-  "DIZ": "DIeZ\nRhein-Lahn-Kreis\nRheinland-Pfalz",
-  "DKB": "DinKelsBühl\nLandkreis Ansbach\nBayern",
-  "DL": "DöbeLn\nLandkreis Mittelsachsen\nSachsen",
-  "DLG": "DilLinGen\nLandkreis Dillingen an der Donau\nBayern",
-  "DM": "DemMin\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "DN": "DüreN\nKreis Düren\nNordrhein-Westfalen",
-  "DO": "DOrtmund\nStadt Dortmund\nNordrhein-Westfalen",
-  "DON": "DONauwörth\nLandkreis Donau-Ries\nBayern",
-  "DU": "DUisburg\nStadt Duisburg\nNordrhein-Westfalen",
-  "DUD": "DUDerstadt\nLandkreis Göttingen ohne die Stadt Göttingen\nNiedersachsen",
-  "DÜW": "DÜrkheim an der Weinstraße\nLandkreis Bad Dürkheim\nRheinland-Pfalz",
-  "DW": "DippoldisWalde\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
-  "DZ": "DelitZsch\nLandkreis Nordsachsen\nSachsen",
-  "E": "Essen\nStadt Essen\nNordrhein-Westfalen",
-  "EA": "EisenAch\nStadt Eisenach\nThüringen",
-  "EB": "EilenBurg\nLandkreis Nordsachsen\nSachsen",
-  "EBE": "EBErsberg\nLandkreis Ebersberg\nBayern",
-  "EBN": "EBerN\nLandkreis Haßberge\nBayern",
-  "EBS": "EBermannStadt\nLandkreis Forchheim, Landkreis Kulmbach (A–M 1–999), Landkreis Bayreuth (N–Z 1–999)\nBayern",
-  "ECK": "ECKernförde\nKreis Rendsburg-Eckernförde\nSchleswig-Holstein",
-  "ED": "ErDing\nLandkreis Erding\nBayern",
-  "EE": "Elbe, Elster\nLandkreis Elbe-Elster\nBrandenburg",
-  "EF": "ErFurt\nStadt Erfurt\nThüringen",
-  "EG": "EGgenfelden\nLandkreis Rottal-Inn\nBayern",
-  "EH": "EisenHüttenstadt\nLandkreis Oder-Spree\nBrandenburg",
-  "EI": "EIchstätt\nLandkreis Eichstätt\nBayern",
-  "EIC": "EIChsfeld\nLandkreis Eichsfeld\nThüringen",
-  "EIL": "EIsLeben\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
-  "EIN": "EINbeck\nLandkreis Northeim\nNiedersachsen",
-  "EIS": "EISenberg\nSaale-Holzland-Kreis\nThüringen",
-  "EL": "EmsLand\nLandkreis Emsland\nNiedersachsen",
-  "EM": "EMmendingen\nLandkreis Emmendingen\nBaden-Württemberg",
-  "EMD": "EMDen\nStadt Emden\nNiedersachsen",
-  "EMS": "EMS\nRhein-Lahn-Kreis\nRheinland-Pfalz",
-  "EN": "ENnepe\nEnnepe-Ruhr-Kreis\nNordrhein-Westfalen",
-  "ER": "ERlangen\nStadt Erlangen\nBayern",
-  "ERB": "ERBach\nOdenwaldkreis\nHessen",
-  "ERH": "ERlangen, Höchstadt\nLandkreis Erlangen-Höchstadt\nBayern",
-  "ERK": "ERKelenz\nKreis Heinsberg\nNordrhein-Westfalen",
-  "ERZ": "ERZgebirge\nErzgebirgskreis\nSachsen",
-  "ES": "ESslingen\nLandkreis Esslingen\nBaden-Württemberg",
-  "ESB": "ESchenBach\nLandkreis Neustadt an der Waldnaab, Landkreis Amberg-Sulzbach (B, F, G, I, O und Q 1–999), Landkreis Bayreuth (AT, BT, CT, DT, ... YT und ZT 1–99), Landkreis Nürnberger Land (N 1–999)\nBayern",
-  "ESW": "ESchWege\nWerra-Meißner-Kreis\nHessen",
-  "EU": "EUskirchen\nKreis Euskirchen\nNordrhein-Westfalen",
-  "EW": "EbersWalde\nLandkreis Barnim\nBrandenburg",
-  "F": "Frankfurt\nStadt Frankfurt am Main\nHessen",
-  "FB": "FriedBerg\nWetteraukreis\nHessen",
-  "FD": "FulDa\nLandkreis Fulda\nHessen",
-  "FDB": "FrieDBerg\nLandkreis Aichach-Friedberg\nBayern",
-  "FDS": "FreuDenStadt\nLandkreis Freudenstadt\nBaden-Württemberg",
-  "FEU": "FEUchtwangen\nLandkreis Ansbach\nBayern",
-  "FF": "FrankFurt\nStadt Frankfurt (Oder)\nBrandenburg",
-  "FFB": "FürstenFeldBruck\nLandkreis Fürstenfeldbruck\nBayern",
-  "FG": "FreiberG\nLandkreis Mittelsachsen\nSachsen",
-  "FI": "FInsterwalde\nLandkreis Elbe-Elster\nBrandenburg",
-  "FKB": "FranKenBerg\nLandkreis Waldeck-Frankenberg\nHessen",
-  "FL": "FLensburg\nStadt Flensburg\nSchleswig-Holstein",
-  "FLÖ": "FLÖha\nLandkreis Mittelsachsen\nSachsen",
-  "FN": "FriedrichshafeN\nBodenseekreis\nBaden-Württemberg",
-  "FO": "FOrchheim\nLandkreis Forchheim\nBayern",
-  "FOR": "FORst\nLandkreis Spree-Neiße\nBrandenburg",
-  "FR": "FReiburg\nLandkreis Breisgau-Hochschwarzwald, Stadt Freiburg im Breisgau (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
-  "FRG": "FReyung, Grafenau\nLandkreis Freyung-Grafenau\nBayern",
-  "FRI": "FRIesland\nLandkreis Friesland\nNiedersachsen",
-  "FRW": "FReienWalde\nLandkreis Märkisch-Oderland\nBrandenburg",
-  "FS": "FreiSing\nLandkreis Freising\nBayern",
-  "FT": "FrankenThal\nStadt Frankenthal (Pfalz)\nRheinland-Pfalz",
-  "FTL": "FreiTaL\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
-  "FÜ": "FÜrth\nLandkreis Fürth, Stadt Fürth (AA–ZZ 100–999)\nBayern",
-  "FÜS": "FÜSsen\nLandkreis Ostallgäu\nBayern",
-  "FW": "FürstenWalde\nLandkreis Oder-Spree\nBrandenburg",
-  "FZ": "FritZlar\nSchwalm-Eder-Kreis\nHessen",
-  "G": "Gera\nStadt Gera\nThüringen",
-  "GA": "GArdelegen\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
-  "GAN": "GANdersheim\nLandkreis Northeim\nNiedersachsen",
-  "GAP": "GArmisch-Partenkirchen\nLandkreis Garmisch-Partenkirchen\nBayern",
-  "GC": "GlauChau\nLandkreis Zwickau\nSachsen",
-  "GD": "GmünD\nOstalbkreis\nBaden-Württemberg",
-  "GDB": "GaDeBusch\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
-  "GE": "GElsenkirchen\nStadt Gelsenkirchen\nNordrhein-Westfalen",
-  "GEL": "GELdern\nKreis Kleve\nNordrhein-Westfalen",
-  "GEO": "GErOlzhofen\nLandkreis Schweinfurt, Landkreis Haßberge (A und B 1000–9999)\nBayern",
-  "GER": "GERmersheim\nLandkreis Germersheim\nRheinland-Pfalz",
-  "GF": "GiFhorn\nLandkreis Gifhorn\nNiedersachsen",
-  "GG": "Groß-Gerau\nKreis Groß-Gerau\nHessen",
-  "GHA": "GeitHAin\nLandkreis Leipzig\nSachsen",
-  "GHC": "GräfenHainiChen\nLandkreis Wittenberg\nSachsen-Anhalt",
-  "GI": "GIeßen\nLandkreis Gießen\nHessen",
-  "GK": "GeilenKirchen\nKreis Heinsberg\nNordrhein-Westfalen",
-  "GL": "GLadbach\nRheinisch-Bergischer Kreis\nNordrhein-Westfalen",
-  "GLA": "GLAdbeck\nKreis Recklinghausen\nNordrhein-Westfalen",
-  "GM": "GumMersbach\nOberbergischer Kreis\nNordrhein-Westfalen",
-  "GMN": "GrimMeN\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
-  "GN": "GelnhauseN\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
-  "GNT": "GeNThin\nLandkreis Jerichower Land\nSachsen-Anhalt",
-  "GÖ": "GÖttingen\nLandkreis Göttingen, Stadt Göttingen\nNiedersachsen",
-  "GOA": "GOAr\nRhein-Hunsrück-Kreis\nRheinland-Pfalz",
-  "GOH": "GOarsHausen\nRhein-Lahn-Kreis\nRheinland-Pfalz",
-  "GP": "GöpPingen\nLandkreis Göppingen\nBaden-Württemberg",
-  "GR": "GöRlitz\nLandkreis Görlitz\nSachsen",
-  "GRA": "GRAfenau\nLandkreis Freyung-Grafenau\nBayern",
-  "GRH": "GRoßenHain\nLandkreis Meißen\nSachsen",
-  "GRI": "GRIesbach\nLandkreis Rottal-Inn (B, I, O und Q 100–999)\nBayern",
-  "GRM": "GRimMa\nLandkreis Leipzig\nSachsen",
-  "GRZ": "GReiZ\nLandkreis Greiz\nThüringen",
-  "GS": "GoSlar\nLandkreis Goslar\nNiedersachsen",
-  "GT": "GüTersloh\nKreis Gütersloh\nNordrhein-Westfalen",
-  "GTH": "GoTHa\nLandkreis Gotha\nThüringen",
-  "GÜ": "GÜstrow\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "GUB": "GUBen\nLandkreis Spree-Neiße\nBrandenburg",
-  "GUN": "GUNzenhausen\nLandkreis Weißenburg-Gunzenhausen\nBayern",
-  "GV": "GreVenbroich\nRhein-Kreis Neuss\nNordrhein-Westfalen",
-  "GVM": "GreVesMühlen\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
-  "GW": "GreifsWald\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "GZ": "GünZburg\nLandkreis Günzburg\nBayern",
-  "H": "Hannover\nRegion Hannover\nNiedersachsen",
-  "HA": "HAgen\nStadt Hagen\nNordrhein-Westfalen",
-  "HAB": "HAmmelBurg\nLandkreis Bad Kissingen\nBayern",
-  "HAL": "HALle\nStadt Halle (Saale)\nSachsen-Anhalt",
-  "HAM": "HAMm\nStadt Hamm\nNordrhein-Westfalen",
-  "HAS": "HASsfurt\nLandkreis Haßberge\nBayern",
-  "HB": "Hansestadt Bremen\nStadt Bremen, Senat und Bürgerschaft, Stadt Bremerhaven (A–Z 1000–9999)\nBremen",
-  "HBN": "HildBurghauseN\nLandkreis Hildburghausen\nThüringen",
-  "HBS": "HalBerStadt\nLandkreis Harz\nSachsen-Anhalt",
-  "HC": "HainiChen\nLandkreis Mittelsachsen\nSachsen",
-  "HCH": "HeCHingen\nZollernalbkreis, Landkreis Freudenstadt (YQ, QY, YV, VY und ZQ 100 bis 999)\nBaden-Württemberg",
-  "HD": "HeiDelberg\nStadt Heidelberg, Rhein-Neckar-Kreis (AA–ZZ 100–9999)\nBaden-Württemberg",
-  "HDH": "HeiDenHeim\nLandkreis Heidenheim\nBaden-Württemberg",
-  "HDL": "HalDensLeben\nLandkreis Börde\nSachsen-Anhalt",
-  "HE": "HElmstedt\nLandkreis Helmstedt\nNiedersachsen",
-  "HEB": "HErsBruck\nLandkreis Nürnberger Land\nBayern",
-  "HEF": "HErsFeld\nLandkreis Hersfeld-Rotenburg\nHessen",
-  "HEI": "HEIde\nKreis Dithmarschen\nSchleswig-Holstein",
-  "HEL": "HEssischer Landtag\nHessen, Landesregierung und Landtag\nHessen",
-  "HER": "HERne\nStadt Herne\nNordrhein-Westfalen",
-  "HET": "HETtstedt\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
-  "HF": "HerFord\nKreis Herford\nNordrhein-Westfalen",
-  "HG": "HomburG\nHochtaunuskreis\nHessen",
-  "HGN": "HaGeNow\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "HGW": "Hansestadt GreifsWald\nStadt Greifswald (große kreisangehörige Stadt im Landkreis Vorpommern-Greifswald)\nMecklenburg-Vorpommern",
-  "HH": "Hansestadt Hamburg\nFreie und Hansestadt Hamburg, Senat und Bürgerschaft\nHamburg",
-  "HHM": "HoHenMölsen\nBurgenlandkreis\nSachsen-Anhalt",
-  "HI": "HIldesheim\nLandkreis Hildesheim\nNiedersachsen",
-  "HIG": "HeilIGenstadt\nLandkreis Eichsfeld\nThüringen",
-  "HIP": "HIlPoltstein\nLandkreis Roth\nBayern",
-  "HK": "HeideKreis\nLandkreis Heidekreis\nNiedersachsen",
-  "HL": "Hansestadt Lübeck\nStadt Lübeck\nSchleswig-Holstein",
-  "HM": "HaMeln\nLandkreis Hameln-Pyrmont\nNiedersachsen",
-  "HMÜ": "Hann. MÜnden\nLandkreis Göttingen ohne die Stadt Göttingen\nNiedersachsen",
-  "HN": "HeilbronN\nStadt Heilbronn, Landkreis Heilbronn (AA–MZ 100–9999 und NA–ZZ 100–999)\nBaden-Württemberg",
-  "HO": "HOf\nStadt Hof, Landkreis Hof (AA–ZZ 100–9999)\nBayern",
-  "HOG": "HOfGeismar\nLandkreis Kassel\nHessen",
-  "HOH": "HOfHeim\nLandkreis Haßberge\nBayern",
-  "HOL": "HOLzminden\nLandkreis Holzminden\nNiedersachsen",
-  "HOM": "HOMburg\nSaarpfalz-Kreis ohne die Stadt St. Ingbert\nSaarland",
-  "HOR": "HORb\nLandkreis Freudenstadt\nBaden-Württemberg",
-  "HÖS": "HÖchStadt\nLandkreis Erlangen-Höchstadt\nBayern",
-  "HOT": "HOhensTein\nLandkreis Zwickau\nSachsen",
-  "HP": "HepPenheim\nKreis Bergstraße\nHessen",
-  "HR": "HombeRg\nSchwalm-Eder-Kreis\nHessen",
-  "HRO": "Hansestadt ROstock\nStadt Rostock\nMecklenburg-Vorpommern",
-  "HS": "HeinSberg\nKreis Heinsberg\nNordrhein-Westfalen",
-  "HSK": "HochSauerlandKreis\nHochsauerlandkreis\nNordrhein-Westfalen",
-  "HST": "Hansestadt STralsund\nStadt Stralsund (große kreisangehörige Stadt im Landkreis Vorpommern-Rügen)\nMecklenburg-Vorpommern",
-  "HU": "HanaU\nStadt Hanau (Sonderstatusstadt im Main-Kinzig-Kreis), Main-Kinzig-Kreis (übriges Kreisgebiet)\nHessen",
-  "HV": "HaVelberg\nLandkreis Stendal\nSachsen-Anhalt",
-  "HVL": "HaVelLand\nLandkreis Havelland\nBrandenburg",
-  "HWI": "Hansestadt WIsmar\nStadt Wismar (große kreisangehörige Stadt im Landkreis Nordwestmecklenburg)\nMecklenburg-Vorpommern",
-  "HX": "HöXter\nKreis Höxter\nNordrhein-Westfalen",
-  "HY": "HoYerswerda\nLandkreis Bautzen\nSachsen",
-  "HZ": "HarZ\nLandkreis Harz\nSachsen-Anhalt",
-  "IGB": "InGBert\nStadt St. Ingbert (Mittelstadt im Saarpfalz-Kreis)\nSaarland",
-  "IK": "Ilm-Kreis\nIlm-Kreis\nThüringen",
-  "IL": "ILmenau\nIlm-Kreis\nThüringen",
-  "ILL": "ILLertissen\nLandkreis Neu-Ulm\nBayern",
-  "IN": "INgolstadt\nStadt Ingolstadt\nBayern",
-  "IZ": "ItZehoe\nKreis Steinburg\nSchleswig-Holstein",
-  "J": "Jena\nStadt Jena\nThüringen",
-  "JE": "JEssen\nLandkreis Wittenberg\nSachsen-Anhalt",
-  "JL": "Jerichower Land\nLandkreis Jerichower Land\nSachsen-Anhalt",
-  "JÜL": "JÜLich\nKreis Düren\nNordrhein-Westfalen",
-  "K": "Köln\nStadt Köln\nNordrhein-Westfalen",
-  "KA": "KArlsruhe\nLandkreis Karlsruhe, Stadt Karlsruhe (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
-  "KB": "KorBach\nLandkreis Waldeck-Frankenberg\nHessen",
-  "KC": "KronaCh\nLandkreis Kronach\nBayern",
-  "KE": "KEmpten\nStadt Kempten (Allgäu)\nBayern",
-  "KEH": "KElHeim\nLandkreis Kelheim\nBayern",
-  "KEL": "KEhL\nOrtenaukreis\nBaden-Württemberg",
-  "KEM": "KEMnath\nLandkreis Tirschenreuth, Landkreis Bayreuth (AT, BT, CT, DT, ... YT und ZT 1–99)\nBayern",
-  "KF": "KauFbeuren\nStadt Kaufbeuren\nBayern",
-  "KG": "KissinGen\nLandkreis Bad Kissingen\nBayern",
-  "KH": "KreuznacH\nLandkreis Bad Kreuznach\nRheinland-Pfalz",
-  "KI": "KIel\nStadt Kiel\nSchleswig-Holstein",
-  "KIB": "KIrchheimBolanden\nDonnersbergkreis\nRheinland-Pfalz",
-  "KK": "Kempen, Krefeld\nKreis Viersen\nNordrhein-Westfalen",
-  "KL": "KaisersLautern\nStadt Kaiserslautern, Landkreis Kaiserslautern (AA–ZZ 100–999)\nRheinland-Pfalz",
-  "KLE": "KLEve\nKreis Kleve\nNordrhein-Westfalen",
-  "KLZ": "KLötZe\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
-  "KM": "KaMenz\nLandkreis Bautzen\nSachsen",
-  "KN": "KoNstanz\nLandkreis Konstanz ohne die Gemeinde Büsingen am Hochrhein\nBaden-Württemberg",
-  "KO": "KOblenz\nStadt Koblenz\nRheinland-Pfalz",
-  "KÖN": "KÖNigshofen\nLandkreis Rhön-Grabfeld\nBayern",
-  "KÖT": "KÖThen\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
-  "KÖZ": "KÖtZting\nLandkreis Cham\nBayern",
-  "KR": "KRefeld\nStadt Krefeld\nNordrhein-Westfalen",
-  "KRU": "KRUmbach\nLandkreis Günzburg\nBayern",
-  "KS": "KasSel\nLandkreis Kassel und Stadt Kassel\nHessen",
-  "KT": "KiTzingen\nLandkreis Kitzingen\nBayern",
-  "KU": "KUlmbach\nLandkreis Kulmbach\nBayern",
-  "KÜN": "KÜNzelsau\nHohenlohekreis\nBaden-Württemberg",
-  "KUS": "KUSel\nLandkreis Kusel\nRheinland-Pfalz",
-  "KW": "Königs Wusterhausen\nLandkreis Dahme-Spreewald\nBrandenburg",
-  "KY": "KYritz\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
-  "KYF": "KYFfhäuser\nKyffhäuserkreis\nThüringen",
-  "L": "Leipzig\nSachsen\nStadt Leipzig (A–T und AA–TZ), Landkreis Leipzig (U–Z und UA–ZZ)",
-  "LA": "LAndshut\nStadt Landshut, Landkreis Landshut (AA–ZZ 100–999 und 5000–9999)\nBayern",
-  "LAN": "LANdau\nLandkreis Dingolfing-Landau\nBayern",
-  "LAU": "LAUf\nLandkreis Nürnberger Land\nBayern",
-  "LB": "LudwigsBurg\nLandkreis Ludwigsburg\nBaden-Württemberg",
-  "LBS": "LoBenStein\nSaale-Orla-Kreis\nThüringen",
-  "LBZ": "LüBZ\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "LC": "LuCkau\nLandkreis Dahme-Spreewald\nBrandenburg",
-  "LD": "LanDau\nStadt Landau in der Pfalz\nRheinland-Pfalz",
-  "LDK": "Lahn-Dill-Kreis\nLahn-Dill-Kreis ohne die Stadt Wetzlar\nHessen",
-  "LDS": "Landkreis Dahme-Spreewald\nLandkreis Dahme-Spreewald\nBrandenburg",
-  "LEO": "LEOnberg\nLandkreis Böblingen\nBaden-Württemberg",
-  "LER": "LEeR\nLandkreis Leer\nNiedersachsen",
-  "LEV": "LEVerkusen\nStadt Leverkusen\nNordrhein-Westfalen",
-  "LF": "LauFen\nLandkreis Berchtesgadener Land, Landkreis Altötting (C 1–999, E 1–500, I, J, M, O, Q und V 1–999), Landkreis Traunstein (B, F und G 1–999, DH 1–100, FZ, GH und KQ 1–999, LU 1–200, RW 1–999, TK 1–100, TS 1–999, VW 200–400 sowie WW, XX und ZZ 1–999)\nBayern",
-  "LG": "LüneburG\nLandkreis Lüneburg\nNiedersachsen",
-  "LH": "LüdingHausen\nKreis Coesfeld, Kreis Unna\nNordrhein-Westfalen",
-  "LI": "LIndau\nLandkreis Lindau (Bodensee)\nBayern",
-  "LIB": "LIeBenwerda\nLandkreis Elbe-Elster\nBrandenburg",
-  "LIF": "LIchtenFels\nLandkreis Lichtenfels\nBayern",
-  "LIP": "LIPpe\nKreis Lippe\nNordrhein-Westfalen",
-  "LL": "Landsberg am Lech\nLandkreis Landsberg am Lech\nBayern",
-  "LM": "LiMburg\nLandkreis Limburg-Weilburg\nHessen",
-  "LN": "LübbeN\nLandkreis Dahme-Spreewald\nBrandenburg",
-  "LÖ": "LÖrrach\nLandkreis Lörrach\nBaden-Württemberg",
-  "LÖB": "LÖBau\nLandkreis Görlitz\nSachsen",
-  "LOS": "Landkreis Oder-Spre\nLandkreis Oder-Spree\nBrandenburg",
-  "LP": "LiPpstadt\nKreis Soest\nNordrhein-Westfalen",
-  "LR": "LahR\nOrtenaukreis\nBaden-Württemberg",
-  "LRO": "Landkreis ROstock\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "LSA": "Land Sachsen-Anhalt\nSachsen-Anhalt, Landesregierung, Landtag und Polizei\nSachsen-Anhalt",
-  "LSN": "Landtag SachseN\nSachsen, Landesregierung und Landtag\nSachsen",
-  "LSZ": "LangenSalZa\nUnstrut-Hainich-Kreis\nThüringen",
-  "LU": "LUdwigshafen\nStadt Ludwigshafen am Rhein\nRheinland-Pfalz",
-  "LÜN": "LÜNen\nKreis Unna\nNordrhein-Westfalen",
-  "LUP": "LUdwigslust, Parchim\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "LWL": "LudWigsLust\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "M": "München\nLandkreis München, Stadt München (AA–ZZ 100–9999)\nBayern",
-  "MA": "MAnnheim\nStadt Mannheim\nBaden-Württemberg",
-  "MAB": "MArienBerg\nErzgebirgskreis\nSachsen",
-  "MAI": "MAInburg\nLandkreis Kelheim, Landkreis Landshut (B, F, G, I, O und Q 1–9999)\nBayern",
-  "MAK": "MArKtredwitz\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
-  "MAL": "MALlersdorf\nLandkreis Landshut (B, F, G, I, O und Q 1–9999)\nBayern",
-  "MB": "MiesBach\nLandkreis Miesbach\nBayern",
-  "MC": "MalChin\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "MD": "MagDeburg\nStadt Magdeburg\nSachsen-Anhalt",
-  "ME": "MEttmann\nKreis Mettmann\nNordrhein-Westfalen",
-  "MED": "MElDorf\nKreis Dithmarschen\nSchleswig-Holstein",
-  "MEG": "MElsunGen\nSchwalm-Eder-Kreis\nHessen",
-  "MEI": "MEIßen\nLandkreis Meißen\nSachsen",
-  "MEK": "Mittlerer ErzgebirgsKreis\nErzgebirgskreis\nSachsen",
-  "MEL": "MELle\nLandkreis Osnabrück\nNiedersachsen",
-  "MER": "MERseburg\nSaalekreis\nSachsen-Anhalt",
-  "MET": "MEllrichstadT\nLandkreis Rhön-Grabfeld\nBayern",
-  "MG": "MönchenGladbach\nStadt Mönchengladbach\nNordrhein-Westfalen",
-  "MGH": "MerGentHeim\nMain-Tauber-Kreis\nBaden-Württemberg",
-  "MGN": "MeininGeN\nLandkreis Schmalkalden-Meiningen\nThüringen",
-  "MH": "MülHeim\nStadt Mülheim an der Ruhr\nNordrhein-Westfalen",
-  "MHL": "MüHLhausen\nUnstrut-Hainich-Kreis\nThüringen",
-  "MI": "MInden\nKreis Minden-Lübbecke\nNordrhein-Westfalen",
-  "MIL": "MILtenberg\nLandkreis Miltenberg\nBayern",
-  "MK": "Märkischer Kreis\nMärkischer Kreis\nNordrhein-Westfalen",
-  "MKK": "Main-Kinzig-Kreis\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
-  "ML": "Mansfelder Land\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
-  "MM": "MemMingen\nStadt Memmingen\nBayern",
-  "MN": "MiNdelheim\nLandkreis Unterallgäu\nBayern",
-  "MO": "MOers\nKreis Wesel\nNordrhein-Westfalen",
-  "MOD": "MarktOberDorf\nLandkreis Ostallgäu\nBayern",
-  "MOL": "Märkisch-OderLand\nLandkreis Märkisch-Oderland\nBrandenburg",
-  "MON": "MONschau\nStädteregion Aachen, Kreis Düren\nNordrhein-Westfalen",
-  "MOS": "MOSbach\nNeckar-Odenwald-Kreis\nBaden-Württemberg",
-  "MQ": "Merseburg, Querfurt\nSaalekreis\nSachsen-Anhalt",
-  "MR": "MaRburg\nLandkreis Marburg-Biedenkopf\nHessen",
-  "MS": "MünSter\nStadt Münster\nNordrhein-Westfalen",
-  "MSE": "Mecklenburgische SEenplatte\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "MSH": "Mansfeld, SüdHarz\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
-  "MSP": "Main, SPessart\nLandkreis Main-Spessart\nBayern",
-  "MST": "Mecklenburg-STrelitz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "MTK": "Main-Taunus-Kreis\nMain-Taunus-Kreis\nHessen",
-  "MTL": "MuldenTaL\nLandkreis Leipzig\nSachsen",
-  "MUC": "Internationale Kennung des Münchner Flughafens\nStadt München\nBayern",
-  "MÜ": "MÜhldorf\nLandkreis Mühldorf am Inn\nBayern",
-  "MÜB": "MÜnchBerg\nLandkreis Hof, Landkreis Bayreuth (A–M 100–999 und N–Z 1–99)\nBayern",
-  "MÜL": "MÜLheim (Baden)\nLandkreis Breisgau-Hochschwarzwald\nBaden-Württemberg",
-  "MÜR": "MÜRitz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "MVL": "Mecklenburg-Vorpommerscher Landtag\nMecklenburg-Vorpommern, Landesregierung, Landtag und Polizei\nMecklenburg-Vorpommern",
-  "MW": "MittWeida\nLandkreis Mittelsachsen\nSachsen",
-  "MY": "MaYen\nLandkreis Mayen-Koblenz\nRheinland-Pfalz",
-  "MYK": "MaYen, Koblenz\nLandkreis Mayen-Koblenz\nRheinland-Pfalz",
-  "MZ": "MainZ\nLandkreis Mainz-Bingen, Stadt Mainz (AA–KY 100–9999 und LA–ZZ 100–999)\nRheinland-Pfalz",
-  "MZG": "MerZiG\nLandkreis Merzig-Wadern\nSaarland",
-  "N": "Nürnberg\nLandkreis Nürnberger Land (A–Z 1–999), Stadt Nürnberg (A–Z 1000–9999 und AA–ZZ 100–9999)\nBayern",
-  "NAB": "NABburg\nLandkreis Schwandorf, Landkreis Amberg-Sulzbach (B, F und G 1–999)\nBayern",
-  "NAI": "NAIla\nLandkreis Hof\nBayern",
-  "NAU": "NAUen\nLandkreis Havelland\nBrandenburg",
-  "NB": "NeuBrandenburg\nStadt Neubrandenburg (große kreisangehörige Stadt im Landkreis Mecklenburgische Seenplatte)\nMecklenburg-Vorpommern",
-  "ND": "Neuburg an der Donau\nLandkreis Neuburg-Schrobenhausen\nBayern",
-  "NDH": "NorDHausen\nLandkreis Nordhausen\nThüringen",
-  "NE": "NEuss\nRhein-Kreis Neuss\nNordrhein-Westfalen",
-  "NEA": "NEustadt an der Aisch\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
-  "NEB": "NEBra\nBurgenlandkreis\nSachsen-Anhalt",
-  "NEC": "NEustadt bei Coburg\nStadt Coburg und Landkreis Coburg\nBayern",
-  "NEN": "NEuNburg\nLandkreis Schwandorf\nBayern",
-  "NES": "NEustadt an der Saale\nLandkreis Rhön-Grabfeld\nBayern",
-  "NEU": "Titisee-NEUstadt\nLandkreis Breisgau-Hochschwarzwald\nBaden-Württemberg",
-  "NEW": "NEustadt an der Waldnaab\nLandkreis Neustadt an der Waldnaab\nBayern",
-  "NF": "NordFriesland\nKreis Nordfriesland\nSchleswig-Holstein",
-  "NH": "NeuHaus\nLandkreis Sonneberg\nThüringen",
-  "NI": "NIenburg\nLandkreis Nienburg/Weser\nNiedersachsen",
-  "NK": "NeunKirchen\nLandkreis Neunkirchen\nSaarland",
-  "NL": "Niedersächsischer Landtag\nNiedersachsen, Landesregierung und Landtag\nNiedersachsen",
-  "NM": "NeuMarkt\nLandkreis Neumarkt in der Oberpfalz\nBayern",
-  "NMB": "NauMBurg\nBurgenlandkreis\nSachsen-Anhalt",
-  "NMS": "NeuMünSter\nStadt Neumünster\nSchleswig-Holstein",
-  "NÖ": "NÖrdlingen\nLandkreis Donau-Ries\nBayern",
-  "NOH": "NOrdHorn\nLandkreis Grafschaft Bentheim\nNiedersachsen",
-  "NOL": "Niederschlesische OberLausitz\nLandkreis Görlitz\nSachsen",
-  "NOM": "NOrtheiM\nLandkreis Northeim\nNiedersachsen",
-  "NOR": "NORden\nLandkreis Aurich\nNiedersachsen",
-  "NP": "NeurupPin\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
-  "NR": "Neuwied am Rhein\nLandkreis Neuwied\nRheinland-Pfalz",
-  "NRW": "NordRhein-Westfalen\nNordrhein-Westfalen, Landesregierung, Landtag und Polizei\nNordrhein-Westfalen",
-  "NT": "NürTingen\nLandkreis Esslingen\nBaden-Württemberg",
-  "NU": "Neu-Ulm\nLandkreis Neu-Ulm\nBayern",
-  "NVP": "NordVorPommern\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
-  "NW": "Neustadt an der Weinstraße\nStadt Neustadt an der Weinstraße\nRheinland-Pfalz",
-  "NWM": "NordWestMecklenburg\nLandkreis Nordwestmecklenburg ohne die Stadt Wismar\nMecklenburg-Vorpommern",
-  "NY": "NieskY\nLandkreis Görlitz\nSachsen",
-  "NZ": "NeustrelitZ\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "OA": "OberAllgäu\nLandkreis Oberallgäu\nBayern",
-  "OAL": "OstALlgäu\nLandkreis Ostallgäu\nBayern",
-  "OB": "OBerhausen\nStadt Oberhausen\nNordrhein-Westfalen",
-  "OBB": "OBernBurg\nLandkreis Miltenberg\nBayern",
-  "OBG": "OsterBurG\nLandkreis Stendal\nSachsen-Anhalt",
-  "OC": "OsChersleben\nLandkreis Börde\nSachsen-Anhalt",
-  "OCH": "OCHsenfurt\nLandkreis Würzburg\nBayern",
-  "OD": "OlDesloe\nKreis Stormarn\nSchleswig-Holstein",
-  "OE": "OlpE\nKreis Olpe\nNordrhein-Westfalen",
-  "OF": "OFfenbach\nLandkreis Offenbach und Stadt Offenbach am Main\nHessen",
-  "OG": "OffenburG\nOrtenaukreis\nBaden-Württemberg",
-  "OH": "OstHolstein\nKreis Ostholstein\nSchleswig-Holstein",
-  "OHA": "Osterode am HArz\nLandkreis Göttingen\nNiedersachsen",
-  "ÖHR": "ÖHRingen\nHohenlohekreis\nBaden-Württemberg",
-  "OHV": "OberHaVel\nLandkreis Oberhavel\nBrandenburg",
-  "OHZ": "OsterHolZ\nLandkreis Osterholz\nNiedersachsen",
-  "OK": "OhreKreis\nLandkreis Börde\nSachsen-Anhalt",
-  "OL": "OLdenburg\nLandkreis Oldenburg, Stadt Oldenburg (AA–ZZ 100–999)\nNiedersachsen",
-  "OP": "OPladen\nStadt Leverkusen\nNordrhein-Westfalen",
-  "OPR": "OstPrignitz, Ruppin\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
-  "OS": "OSnabrück\nStadt Osnabrück, Landkreis Osnabrück (AA–ZZ 100–999)\nNiedersachsen",
-  "OSL": "OberSpreewald, Lausitz\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
-  "OTW": "OTtWeiler\nLandkreis Ottweiler\nSaarland",
-  "OVI": "OberVIechtach\nLandkreis Schwandorf\nBayern",
-  "OVL": "OberVogtLand\nVogtlandkreis\nSachsen",
-  "OVP": "OstVorPommern\nLandkreis Ostvorpommern\nMecklenburg-Vorpommern",
-  "OZ": "OschatZ\nLandkreis Nordsachsen\nSachsen",
-  "P": "Potsdam\nStadt Potsdam\nBrandenburg",
-  "PA": "PAssau\nStadt Passau (A–Z 1–9999), Landkreis Passau (AA–ZZ 1–999)\nBayern",
-  "PAF": "PfAFfenhofen\nLandkreis Pfaffenhofen an der Ilm\nBayern",
-  "PAN": "PfArrkircheN\nLandkreis Rottal-Inn\nBayern",
-  "PAR": "PARsberg\nLandkreis Neumarkt in der Oberpfalz, Landkreis Kelheim (Q, Y, BB und CC 1–999)\nBayern",
-  "PB": "PaderBorn\nKreis Paderborn\nNordrhein-Westfalen",
-  "PCH": "ParCHim\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "PE": "PEine\nLandkreis Peine\nNiedersachsen",
-  "PEG": "PEGnitz\nLandkreis Forchheim, Landkreis Nürnberger Land (A 1–999), Landkreis Bayreuth (B–Z 1–999)\nBayern",
-  "PF": "PForzheim\nEnzkreis, Stadt Pforzheim (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
-  "PI": "PInneberg\nKreis Pinneberg\nSchleswig-Holstein",
-  "PIR": "PIRna\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
-  "PL": "PLauen\nVogtlandkreis\nSachsen",
-  "PLÖ": "PLÖn\nKreis Plön\nSchleswig-Holstein",
-  "PM": "Potsdam, Mittelmark\nLandkreis Potsdam-Mittelmark\nBrandenburg",
-  "PN": "PößNeck\nSaale-Orla-Kreis\nThüringen",
-  "PR": "PRignitz\nLandkreis Prignitz\nBrandenburg",
-  "PRÜ": "PRÜm\nEifelkreis Bitburg-Prüm\nRheinland-Pfalz",
-  "PS": "PirmaSens\nStadt Pirmasens (A–Z 1–9999), Landkreis Südwestpfalz (AA–ZZ 1–999)\nRheinland-Pfalz",
-  "PW": "PaseWalk\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "PZ": "PrenZlau\nLandkreis Uckermark\nBrandenburg",
-  "QFT": "QuerFurT\nSaalekreis\nSachsen-Anhalt",
-  "QLB": "QuedLinBurg\nLandkreis Harz\nSachsen-Anhalt",
-  "R": "Regensburg\nLandkreis Regensburg, Stadt Regensburg (AA–MM 1–999 und MN–ZZ 1000–9999)\nBayern",
-  "RA": "Württemberg\nLandkreis Rastatt\nBaden-Württemberg",
-  "RC": "ReiChenbach\nVogtlandkreis\nSachsen",
-  "RD": "RenDsburg\nKreis Rendsburg-Eckernförde\nSchleswig-Holstein",
-  "RDG": "Ribnitz-DamGarten\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
-  "RE": "REcklinghausen\nKreis Recklinghausen\nNordrhein-Westfalen",
-  "REG": "REGen\nLandkreis Regen\nBayern",
-  "REH": "REHau\nLandkreis Hof, Landkreis Wunsiedel im Fichtelgebirge (A, E, F, H, J, M, N, P, R, S, V und X 1–999, AA, FF, GG, OO und ZZ 100–999 sowie AU 900–999)\nBayern",
-  "REI": "REIchenhall\nLandkreis Berchtesgadener Land\nBayern",
-  "RG": "Riesa, Großenhain\nLandkreis Meißen\nSachsen",
-  "RH": "RotH\nLandkreis Roth\nBayern",
-  "RI": "RInteln\nLandkreis Schaumburg\nNiedersachsen",
-  "RID": "RIeDenburg\nLandkreis Kelheim\nBayern",
-  "RIE": "RIEsa\nLandkreis Meißen\nSachsen",
-  "RL": "RochLitz\nLandkreis Mittelsachsen\nSachsen",
-  "RM": "Röbel/Müritz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "RN": "RatheNow\nLandkreis Havelland\nBrandenburg",
-  "RO": "ROsenheim\nStadt Rosenheim, Landkreis Rosenheim (AA–ZZ 100–9999)\nBayern",
-  "ROD": "RODing\nLandkreis Cham, Landkreis Schwandorf (B 1–500, F 1–700, G 50–400 und I 100–1000)\nBayern",
-  "ROF": "ROtenburg an der Fulda\nLandkreis Hersfeld-Rotenburg\nHessen",
-  "ROK": "ROcKenhausen\nDonnersbergkreis\nRheinland-Pfalz",
-  "ROL": "ROttenburg an der Laaber\nLandkreis Landshut , Landkreis Kelheim (A bis Z)\nBayern",
-  "ROS": "ROStock\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "ROT": "ROthenburg ob der Tauber\nLandkreis Ansbach\nBayern",
-  "ROW": "ROtenburg (Wümme)\nLandkreis Rotenburg (Wümme)\nNiedersachsen",
-  "RP": "Rhein-Pfalz\nRhein-Pfalz-Kreis\nRheinland-Pfalz",
-  "RPL": "Rheinland-Pfälzischer Landtag\nRheinland-Pfalz, Landesregierung, Landtag und Polizei\nRheinland-Pfalz",
-  "RS": "RemScheid\nStadt Remscheid\nNordrhein-Westfalen",
-  "RSL": "RosSLau\nStadt Dessau-Roßlau\nSachsen-Anhalt",
-  "RT": "ReuTlingen\nLandkreis Reutlingen\nBaden-Württemberg",
-  "RU": "RUdolstadt\nLandkreis Saalfeld-Rudolstadt\nThüringen",
-  "RÜD": "RÜDesheim\nRheingau-Taunus-Kreis\nHessen",
-  "RÜG": "RÜGen\nLandkreis Vorpommern-Rügen\nMecklenburg-Vorpommern",
-  "RV": "RaVensburg\nLandkreis Ravensburg\nBaden-Württemberg",
-  "RW": "RottWeil\nLandkreis Rottweil\nBaden-Württemberg",
-  "RZ": "RatZeburg\nKreis Herzogtum Lauenburg\nSchleswig-Holstein",
-  "S": "Stuttgart\nStadt Stuttgart\nBaden-Württemberg",
-  "SAB": "SAarBurg\nLandkreis Trier-Saarburg\nRheinland-Pfalz",
-  "SAD": "SchwAnDorf\nLandkreis Schwandorf\nBayern",
-  "SAL": "SAarländischer Landtag\nSaarland, Landesregierung, Landtag und Polizei\nSaarland",
-  "SAN": "StAdtsteiNach\nLandkreis Hof (W–Z 1–999), Landkreis Kulmbach (A–R 1–9999 und JA–ZZ 1–999), Landkreis Kronach (S–V 1–9999 und AA–IZ 1–999)\nBayern",
-  "SAW": "SAlzWedel\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
-  "SÄK": "SÄcKingen\nLandkreis Säckingen\nBaden-Württemberg",
-  "SB": "SaarBrücken\nRegionalverband Saarbrücken ohne die Stadt Völklingen\nSaarland",
-  "SBG": "StrasBurG\nLandkreis Vorpommern-Greifswald\nMecklenburg-Vorpommern",
-  "SBK": "SchöneBecK\nSalzlandkreis\nSachsen-Anhalt",
-  "SC": "SChwabach\nStadt Schwabach\nBayern",
-  "SCZ": "SChleiZ\nSaale-Orla-Kreis\nThüringen",
-  "SDH": "SonDersHausen\nKyffhäuserkreis\nThüringen",
-  "SDL": "StenDaL\nLandkreis Stendal\nSachsen-Anhalt",
-  "SDT": "SchweDT\nLandkreis Uckermark\nBrandenburg",
-  "SE": "SEgeberg\nKreis Segeberg\nSchleswig-Holstein",
-  "SEB": "SEBnitz\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
-  "SEE": "SEElow\nLandkreis Märkisch-Oderland\nBrandenburg",
-  "SEF": "SchEinFeld\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
-  "SEL": "SELb\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
-  "SFB": "SenFtenBerg\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
-  "SFT": "StaßFurT\nSalzlandkreis\nSachsen-Anhalt",
-  "SG": "SolinGen\nStadt Solingen\nNordrhein-Westfalen",
-  "SGH": "SanGerHausen\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
-  "SH": "Schleswig-Holstein\nSchleswig-Holstein, Landesregierung, Landtag und Polizei\nSchleswig-Holstein",
-  "SHA": "Schwäbisch HAll\nLandkreis Schwäbisch Hall\nBaden-Württemberg",
-  "SHG": "StadtHaGen\nLandkreis Schaumburg\nNiedersachsen",
-  "SHK": "Saale-Holzland-Kreis\nSaale-Holzland-Kreis\nThüringen",
-  "SHL": "SuHL\nStadt Suhl\nThüringen",
-  "SI": "SIegen\nKreis Siegen-Wittgenstein\nNordrhein-Westfalen",
-  "SIG": "SIGmaringen\nLandkreis Sigmaringen\nBaden-Württemberg",
-  "SIH": "aus dem Film \"Hanne\"\nfiktiver Ort\nFilmproduktion",
-  "SIM": "SIMmern\nRhein-Hunsrück-Kreis\nRheinland-Pfalz",
-  "SK": "SaaleKreis\nSaalekreis\nSachsen-Anhalt",
-  "SL": "SchLeswig\nKreis Schleswig-Flensburg\nSchleswig-Holstein",
-  "SLE": "SchLEiden\nKreis Düren, Kreis Euskirchen\nNordrhein-Westfalen",
-  "SLF": "SaaLFeld\nLandkreis Saalfeld-Rudolstadt\nThüringen",
-  "SLG": "SauLGau\nLandkreis Saulgau\nBaden-Württemberg",
-  "SLK": "SalzLandKreis\nSalzlandkreis\nSachsen-Anhalt",
-  "SLN": "SchmölLN\nLandkreis Altenburger Land\nThüringen",
-  "SLS": "SaarLouiS\nLandkreis Saarlouis\nSaarland",
-  "SLÜ": "SchLÜchtern\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
-  "SLZ": "SaLZungen\nWartburgkreis\nThüringen",
-  "SM": "SchMalkalden\nLandkreis Schmalkalden-Meiningen\nThüringen",
-  "SMÜ": "SchwabMÜnchen\nLandkreis Augsburg\nBayern",
-  "SN": "SchweriN\nStadt Schwerin\nMecklenburg-Vorpommern",
-  "SO": "SOest\nKreis Soest\nNordrhein-Westfalen",
-  "SOB": "SchrOBenhausen\nLandkreis Neuburg-Schrobenhausen\nBayern",
-  "SOG": "SchOnGau\nLandkreis Weilheim-Schongau\nBayern",
-  "SOK": "Saale-Orla-Kreis\nSaale-Orla-Kreis\nThüringen",
-  "SÖM": "SÖMmerda\nLandkreis Sömmerda\nThüringen",
-  "SON": "SONneberg\nLandkreis Sonneberg\nThüringen",
-  "SP": "SPeyer\nStadt Speyer\nRheinland-Pfalz",
-  "SPB": "SPremBerg\nLandkreis Spree-Neiße\nBrandenburg",
-  "SPN": "SPree, Neiße\nLandkreis Spree-Neiße\nBrandenburg",
-  "SR": "StRaubing\nStadt Straubing (A–Z 1–9999), Landkreis Straubing-Bogen (AA–ZZ 1–999)\nBayern",
-  "SRB": "StRausBerg\nLandkreis Märkisch-Oderland\nBrandenburg",
-  "SRO": "StadtROda\nSaale-Holzland-Kreis\nThüringen",
-  "ST": "STeinfurt\nKreis Steinfurt\nNordrhein-Westfalen",
-  "STA": "STArnberg\nLandkreis Starnberg\nBayern",
-  "STB": "STernBerg\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
-  "STD": "STaDe\nLandkreis Stade\nNiedersachsen",
-  "STE": "STaffelstEin\nLandkreis Lichtenfels\nBayern",
-  "STL": "STolLberg\nErzgebirgskreis\nSachsen",
-  "STO": "STOckach\nLandkreis Stockach\nBaden-Württemberg",
-  "SU": "SiegbUrg\nRhein-Sieg-Kreis\nNordrhein-Westfalen",
-  "SUL": "SULzbach\nLandkreis Amberg-Sulzbach\nBayern",
-  "SÜW": "SÜdliche Weinstraße\nLandkreis Südliche Weinstraße\nRheinland-Pfalz",
-  "SW": "SchWeinfurt\nStadt Schweinfurt, Landkreis Schweinfurt (AA–ZZ 100–9999)\nBayern",
-  "SWA": "SchWAlbach\nRheingau-Taunus-Kreis\nHessen",
-  "SY": "SYke\nLandkreis Diepholz\nNiedersachsen",
-  "SZ": "SalZgitter\nStadt Salzgitter\nNiedersachsen",
-  "SZB": "SchwarZenBerg\nErzgebirgskreis\nSachsen",
-  "TBB": "TauBerBischofsheim\nMain-Tauber-Kreis\nBaden-Württemberg",
-  "TDO": "Torgau, Delitzsch, Oschatz\nLandkreis Nordsachsen\nSachsen",
-  "TE": "TEcklenburg\nKreis Steinfurt\nNordrhein-Westfalen",
-  "TET": "TETerow\nLandkreis Rostock\nMecklenburg-Vorpommern",
-  "TF": "Teltow, Fläming\nLandkreis Teltow-Fläming\nBrandenburg",
-  "TG": "TorGau\nLandkreis Nordsachsen\nSachsen",
-  "THL": "THüringer Landtag\nThüringen, Landesregierung und Landtag\nThüringen",
-  "THW": "Technisches HilfsWerk\nBundesanstalt Technisches Hilfswerk\nbundesweit",
-  "TIR": "TIRschenreuth\nLandkreis Tirschenreuth\nBayern",
-  "TO": "Torgau, Oschatz\nLandkreis Nordsachsen\nSachsen",
-  "TÖL": "TÖLz\nLandkreis Bad Tölz-Wolfratshausen\nBayern",
-  "TP": "TemPlin\nLandkreis Uckermark\nBrandenburg",
-  "TR": "TRier\nLandkreis Trier-Saarburg und Stadt Trier\nRheinland-Pfalz",
-  "TS": "TraunStein\nLandkreis Traunstein\nBayern",
-  "TT": "TeTtnang\nBodenseekreis\nBaden-Württemberg",
-  "TÜ": "TÜbingen\nLandkreis Tübingen\nBaden-Württemberg",
-  "TUT": "TUTtlingen\nLandkreis Tuttlingen\nBaden-Württemberg",
-  "UE": "UElzen\nLandkreis Uelzen\nNiedersachsen",
-  "UEM": "UEckerMünde\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "UFF": "UFFenheim\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
-  "UH": "Unstrut, Hainich\nUnstrut-Hainich-Kreis\nThüringen",
-  "UL": "ULm\nStadt Ulm, Alb-Donau-Kreis (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
-  "UM": "UckerMark\nLandkreis Uckermark\nBrandenburg",
-  "UN": "UNna\nKreis Unna\nNordrhein-Westfalen",
-  "USI": "USIngen\nHochtaunuskreis\nHessen",
-  "ÜB": "ÜBerlingen\nBodenseekreis, Landkreis Ravensburg\nBaden-Württemberg",
-  "V": "Vogtland\nVogtlandkreis\nSachsen",
-  "VAI": "VAIhingen\nLandkreis Ludwigsburg\nBaden-Württemberg",
-  "VB": "VogelsBerg\nVogelsbergkreis\nHessen",
-  "VEC": "VEChta\nLandkreis Vechta\nNiedersachsen",
-  "VER": "VERden\nLandkreis Verden\nNiedersachsen",
-  "VG": "Vorpommern, Greifswald\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "VIB": "VIlsBiburg\nLandkreis Landshut, Landkreis Rottal-Inn (B, I, O und Q 100–999)\nBayern",
-  "VIE": "VIErsen\nKreis Viersen\nNordrhein-Westfalen",
-  "VIT": "VIechTach\nLandkreis Regen\nBayern",
-  "VK": "VölKlingen\nStadt Völklingen (Mittelstadt im Regionalverband Saarbrücken)\nSaarland",
-  "VOH": "VOHenstrauß\nLandkreis Neustadt an der Waldnaab\nBayern",
-  "VR": "Vorpommern, Rügen\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
-  "VS": "Villingen-Schwenningen\nSchwarzwald-Baar-Kreis\nBaden-Württemberg",
-  "W": "Wuppertal\nStadt Wuppertal\nNordrhein-Westfalen",
-  "WA": "WAldeck\nLandkreis Waldeck-Frankenberg\nHessen",
-  "WAF": "WArendorF\nKreis Warendorf\nNordrhein-Westfalen",
-  "WAK": "WArtburgKreis\nWartburgkreis\nThüringen",
-  "WAN": "WANne\nStadt Herne\nNordrhein-Westfalen",
-  "WAR": "WARburg\nKreis Höxter\nNordrhein-Westfalen",
-  "WAT": "WATtenscheid\nStadt Bochum\nNordrhein-Westfalen",
-  "WB": "WittenBerg\nLandkreis Wittenberg\nSachsen-Anhalt",
-  "WBS": "WorBiS\nLandkreis Eichsfeld\nThüringen",
-  "WDA": "WerDAu\nLandkreis Zwickau\nSachsen",
-  "WE": "WEimar\nStadt Weimar\nThüringen",
-  "WEL": "WEiLburg\nLandkreis Limburg-Weilburg\nHessen",
-  "WEN": "WEideN\nStadt Weiden in der Oberpfalz\nBayern",
-  "WER": "WERtingen\nLandkreis Dillingen an der Donau, Landkreis Augsburg (A–Z 7000–9999 und YA–YZ 1–999)\nBayern",
-  "WES": "WESel\nKreis Wesel\nNordrhein-Westfalen",
-  "WF": "WolFenbüttel\nLandkreis Wolfenbüttel\nNiedersachsen",
-  "WG": "WanGen\nLandkreis Ravensburg\nBaden-Württemberg",
-  "WHV": "WilhelmsHaVen\nStadt Wilhelmshaven\nNiedersachsen",
-  "WI": "WIesbaden\nStadt Wiesbaden\nHessen",
-  "WIL": "WIttLich\nLandkreis Bernkastel-Wittlich\nRheinland-Pfalz",
-  "WIN": "aus der Serie \"Dark\"\nWinden (fiktiver Ort)\nFilmproduktion",
-  "WIS": "WISmar\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
-  "WIT": "WITten\nEnnepe-Ruhr-Kreis\nNordrhein-Westfalen",
-  "WIV": "aus dem Film \"Hanne\"\nfiktiver Ort\nFilmproduktion",
-  "WIZ": "WItZenhausen\nWerra-Meißner-Kreis\nHessen",
-  "WK": "WittstocK\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
-  "WL": "Winsen (Luhe)\nLandkreis Harburg\nNiedersachsen",
-  "WLG": "WoLGast\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
-  "WM": "WeilheiM\nLandkreis Weilheim-Schongau\nBayern",
-  "WMS": "WolMirStedt\nLandkreis Börde\nSachsen-Anhalt",
-  "WN": "WaiblingeN\nRems-Murr-Kreis\nBaden-Württemberg",
-  "WND": "WeNDel\nLandkreis St. Wendel\nSaarland",
-  "WO": "WOrms\nStadt Worms\nRheinland-Pfalz",
-  "WOB": "WOlfsBurg\nStadt Wolfsburg\nNiedersachsen",
-  "WOH": "WOlfHagen\nLandkreis Kassel\nHessen",
-  "WOL": "WOLfach\nOrtenaukreis, Landkreis Freudenstadt (A bis E 9000–9999)\nBaden-Württemberg",
-  "WOR": "WOlfRatshausen\nLandkreis Bad Tölz-Wolfratshausen, Landkreis München (F und O 10–9999), Landkreis Starnberg (B und G 10–9999)\nBayern",
-  "WOS": "WOlfStein\nLandkreis Freyung-Grafenau\nBayern",
-  "WR": "WernigeRode\nLandkreis Harz\nSachsen-Anhalt",
-  "WRN": "WaReN\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
-  "WS": "WasSerburg\nLandkreis Rosenheim\nBayern",
-  "WSF": "WeisSenFels\nBurgenlandkreis\nSachsen-Anhalt",
-  "WST": "WesterSTede\nLandkreis Ammerland\nNiedersachsen",
-  "WSW": "WeisSWasser\nLandkreis Görlitz\nSachsen",
-  "WT": "WaldshuT\nLandkreis Waldshut\nBaden-Württemberg",
-  "WTL": "WitTLage\nLandkreis Osnabrück\nNiedersachsen",
-  "WTM": "WitTMund\nLandkreis Wittmund\nNiedersachsen",
-  "WÜ": "WÜrzburg\nLandkreis Würzburg, Stadt Würzburg (AA–NZ 100–9999 und OA–ZZ 100–999)\nBayern",
-  "WUG": "WeißenbUrG\nLandkreis Weißenburg-Gunzenhausen\nBayern",
-  "WÜM": "WaldMÜnchen (mit einem Buchstabendreher)\nLandkreis Cham\nBayern",
-  "WUN": "WUNsiedel\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
-  "WUR": "WURzen\nLandkreis Leipzig\nSachsen",
-  "WW": "WesterWald\nWesterwaldkreis\nRheinland-Pfalz",
-  "WZ": "WetZlar\nStadt Wetzlar (Sonderstatusstadt im Lahn-Dill-Kreis)\nHessen",
-  "WZL": "WanZLeben\nLandkreis Börde\nSachsen-Anhalt",
-  "X": "willkürlich gewählt\nInternationale Hauptquartiere (NATO)\nbundesweit",
-  "Y": "willkürlich gewählt\nBundeswehr\nbundesweit",
-  "Z": "Zwickau\nLandkreis Zwickau\nSachsen",
-  "ZE": "ZErbst\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
-  "ZEL": "ZELl\nLandkreis Cochem-Zell\nRheinland-Pfalz",
-  "ZI": "ZIttau\nLandkreis Görlitz\nSachsen",
-  "ZIG": "ZIeGenhain\nSchwalm-Eder-Kreis\nHessen",
-  "ZP": "ZschoPau\nErzgebirgskreis\nSachsen",
-  "ZR": "ZeulenRoda\nLandkreis Greiz\nThüringen",
-  "ZW": "ZWeibrücken\nStadt Zweibrücken, Landkreis Südwestpfalz (AA–ZZ 1–99)\nRheinland-Pfalz",
-  "ZZ": "ZeitZ\nBurgenlandkreis\nSachsen-Anhalt"
+  "metadata": {
+    "createdAt": "2025-06-23-09:23:10",
+    "total": 726
+  },
+  "data": {
+    "A": {
+      "desc": "Augsburg\nStadt Augsburg, Landkreis Augsburg\nBayern",
+      "count": 0
+    },
+    "AA": {
+      "desc": "AAlen\nOstalbkreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "AB": {
+      "desc": "AschaffenBurg\nStadt Aschaffenburg, Landkreis Aschaffenburg\nBayern",
+      "count": 0
+    },
+    "ABG": {
+      "desc": "AltenBurG\nLandkreis Altenburger Land\nThüringen",
+      "count": 0
+    },
+    "ABI": {
+      "desc": "Anhalt, BItterfeld\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
+      "count": 0
+    },
+    "AC": {
+      "desc": "AaChen\nStädteregion Aachen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "AE": {
+      "desc": "AuErbach\nVogtlandkreis\nSachsen",
+      "count": 0
+    },
+    "AH": {
+      "desc": "AHaus\nKreis Borken\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "AIB": {
+      "desc": "AIBling\nLandkreis München, Landkreis Rosenheim\nBayern",
+      "count": 0
+    },
+    "AIC": {
+      "desc": "AIChach\nLandkreis Aichach-Friedberg\nBayern",
+      "count": 0
+    },
+    "AK": {
+      "desc": "AltenKirchen\nLandkreis Altenkirchen (Westerwald)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "ALF": {
+      "desc": "ALFeld\nLandkreis Hildesheim\nNiedersachsen",
+      "count": 0
+    },
+    "ALZ": {
+      "desc": "ALZenau\nLandkreis Aschaffenburg\nBayern",
+      "count": 0
+    },
+    "AM": {
+      "desc": "AMberg\nStadt Amberg\nBayern",
+      "count": 0
+    },
+    "AN": {
+      "desc": "ANsbach\nStadt Ansbach, Landkreis Ansbach\nBayern",
+      "count": 0
+    },
+    "ANA": {
+      "desc": "ANnAberg\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "ANG": {
+      "desc": "ANGermünde\nLandkreis Uckermark\nBrandenburg",
+      "count": 0
+    },
+    "ANK": {
+      "desc": "ANKlam\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "AÖ": {
+      "desc": "AltÖtting\nLandkreis Altötting\nBayern",
+      "count": 0
+    },
+    "AP": {
+      "desc": "APolda\nLandkreis Weimarer Land\nThüringen",
+      "count": 0
+    },
+    "APD": {
+      "desc": "APolDa\nLandkreis Weimarer Land\nThüringen",
+      "count": 0
+    },
+    "ARN": {
+      "desc": "ARNstadt\nIlm-Kreis\nThüringen",
+      "count": 0
+    },
+    "ART": {
+      "desc": "ARTern\nKyffhäuserkreis\nThüringen",
+      "count": 0
+    },
+    "AS": {
+      "desc": "Amberg, Sulzbach\nLandkreis Amberg-Sulzbach\nBayern",
+      "count": 0
+    },
+    "ASL": {
+      "desc": "ASchersLeben\nSalzlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "ASZ": {
+      "desc": "Aue, SchwarZenberg\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "AT": {
+      "desc": "AltenTreptow\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "AU": {
+      "desc": "AUe\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "AUR": {
+      "desc": "AURich\nLandkreis Aurich\nNiedersachsen",
+      "count": 0
+    },
+    "AW": {
+      "desc": "AhrWeiler\nLandkreis Ahrweiler\nRheinland-Pfalz",
+      "count": 0
+    },
+    "AZ": {
+      "desc": "AlZey\nLandkreis Alzey-Worms\nRheinland-Pfalz",
+      "count": 0
+    },
+    "AZE": {
+      "desc": "Anhalt-ZErbst\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
+      "count": 0
+    },
+    "B": {
+      "desc": "Berlin\nBerlin\nBerlin",
+      "count": 0
+    },
+    "BA": {
+      "desc": "BAmberg\nStadt Bamberg, Landkreis Bamberg\nBayern",
+      "count": 0
+    },
+    "BAD": {
+      "desc": "BADen-Baden\nStadt Baden-Baden\nBaden-Württemberg",
+      "count": 0
+    },
+    "BAR": {
+      "desc": "BARnim\nLandkreis Barnim\nBrandenburg",
+      "count": 0
+    },
+    "BB": {
+      "desc": "BöBlingen\nLandkreis Böblingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "BBG": {
+      "desc": "BernBurG\nSalzlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "BBL": {
+      "desc": "BrandenBurgische Landesregierung\nBrandenburg, Landesregierung, Landtag und Polizei\nBrandenburg",
+      "count": 0
+    },
+    "BC": {
+      "desc": "BiberaCh\nLandkreis Biberach\nBaden-Württemberg",
+      "count": 0
+    },
+    "BCH": {
+      "desc": "BuCHen\nNeckar-Odenwald-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "BD": {
+      "desc": "BundesDienst\nDeutscher Bundestag, Bundesrat, Bundespräsidialamt, Bundesregierung, Bundesministerien, Bundesfinanzverwaltung und Bundesverfassungsgericht\nbundesweit",
+      "count": 0
+    },
+    "BE": {
+      "desc": "BEckum\nKreis Warendorf\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BED": {
+      "desc": "Brand-ErbisDorf\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "BER": {
+      "desc": "BERnau\nLandkreis Barnim\nBrandenburg",
+      "count": 0
+    },
+    "BF": {
+      "desc": "BurgsteinFurt\nKreis Steinfurt\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BGD": {
+      "desc": "BerchtesGaDen\nLandkreis Berchtesgadener Land\nBayern",
+      "count": 0
+    },
+    "BGL": {
+      "desc": "BerchtesGadener Land\nLandkreis Berchtesgadener Land\nBayern",
+      "count": 0
+    },
+    "BH": {
+      "desc": "BüHl\nOrtenaukreis, Landkreis Rastatt\nBaden-Württemberg",
+      "count": 0
+    },
+    "BI": {
+      "desc": "BIelefeld\nStadt Bielefeld\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BID": {
+      "desc": "BIeDenkopf\nLandkreis Marburg-Biedenkopf\nHessen",
+      "count": 0
+    },
+    "BIN": {
+      "desc": "BINgen\nLandkreis Mainz-Bingen\nRheinland-Pfalz",
+      "count": 0
+    },
+    "BIR": {
+      "desc": "BIRkenfeld\nLandkreis Birkenfeld\nRheinland-Pfalz",
+      "count": 0
+    },
+    "BIT": {
+      "desc": "BITburg\nEifelkreis Bitburg-Prüm\nRheinland-Pfalz",
+      "count": 0
+    },
+    "BIW": {
+      "desc": "BIschofsWerda\nLandkreis Bautzen\nSachsen",
+      "count": 0
+    },
+    "BK": {
+      "desc": "BacKnang\nLandkreis Backnang\nBaden-Württemberg",
+      "count": 0
+    },
+    "BKS": {
+      "desc": "BernKaStel\nLandkreis Bernkastel-Wittlich\nRheinland-Pfalz",
+      "count": 0
+    },
+    "BL": {
+      "desc": "BaLingen\nZollernalbkreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "BLB": {
+      "desc": "BerLeBurg\nKreis Siegen-Wittgenstein\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BLK": {
+      "desc": "BurgenLandKreis\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "BM": {
+      "desc": "BergheiM\nRhein-Erft-Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BN": {
+      "desc": "BonN\nStadt Bonn, Diplomaten\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BNA": {
+      "desc": "BorNA\nLandkreis Leipzig\nSachsen",
+      "count": 0
+    },
+    "BO": {
+      "desc": "BOchum\nStadt Bochum\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BÖ": {
+      "desc": "BÖrde\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "BOG": {
+      "desc": "BOGen\nLandkreis Straubing-Bogen\nBayern",
+      "count": 0
+    },
+    "BOH": {
+      "desc": "BOcHolt\nKreis Borken\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BOR": {
+      "desc": "BORken\nKreis Borken\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BOT": {
+      "desc": "BOTtrop\nStadt Bottrop\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BP": {
+      "desc": "BundesPolizei\nBundespolizei\nbundesweit",
+      "count": 0
+    },
+    "BRA": {
+      "desc": "BRAke\nLandkreis Wesermarsch\nNiedersachsen",
+      "count": 0
+    },
+    "BRB": {
+      "desc": "BRandenBurg\nStadt Brandenburg an der Havel\nBrandenburg",
+      "count": 0
+    },
+    "BRG": {
+      "desc": "BuRG\nLandkreis Jerichower Land\nSachsen-Anhalt",
+      "count": 0
+    },
+    "BRK": {
+      "desc": "BRücKenau\nLandkreis Bad Kissingen\nBayern",
+      "count": 0
+    },
+    "BRL": {
+      "desc": "BRaunLage\nLandkreis Goslar\nNiedersachsen",
+      "count": 0
+    },
+    "BRV": {
+      "desc": "BRemerVörde\nLandkreis Rotenburg (Wümme)\nNiedersachsen",
+      "count": 0
+    },
+    "BS": {
+      "desc": "BraunSchweig\nStadt Braunschweig, Polizeidirektion Braunschweig (PD 100–9999)\nNiedersachsen",
+      "count": 0
+    },
+    "BSB": {
+      "desc": "BerSenBrück\nLandkreis Osnabrück\nNiedersachsen",
+      "count": 0
+    },
+    "BSK": {
+      "desc": "BeeSKow\nLandkreis Oder-Spree\nBrandenburg",
+      "count": 0
+    },
+    "BT": {
+      "desc": "BayreuTh\nStadt Bayreuth, Landkreis Bayreuth\nBayern",
+      "count": 0
+    },
+    "BTF": {
+      "desc": "BitTerFeld\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
+      "count": 0
+    },
+    "BÜD": {
+      "desc": "BÜDingen\nWetteraukreis\nHessen",
+      "count": 0
+    },
+    "BUL": {
+      "desc": "BUrgLengenfeld\nLandkreis Amberg-Sulzbach (B, F und G 1–999), Landkreis Schwandorf\nBayern",
+      "count": 0
+    },
+    "BÜR": {
+      "desc": "BÜRen\nKreis Paderborn\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "BÜS": {
+      "desc": "BÜSingen\nGemeinde Büsingen am Hochrhein (Gemeinde im Landkreis Konstanz, deutsche Exklave in der Schweiz) (A und Z 1–999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "BÜZ": {
+      "desc": "BÜtZow\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "BW": {
+      "desc": "Bundes-Wasserstraßen- und Schifffahrtsverwaltung\nWasserstraßen- und Schifffahrtsverwaltung des Bundes\nbundesweit",
+      "count": 0
+    },
+    "BWL": {
+      "desc": "Baden-Württembergischer Landtag\nBaden-Württemberg, Landesregierung, Landtag und Polizei\nBaden-Württemberg",
+      "count": 0
+    },
+    "BYL": {
+      "desc": "BaYerischer Landtag\nBayern, Landesregierung und Landtag\nBayern",
+      "count": 0
+    },
+    "BZ": {
+      "desc": "BautZen\nLandkreis Bautzen\nSachsen",
+      "count": 0
+    },
+    "C": {
+      "desc": "Chemnitz\nStadt Chemnitz\nSachsen",
+      "count": 0
+    },
+    "CA": {
+      "desc": "CAlau\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
+      "count": 0
+    },
+    "CAS": {
+      "desc": "CAStrop\nKreis Recklinghausen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "CB": {
+      "desc": "CottBus\nStadt Cottbus\nBrandenburg",
+      "count": 0
+    },
+    "CE": {
+      "desc": "CElle\nLandkreis Celle\nNiedersachsen",
+      "count": 0
+    },
+    "CHA": {
+      "desc": "CHAm\nLandkreis Cham\nBayern",
+      "count": 0
+    },
+    "CLP": {
+      "desc": "CLopPenburg\nLandkreis Cloppenburg\nNiedersachsen",
+      "count": 0
+    },
+    "CLZ": {
+      "desc": "CLausthal-Zellerfeld\nLandkreis Goslar\nNiedersachsen",
+      "count": 0
+    },
+    "CO": {
+      "desc": "COburg\nStadt Coburg und Landkreis Coburg\nBayern",
+      "count": 0
+    },
+    "COC": {
+      "desc": "COChem\nLandkreis Cochem-Zell\nRheinland-Pfalz",
+      "count": 0
+    },
+    "COE": {
+      "desc": "COEsfeld\nKreis Coesfeld\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "CR": {
+      "desc": "CRailsheim\nLandkreis Schwäbisch Hall\nBaden-Württemberg",
+      "count": 0
+    },
+    "CUX": {
+      "desc": "CUXhaven\nLandkreis Cuxhaven\nNiedersachsen",
+      "count": 0
+    },
+    "CW": {
+      "desc": "CalW\nLandkreis Calw\nBaden-Württemberg",
+      "count": 0
+    },
+    "D": {
+      "desc": "Düsseldorf\nStadt Düsseldorf\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "DA": {
+      "desc": "DArmstadt\nLandkreis Darmstadt-Dieburg und Stadt Darmstadt\nHessen",
+      "count": 0
+    },
+    "DAH": {
+      "desc": "DAcHau\nLandkreis Dachau\nBayern",
+      "count": 0
+    },
+    "DAN": {
+      "desc": "DANnenberg\nLandkreis Lüchow-Dannenberg\nNiedersachsen",
+      "count": 0
+    },
+    "DAU": {
+      "desc": "DAUn\nLandkreis Vulkaneifel\nRheinland-Pfalz",
+      "count": 0
+    },
+    "DBR": {
+      "desc": "DoBeRan\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "DD": {
+      "desc": "DresDen\nStadt Dresden, Polizei Sachsen (Q 1000–9999)\nSachsen",
+      "count": 0
+    },
+    "DE": {
+      "desc": "DEssau\nStadt Dessau-Roßlau\nSachsen-Anhalt",
+      "count": 0
+    },
+    "DEG": {
+      "desc": "DEGgendorf\nLandkreis Deggendorf\nBayern",
+      "count": 0
+    },
+    "DEL": {
+      "desc": "DELmenhorst\nStadt Delmenhorst\nNiedersachsen",
+      "count": 0
+    },
+    "DGF": {
+      "desc": "DinGolFing\nLandkreis Dingolfing-Landau\nBayern",
+      "count": 0
+    },
+    "DH": {
+      "desc": "DiepHolz\nLandkreis Diepholz\nNiedersachsen",
+      "count": 0
+    },
+    "DI": {
+      "desc": "DIeburg\nLandkreis Darmstadt-Dieburg\nHessen",
+      "count": 0
+    },
+    "DIL": {
+      "desc": "DILlenburg\nLahn-Dill-Kreis ohne die Stadt Wetzlar\nHessen",
+      "count": 0
+    },
+    "DIN": {
+      "desc": "DINslaken\nKreis Wesel\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "DIZ": {
+      "desc": "DIeZ\nRhein-Lahn-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "DKB": {
+      "desc": "DinKelsBühl\nLandkreis Ansbach\nBayern",
+      "count": 0
+    },
+    "DL": {
+      "desc": "DöbeLn\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "DLG": {
+      "desc": "DilLinGen\nLandkreis Dillingen an der Donau\nBayern",
+      "count": 0
+    },
+    "DM": {
+      "desc": "DemMin\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "DN": {
+      "desc": "DüreN\nKreis Düren\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "DO": {
+      "desc": "DOrtmund\nStadt Dortmund\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "DON": {
+      "desc": "DONauwörth\nLandkreis Donau-Ries\nBayern",
+      "count": 0
+    },
+    "DU": {
+      "desc": "DUisburg\nStadt Duisburg\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "DUD": {
+      "desc": "DUDerstadt\nLandkreis Göttingen ohne die Stadt Göttingen\nNiedersachsen",
+      "count": 0
+    },
+    "DÜW": {
+      "desc": "DÜrkheim an der Weinstraße\nLandkreis Bad Dürkheim\nRheinland-Pfalz",
+      "count": 0
+    },
+    "DW": {
+      "desc": "DippoldisWalde\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
+      "count": 0
+    },
+    "DZ": {
+      "desc": "DelitZsch\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "E": {
+      "desc": "Essen\nStadt Essen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "EA": {
+      "desc": "EisenAch\nStadt Eisenach\nThüringen",
+      "count": 0
+    },
+    "EB": {
+      "desc": "EilenBurg\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "EBE": {
+      "desc": "EBErsberg\nLandkreis Ebersberg\nBayern",
+      "count": 0
+    },
+    "EBN": {
+      "desc": "EBerN\nLandkreis Haßberge\nBayern",
+      "count": 0
+    },
+    "EBS": {
+      "desc": "EBermannStadt\nLandkreis Forchheim, Landkreis Kulmbach (A–M 1–999), Landkreis Bayreuth (N–Z 1–999)\nBayern",
+      "count": 0
+    },
+    "ECK": {
+      "desc": "ECKernförde\nKreis Rendsburg-Eckernförde\nSchleswig-Holstein",
+      "count": 0
+    },
+    "ED": {
+      "desc": "ErDing\nLandkreis Erding\nBayern",
+      "count": 0
+    },
+    "EE": {
+      "desc": "Elbe, Elster\nLandkreis Elbe-Elster\nBrandenburg",
+      "count": 0
+    },
+    "EF": {
+      "desc": "ErFurt\nStadt Erfurt\nThüringen",
+      "count": 0
+    },
+    "EG": {
+      "desc": "EGgenfelden\nLandkreis Rottal-Inn\nBayern",
+      "count": 0
+    },
+    "EH": {
+      "desc": "EisenHüttenstadt\nLandkreis Oder-Spree\nBrandenburg",
+      "count": 0
+    },
+    "EI": {
+      "desc": "EIchstätt\nLandkreis Eichstätt\nBayern",
+      "count": 0
+    },
+    "EIC": {
+      "desc": "EIChsfeld\nLandkreis Eichsfeld\nThüringen",
+      "count": 0
+    },
+    "EIL": {
+      "desc": "EIsLeben\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "EIN": {
+      "desc": "EINbeck\nLandkreis Northeim\nNiedersachsen",
+      "count": 0
+    },
+    "EIS": {
+      "desc": "EISenberg\nSaale-Holzland-Kreis\nThüringen",
+      "count": 0
+    },
+    "EL": {
+      "desc": "EmsLand\nLandkreis Emsland\nNiedersachsen",
+      "count": 0
+    },
+    "EM": {
+      "desc": "EMmendingen\nLandkreis Emmendingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "EMD": {
+      "desc": "EMDen\nStadt Emden\nNiedersachsen",
+      "count": 0
+    },
+    "EMS": {
+      "desc": "EMS\nRhein-Lahn-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "EN": {
+      "desc": "ENnepe\nEnnepe-Ruhr-Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "ER": {
+      "desc": "ERlangen\nStadt Erlangen\nBayern",
+      "count": 0
+    },
+    "ERB": {
+      "desc": "ERBach\nOdenwaldkreis\nHessen",
+      "count": 0
+    },
+    "ERH": {
+      "desc": "ERlangen, Höchstadt\nLandkreis Erlangen-Höchstadt\nBayern",
+      "count": 0
+    },
+    "ERK": {
+      "desc": "ERKelenz\nKreis Heinsberg\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "ERZ": {
+      "desc": "ERZgebirge\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "ES": {
+      "desc": "ESslingen\nLandkreis Esslingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "ESB": {
+      "desc": "ESchenBach\nLandkreis Neustadt an der Waldnaab, Landkreis Amberg-Sulzbach (B, F, G, I, O und Q 1–999), Landkreis Bayreuth (AT, BT, CT, DT, ... YT und ZT 1–99), Landkreis Nürnberger Land (N 1–999)\nBayern",
+      "count": 0
+    },
+    "ESW": {
+      "desc": "ESchWege\nWerra-Meißner-Kreis\nHessen",
+      "count": 0
+    },
+    "EU": {
+      "desc": "EUskirchen\nKreis Euskirchen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "EW": {
+      "desc": "EbersWalde\nLandkreis Barnim\nBrandenburg",
+      "count": 0
+    },
+    "F": {
+      "desc": "Frankfurt\nStadt Frankfurt am Main\nHessen",
+      "count": 0
+    },
+    "FB": {
+      "desc": "FriedBerg\nWetteraukreis\nHessen",
+      "count": 0
+    },
+    "FD": {
+      "desc": "FulDa\nLandkreis Fulda\nHessen",
+      "count": 0
+    },
+    "FDB": {
+      "desc": "FrieDBerg\nLandkreis Aichach-Friedberg\nBayern",
+      "count": 0
+    },
+    "FDS": {
+      "desc": "FreuDenStadt\nLandkreis Freudenstadt\nBaden-Württemberg",
+      "count": 0
+    },
+    "FEU": {
+      "desc": "FEUchtwangen\nLandkreis Ansbach\nBayern",
+      "count": 0
+    },
+    "FF": {
+      "desc": "FrankFurt\nStadt Frankfurt (Oder)\nBrandenburg",
+      "count": 0
+    },
+    "FFB": {
+      "desc": "FürstenFeldBruck\nLandkreis Fürstenfeldbruck\nBayern",
+      "count": 0
+    },
+    "FG": {
+      "desc": "FreiberG\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "FI": {
+      "desc": "FInsterwalde\nLandkreis Elbe-Elster\nBrandenburg",
+      "count": 0
+    },
+    "FKB": {
+      "desc": "FranKenBerg\nLandkreis Waldeck-Frankenberg\nHessen",
+      "count": 0
+    },
+    "FL": {
+      "desc": "FLensburg\nStadt Flensburg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "FLÖ": {
+      "desc": "FLÖha\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "FN": {
+      "desc": "FriedrichshafeN\nBodenseekreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "FO": {
+      "desc": "FOrchheim\nLandkreis Forchheim\nBayern",
+      "count": 0
+    },
+    "FOR": {
+      "desc": "FORst\nLandkreis Spree-Neiße\nBrandenburg",
+      "count": 0
+    },
+    "FR": {
+      "desc": "FReiburg\nLandkreis Breisgau-Hochschwarzwald, Stadt Freiburg im Breisgau (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "FRG": {
+      "desc": "FReyung, Grafenau\nLandkreis Freyung-Grafenau\nBayern",
+      "count": 0
+    },
+    "FRI": {
+      "desc": "FRIesland\nLandkreis Friesland\nNiedersachsen",
+      "count": 0
+    },
+    "FRW": {
+      "desc": "FReienWalde\nLandkreis Märkisch-Oderland\nBrandenburg",
+      "count": 0
+    },
+    "FS": {
+      "desc": "FreiSing\nLandkreis Freising\nBayern",
+      "count": 0
+    },
+    "FT": {
+      "desc": "FrankenThal\nStadt Frankenthal (Pfalz)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "FTL": {
+      "desc": "FreiTaL\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
+      "count": 0
+    },
+    "FÜ": {
+      "desc": "FÜrth\nLandkreis Fürth, Stadt Fürth (AA–ZZ 100–999)\nBayern",
+      "count": 0
+    },
+    "FÜS": {
+      "desc": "FÜSsen\nLandkreis Ostallgäu\nBayern",
+      "count": 0
+    },
+    "FW": {
+      "desc": "FürstenWalde\nLandkreis Oder-Spree\nBrandenburg",
+      "count": 0
+    },
+    "FZ": {
+      "desc": "FritZlar\nSchwalm-Eder-Kreis\nHessen",
+      "count": 0
+    },
+    "G": {
+      "desc": "Gera\nStadt Gera\nThüringen",
+      "count": 0
+    },
+    "GA": {
+      "desc": "GArdelegen\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
+      "count": 0
+    },
+    "GAN": {
+      "desc": "GANdersheim\nLandkreis Northeim\nNiedersachsen",
+      "count": 0
+    },
+    "GAP": {
+      "desc": "GArmisch-Partenkirchen\nLandkreis Garmisch-Partenkirchen\nBayern",
+      "count": 0
+    },
+    "GC": {
+      "desc": "GlauChau\nLandkreis Zwickau\nSachsen",
+      "count": 0
+    },
+    "GD": {
+      "desc": "GmünD\nOstalbkreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "GDB": {
+      "desc": "GaDeBusch\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "GE": {
+      "desc": "GElsenkirchen\nStadt Gelsenkirchen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GEL": {
+      "desc": "GELdern\nKreis Kleve\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GEO": {
+      "desc": "GErOlzhofen\nLandkreis Schweinfurt, Landkreis Haßberge (A und B 1000–9999)\nBayern",
+      "count": 0
+    },
+    "GER": {
+      "desc": "GERmersheim\nLandkreis Germersheim\nRheinland-Pfalz",
+      "count": 0
+    },
+    "GF": {
+      "desc": "GiFhorn\nLandkreis Gifhorn\nNiedersachsen",
+      "count": 0
+    },
+    "GG": {
+      "desc": "Groß-Gerau\nKreis Groß-Gerau\nHessen",
+      "count": 0
+    },
+    "GHA": {
+      "desc": "GeitHAin\nLandkreis Leipzig\nSachsen",
+      "count": 0
+    },
+    "GHC": {
+      "desc": "GräfenHainiChen\nLandkreis Wittenberg\nSachsen-Anhalt",
+      "count": 0
+    },
+    "GI": {
+      "desc": "GIeßen\nLandkreis Gießen\nHessen",
+      "count": 0
+    },
+    "GK": {
+      "desc": "GeilenKirchen\nKreis Heinsberg\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GL": {
+      "desc": "GLadbach\nRheinisch-Bergischer Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GLA": {
+      "desc": "GLAdbeck\nKreis Recklinghausen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GM": {
+      "desc": "GumMersbach\nOberbergischer Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GMN": {
+      "desc": "GrimMeN\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "GN": {
+      "desc": "GelnhauseN\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
+      "count": 0
+    },
+    "GNT": {
+      "desc": "GeNThin\nLandkreis Jerichower Land\nSachsen-Anhalt",
+      "count": 0
+    },
+    "GÖ": {
+      "desc": "GÖttingen\nLandkreis Göttingen, Stadt Göttingen\nNiedersachsen",
+      "count": 0
+    },
+    "GOA": {
+      "desc": "GOAr\nRhein-Hunsrück-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "GOH": {
+      "desc": "GOarsHausen\nRhein-Lahn-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "GP": {
+      "desc": "GöpPingen\nLandkreis Göppingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "GR": {
+      "desc": "GöRlitz\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "GRA": {
+      "desc": "GRAfenau\nLandkreis Freyung-Grafenau\nBayern",
+      "count": 0
+    },
+    "GRH": {
+      "desc": "GRoßenHain\nLandkreis Meißen\nSachsen",
+      "count": 0
+    },
+    "GRI": {
+      "desc": "GRIesbach\nLandkreis Rottal-Inn (B, I, O und Q 100–999)\nBayern",
+      "count": 0
+    },
+    "GRM": {
+      "desc": "GRimMa\nLandkreis Leipzig\nSachsen",
+      "count": 0
+    },
+    "GRZ": {
+      "desc": "GReiZ\nLandkreis Greiz\nThüringen",
+      "count": 0
+    },
+    "GS": {
+      "desc": "GoSlar\nLandkreis Goslar\nNiedersachsen",
+      "count": 0
+    },
+    "GT": {
+      "desc": "GüTersloh\nKreis Gütersloh\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GTH": {
+      "desc": "GoTHa\nLandkreis Gotha\nThüringen",
+      "count": 0
+    },
+    "GÜ": {
+      "desc": "GÜstrow\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "GUB": {
+      "desc": "GUBen\nLandkreis Spree-Neiße\nBrandenburg",
+      "count": 0
+    },
+    "GUN": {
+      "desc": "GUNzenhausen\nLandkreis Weißenburg-Gunzenhausen\nBayern",
+      "count": 0
+    },
+    "GV": {
+      "desc": "GreVenbroich\nRhein-Kreis Neuss\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "GVM": {
+      "desc": "GreVesMühlen\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "GW": {
+      "desc": "GreifsWald\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "GZ": {
+      "desc": "GünZburg\nLandkreis Günzburg\nBayern",
+      "count": 0
+    },
+    "H": {
+      "desc": "Hannover\nRegion Hannover\nNiedersachsen",
+      "count": 0
+    },
+    "HA": {
+      "desc": "HAgen\nStadt Hagen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HAB": {
+      "desc": "HAmmelBurg\nLandkreis Bad Kissingen\nBayern",
+      "count": 0
+    },
+    "HAL": {
+      "desc": "HALle\nStadt Halle (Saale)\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HAM": {
+      "desc": "HAMm\nStadt Hamm\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HAS": {
+      "desc": "HASsfurt\nLandkreis Haßberge\nBayern",
+      "count": 0
+    },
+    "HB": {
+      "desc": "Hansestadt Bremen\nStadt Bremen, Senat und Bürgerschaft, Stadt Bremerhaven (A–Z 1000–9999)\nBremen",
+      "count": 0
+    },
+    "HBN": {
+      "desc": "HildBurghauseN\nLandkreis Hildburghausen\nThüringen",
+      "count": 0
+    },
+    "HBS": {
+      "desc": "HalBerStadt\nLandkreis Harz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HC": {
+      "desc": "HainiChen\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "HCH": {
+      "desc": "HeCHingen\nZollernalbkreis, Landkreis Freudenstadt (YQ, QY, YV, VY und ZQ 100 bis 999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "HD": {
+      "desc": "HeiDelberg\nStadt Heidelberg, Rhein-Neckar-Kreis (AA–ZZ 100–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "HDH": {
+      "desc": "HeiDenHeim\nLandkreis Heidenheim\nBaden-Württemberg",
+      "count": 0
+    },
+    "HDL": {
+      "desc": "HalDensLeben\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HE": {
+      "desc": "HElmstedt\nLandkreis Helmstedt\nNiedersachsen",
+      "count": 0
+    },
+    "HEB": {
+      "desc": "HErsBruck\nLandkreis Nürnberger Land\nBayern",
+      "count": 0
+    },
+    "HEF": {
+      "desc": "HErsFeld\nLandkreis Hersfeld-Rotenburg\nHessen",
+      "count": 0
+    },
+    "HEI": {
+      "desc": "HEIde\nKreis Dithmarschen\nSchleswig-Holstein",
+      "count": 0
+    },
+    "HEL": {
+      "desc": "HEssischer Landtag\nHessen, Landesregierung und Landtag\nHessen",
+      "count": 0
+    },
+    "HER": {
+      "desc": "HERne\nStadt Herne\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HET": {
+      "desc": "HETtstedt\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HF": {
+      "desc": "HerFord\nKreis Herford\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HG": {
+      "desc": "HomburG\nHochtaunuskreis\nHessen",
+      "count": 0
+    },
+    "HGN": {
+      "desc": "HaGeNow\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "HGW": {
+      "desc": "Hansestadt GreifsWald\nStadt Greifswald (große kreisangehörige Stadt im Landkreis Vorpommern-Greifswald)\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "HH": {
+      "desc": "Hansestadt Hamburg\nFreie und Hansestadt Hamburg, Senat und Bürgerschaft\nHamburg",
+      "count": 0
+    },
+    "HHM": {
+      "desc": "HoHenMölsen\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HI": {
+      "desc": "HIldesheim\nLandkreis Hildesheim\nNiedersachsen",
+      "count": 0
+    },
+    "HIG": {
+      "desc": "HeilIGenstadt\nLandkreis Eichsfeld\nThüringen",
+      "count": 0
+    },
+    "HIP": {
+      "desc": "HIlPoltstein\nLandkreis Roth\nBayern",
+      "count": 0
+    },
+    "HK": {
+      "desc": "HeideKreis\nLandkreis Heidekreis\nNiedersachsen",
+      "count": 0
+    },
+    "HL": {
+      "desc": "Hansestadt Lübeck\nStadt Lübeck\nSchleswig-Holstein",
+      "count": 0
+    },
+    "HM": {
+      "desc": "HaMeln\nLandkreis Hameln-Pyrmont\nNiedersachsen",
+      "count": 0
+    },
+    "HMÜ": {
+      "desc": "Hann. MÜnden\nLandkreis Göttingen ohne die Stadt Göttingen\nNiedersachsen",
+      "count": 0
+    },
+    "HN": {
+      "desc": "HeilbronN\nStadt Heilbronn, Landkreis Heilbronn (AA–MZ 100–9999 und NA–ZZ 100–999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "HO": {
+      "desc": "HOf\nStadt Hof, Landkreis Hof (AA–ZZ 100–9999)\nBayern",
+      "count": 0
+    },
+    "HOG": {
+      "desc": "HOfGeismar\nLandkreis Kassel\nHessen",
+      "count": 0
+    },
+    "HOH": {
+      "desc": "HOfHeim\nLandkreis Haßberge\nBayern",
+      "count": 0
+    },
+    "HOL": {
+      "desc": "HOLzminden\nLandkreis Holzminden\nNiedersachsen",
+      "count": 0
+    },
+    "HOM": {
+      "desc": "HOMburg\nSaarpfalz-Kreis ohne die Stadt St. Ingbert\nSaarland",
+      "count": 0
+    },
+    "HOR": {
+      "desc": "HORb\nLandkreis Freudenstadt\nBaden-Württemberg",
+      "count": 0
+    },
+    "HÖS": {
+      "desc": "HÖchStadt\nLandkreis Erlangen-Höchstadt\nBayern",
+      "count": 0
+    },
+    "HOT": {
+      "desc": "HOhensTein\nLandkreis Zwickau\nSachsen",
+      "count": 0
+    },
+    "HP": {
+      "desc": "HepPenheim\nKreis Bergstraße\nHessen",
+      "count": 0
+    },
+    "HR": {
+      "desc": "HombeRg\nSchwalm-Eder-Kreis\nHessen",
+      "count": 0
+    },
+    "HRO": {
+      "desc": "Hansestadt ROstock\nStadt Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "HS": {
+      "desc": "HeinSberg\nKreis Heinsberg\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HSK": {
+      "desc": "HochSauerlandKreis\nHochsauerlandkreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HST": {
+      "desc": "Hansestadt STralsund\nStadt Stralsund (große kreisangehörige Stadt im Landkreis Vorpommern-Rügen)\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "HU": {
+      "desc": "HanaU\nStadt Hanau (Sonderstatusstadt im Main-Kinzig-Kreis), Main-Kinzig-Kreis (übriges Kreisgebiet)\nHessen",
+      "count": 0
+    },
+    "HV": {
+      "desc": "HaVelberg\nLandkreis Stendal\nSachsen-Anhalt",
+      "count": 0
+    },
+    "HVL": {
+      "desc": "HaVelLand\nLandkreis Havelland\nBrandenburg",
+      "count": 0
+    },
+    "HWI": {
+      "desc": "Hansestadt WIsmar\nStadt Wismar (große kreisangehörige Stadt im Landkreis Nordwestmecklenburg)\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "HX": {
+      "desc": "HöXter\nKreis Höxter\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "HY": {
+      "desc": "HoYerswerda\nLandkreis Bautzen\nSachsen",
+      "count": 0
+    },
+    "HZ": {
+      "desc": "HarZ\nLandkreis Harz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "IGB": {
+      "desc": "InGBert\nStadt St. Ingbert (Mittelstadt im Saarpfalz-Kreis)\nSaarland",
+      "count": 0
+    },
+    "IK": {
+      "desc": "Ilm-Kreis\nIlm-Kreis\nThüringen",
+      "count": 0
+    },
+    "IL": {
+      "desc": "ILmenau\nIlm-Kreis\nThüringen",
+      "count": 0
+    },
+    "ILL": {
+      "desc": "ILLertissen\nLandkreis Neu-Ulm\nBayern",
+      "count": 0
+    },
+    "IN": {
+      "desc": "INgolstadt\nStadt Ingolstadt\nBayern",
+      "count": 0
+    },
+    "IZ": {
+      "desc": "ItZehoe\nKreis Steinburg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "J": {
+      "desc": "Jena\nStadt Jena\nThüringen",
+      "count": 0
+    },
+    "JE": {
+      "desc": "JEssen\nLandkreis Wittenberg\nSachsen-Anhalt",
+      "count": 0
+    },
+    "JL": {
+      "desc": "Jerichower Land\nLandkreis Jerichower Land\nSachsen-Anhalt",
+      "count": 0
+    },
+    "JÜL": {
+      "desc": "JÜLich\nKreis Düren\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "K": {
+      "desc": "Köln\nStadt Köln\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "KA": {
+      "desc": "KArlsruhe\nLandkreis Karlsruhe, Stadt Karlsruhe (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "KB": {
+      "desc": "KorBach\nLandkreis Waldeck-Frankenberg\nHessen",
+      "count": 0
+    },
+    "KC": {
+      "desc": "KronaCh\nLandkreis Kronach\nBayern",
+      "count": 0
+    },
+    "KE": {
+      "desc": "KEmpten\nStadt Kempten (Allgäu)\nBayern",
+      "count": 0
+    },
+    "KEH": {
+      "desc": "KElHeim\nLandkreis Kelheim\nBayern",
+      "count": 0
+    },
+    "KEL": {
+      "desc": "KEhL\nOrtenaukreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "KEM": {
+      "desc": "KEMnath\nLandkreis Tirschenreuth, Landkreis Bayreuth (AT, BT, CT, DT, ... YT und ZT 1–99)\nBayern",
+      "count": 0
+    },
+    "KF": {
+      "desc": "KauFbeuren\nStadt Kaufbeuren\nBayern",
+      "count": 0
+    },
+    "KG": {
+      "desc": "KissinGen\nLandkreis Bad Kissingen\nBayern",
+      "count": 0
+    },
+    "KH": {
+      "desc": "KreuznacH\nLandkreis Bad Kreuznach\nRheinland-Pfalz",
+      "count": 0
+    },
+    "KI": {
+      "desc": "KIel\nStadt Kiel\nSchleswig-Holstein",
+      "count": 0
+    },
+    "KIB": {
+      "desc": "KIrchheimBolanden\nDonnersbergkreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "KK": {
+      "desc": "Kempen, Krefeld\nKreis Viersen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "KL": {
+      "desc": "KaisersLautern\nStadt Kaiserslautern, Landkreis Kaiserslautern (AA–ZZ 100–999)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "KLE": {
+      "desc": "KLEve\nKreis Kleve\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "KLZ": {
+      "desc": "KLötZe\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
+      "count": 0
+    },
+    "KM": {
+      "desc": "KaMenz\nLandkreis Bautzen\nSachsen",
+      "count": 0
+    },
+    "KN": {
+      "desc": "KoNstanz\nLandkreis Konstanz ohne die Gemeinde Büsingen am Hochrhein\nBaden-Württemberg",
+      "count": 0
+    },
+    "KO": {
+      "desc": "KOblenz\nStadt Koblenz\nRheinland-Pfalz",
+      "count": 0
+    },
+    "KÖN": {
+      "desc": "KÖNigshofen\nLandkreis Rhön-Grabfeld\nBayern",
+      "count": 0
+    },
+    "KÖT": {
+      "desc": "KÖThen\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
+      "count": 0
+    },
+    "KÖZ": {
+      "desc": "KÖtZting\nLandkreis Cham\nBayern",
+      "count": 0
+    },
+    "KR": {
+      "desc": "KRefeld\nStadt Krefeld\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "KRU": {
+      "desc": "KRUmbach\nLandkreis Günzburg\nBayern",
+      "count": 0
+    },
+    "KS": {
+      "desc": "KasSel\nLandkreis Kassel und Stadt Kassel\nHessen",
+      "count": 0
+    },
+    "KT": {
+      "desc": "KiTzingen\nLandkreis Kitzingen\nBayern",
+      "count": 0
+    },
+    "KU": {
+      "desc": "KUlmbach\nLandkreis Kulmbach\nBayern",
+      "count": 0
+    },
+    "KÜN": {
+      "desc": "KÜNzelsau\nHohenlohekreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "KUS": {
+      "desc": "KUSel\nLandkreis Kusel\nRheinland-Pfalz",
+      "count": 0
+    },
+    "KW": {
+      "desc": "Königs Wusterhausen\nLandkreis Dahme-Spreewald\nBrandenburg",
+      "count": 0
+    },
+    "KY": {
+      "desc": "KYritz\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
+      "count": 0
+    },
+    "KYF": {
+      "desc": "KYFfhäuser\nKyffhäuserkreis\nThüringen",
+      "count": 0
+    },
+    "L": {
+      "desc": "Leipzig\nSachsen\nStadt Leipzig (A–T und AA–TZ), Landkreis Leipzig (U–Z und UA–ZZ)",
+      "count": 0
+    },
+    "LA": {
+      "desc": "LAndshut\nStadt Landshut, Landkreis Landshut (AA–ZZ 100–999 und 5000–9999)\nBayern",
+      "count": 0
+    },
+    "LAN": {
+      "desc": "LANdau\nLandkreis Dingolfing-Landau\nBayern",
+      "count": 0
+    },
+    "LAU": {
+      "desc": "LAUf\nLandkreis Nürnberger Land\nBayern",
+      "count": 0
+    },
+    "LB": {
+      "desc": "LudwigsBurg\nLandkreis Ludwigsburg\nBaden-Württemberg",
+      "count": 0
+    },
+    "LBS": {
+      "desc": "LoBenStein\nSaale-Orla-Kreis\nThüringen",
+      "count": 0
+    },
+    "LBZ": {
+      "desc": "LüBZ\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "LC": {
+      "desc": "LuCkau\nLandkreis Dahme-Spreewald\nBrandenburg",
+      "count": 0
+    },
+    "LD": {
+      "desc": "LanDau\nStadt Landau in der Pfalz\nRheinland-Pfalz",
+      "count": 0
+    },
+    "LDK": {
+      "desc": "Lahn-Dill-Kreis\nLahn-Dill-Kreis ohne die Stadt Wetzlar\nHessen",
+      "count": 0
+    },
+    "LDS": {
+      "desc": "Landkreis Dahme-Spreewald\nLandkreis Dahme-Spreewald\nBrandenburg",
+      "count": 0
+    },
+    "LEO": {
+      "desc": "LEOnberg\nLandkreis Böblingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "LER": {
+      "desc": "LEeR\nLandkreis Leer\nNiedersachsen",
+      "count": 0
+    },
+    "LEV": {
+      "desc": "LEVerkusen\nStadt Leverkusen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "LF": {
+      "desc": "LauFen\nLandkreis Berchtesgadener Land, Landkreis Altötting (C 1–999, E 1–500, I, J, M, O, Q und V 1–999), Landkreis Traunstein (B, F und G 1–999, DH 1–100, FZ, GH und KQ 1–999, LU 1–200, RW 1–999, TK 1–100, TS 1–999, VW 200–400 sowie WW, XX und ZZ 1–999)\nBayern",
+      "count": 0
+    },
+    "LG": {
+      "desc": "LüneburG\nLandkreis Lüneburg\nNiedersachsen",
+      "count": 0
+    },
+    "LH": {
+      "desc": "LüdingHausen\nKreis Coesfeld, Kreis Unna\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "LI": {
+      "desc": "LIndau\nLandkreis Lindau (Bodensee)\nBayern",
+      "count": 0
+    },
+    "LIB": {
+      "desc": "LIeBenwerda\nLandkreis Elbe-Elster\nBrandenburg",
+      "count": 0
+    },
+    "LIF": {
+      "desc": "LIchtenFels\nLandkreis Lichtenfels\nBayern",
+      "count": 0
+    },
+    "LIP": {
+      "desc": "LIPpe\nKreis Lippe\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "LL": {
+      "desc": "Landsberg am Lech\nLandkreis Landsberg am Lech\nBayern",
+      "count": 0
+    },
+    "LM": {
+      "desc": "LiMburg\nLandkreis Limburg-Weilburg\nHessen",
+      "count": 0
+    },
+    "LN": {
+      "desc": "LübbeN\nLandkreis Dahme-Spreewald\nBrandenburg",
+      "count": 0
+    },
+    "LÖ": {
+      "desc": "LÖrrach\nLandkreis Lörrach\nBaden-Württemberg",
+      "count": 0
+    },
+    "LÖB": {
+      "desc": "LÖBau\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "LOS": {
+      "desc": "Landkreis Oder-Spre\nLandkreis Oder-Spree\nBrandenburg",
+      "count": 0
+    },
+    "LP": {
+      "desc": "LiPpstadt\nKreis Soest\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "LR": {
+      "desc": "LahR\nOrtenaukreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "LRO": {
+      "desc": "Landkreis ROstock\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "LSA": {
+      "desc": "Land Sachsen-Anhalt\nSachsen-Anhalt, Landesregierung, Landtag und Polizei\nSachsen-Anhalt",
+      "count": 0
+    },
+    "LSN": {
+      "desc": "Landtag SachseN\nSachsen, Landesregierung und Landtag\nSachsen",
+      "count": 0
+    },
+    "LSZ": {
+      "desc": "LangenSalZa\nUnstrut-Hainich-Kreis\nThüringen",
+      "count": 0
+    },
+    "LU": {
+      "desc": "LUdwigshafen\nStadt Ludwigshafen am Rhein\nRheinland-Pfalz",
+      "count": 0
+    },
+    "LÜN": {
+      "desc": "LÜNen\nKreis Unna\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "LUP": {
+      "desc": "LUdwigslust, Parchim\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "LWL": {
+      "desc": "LudWigsLust\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "M": {
+      "desc": "München\nLandkreis München, Stadt München (AA–ZZ 100–9999)\nBayern",
+      "count": 0
+    },
+    "MA": {
+      "desc": "MAnnheim\nStadt Mannheim\nBaden-Württemberg",
+      "count": 0
+    },
+    "MAB": {
+      "desc": "MArienBerg\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "MAI": {
+      "desc": "MAInburg\nLandkreis Kelheim, Landkreis Landshut (B, F, G, I, O und Q 1–9999)\nBayern",
+      "count": 0
+    },
+    "MAK": {
+      "desc": "MArKtredwitz\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
+      "count": 0
+    },
+    "MAL": {
+      "desc": "MALlersdorf\nLandkreis Landshut (B, F, G, I, O und Q 1–9999)\nBayern",
+      "count": 0
+    },
+    "MB": {
+      "desc": "MiesBach\nLandkreis Miesbach\nBayern",
+      "count": 0
+    },
+    "MC": {
+      "desc": "MalChin\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "MD": {
+      "desc": "MagDeburg\nStadt Magdeburg\nSachsen-Anhalt",
+      "count": 0
+    },
+    "ME": {
+      "desc": "MEttmann\nKreis Mettmann\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MED": {
+      "desc": "MElDorf\nKreis Dithmarschen\nSchleswig-Holstein",
+      "count": 0
+    },
+    "MEG": {
+      "desc": "MElsunGen\nSchwalm-Eder-Kreis\nHessen",
+      "count": 0
+    },
+    "MEI": {
+      "desc": "MEIßen\nLandkreis Meißen\nSachsen",
+      "count": 0
+    },
+    "MEK": {
+      "desc": "Mittlerer ErzgebirgsKreis\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "MEL": {
+      "desc": "MELle\nLandkreis Osnabrück\nNiedersachsen",
+      "count": 0
+    },
+    "MER": {
+      "desc": "MERseburg\nSaalekreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "MET": {
+      "desc": "MEllrichstadT\nLandkreis Rhön-Grabfeld\nBayern",
+      "count": 0
+    },
+    "MG": {
+      "desc": "MönchenGladbach\nStadt Mönchengladbach\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MGH": {
+      "desc": "MerGentHeim\nMain-Tauber-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "MGN": {
+      "desc": "MeininGeN\nLandkreis Schmalkalden-Meiningen\nThüringen",
+      "count": 0
+    },
+    "MH": {
+      "desc": "MülHeim\nStadt Mülheim an der Ruhr\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MHL": {
+      "desc": "MüHLhausen\nUnstrut-Hainich-Kreis\nThüringen",
+      "count": 0
+    },
+    "MI": {
+      "desc": "MInden\nKreis Minden-Lübbecke\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MIL": {
+      "desc": "MILtenberg\nLandkreis Miltenberg\nBayern",
+      "count": 0
+    },
+    "MK": {
+      "desc": "Märkischer Kreis\nMärkischer Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MKK": {
+      "desc": "Main-Kinzig-Kreis\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
+      "count": 0
+    },
+    "ML": {
+      "desc": "Mansfelder Land\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "MM": {
+      "desc": "MemMingen\nStadt Memmingen\nBayern",
+      "count": 0
+    },
+    "MN": {
+      "desc": "MiNdelheim\nLandkreis Unterallgäu\nBayern",
+      "count": 0
+    },
+    "MO": {
+      "desc": "MOers\nKreis Wesel\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MOD": {
+      "desc": "MarktOberDorf\nLandkreis Ostallgäu\nBayern",
+      "count": 0
+    },
+    "MOL": {
+      "desc": "Märkisch-OderLand\nLandkreis Märkisch-Oderland\nBrandenburg",
+      "count": 0
+    },
+    "MON": {
+      "desc": "MONschau\nStädteregion Aachen, Kreis Düren\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MOS": {
+      "desc": "MOSbach\nNeckar-Odenwald-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "MQ": {
+      "desc": "Merseburg, Querfurt\nSaalekreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "MR": {
+      "desc": "MaRburg\nLandkreis Marburg-Biedenkopf\nHessen",
+      "count": 0
+    },
+    "MS": {
+      "desc": "MünSter\nStadt Münster\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "MSE": {
+      "desc": "Mecklenburgische SEenplatte\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "MSH": {
+      "desc": "Mansfeld, SüdHarz\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "MSP": {
+      "desc": "Main, SPessart\nLandkreis Main-Spessart\nBayern",
+      "count": 0
+    },
+    "MST": {
+      "desc": "Mecklenburg-STrelitz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "MTK": {
+      "desc": "Main-Taunus-Kreis\nMain-Taunus-Kreis\nHessen",
+      "count": 0
+    },
+    "MTL": {
+      "desc": "MuldenTaL\nLandkreis Leipzig\nSachsen",
+      "count": 0
+    },
+    "MUC": {
+      "desc": "Internationale Kennung des Münchner Flughafens\nStadt München\nBayern",
+      "count": 0
+    },
+    "MÜ": {
+      "desc": "MÜhldorf\nLandkreis Mühldorf am Inn\nBayern",
+      "count": 0
+    },
+    "MÜB": {
+      "desc": "MÜnchBerg\nLandkreis Hof, Landkreis Bayreuth (A–M 100–999 und N–Z 1–99)\nBayern",
+      "count": 0
+    },
+    "MÜL": {
+      "desc": "MÜLheim (Baden)\nLandkreis Breisgau-Hochschwarzwald\nBaden-Württemberg",
+      "count": 0
+    },
+    "MÜR": {
+      "desc": "MÜRitz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "MVL": {
+      "desc": "Mecklenburg-Vorpommerscher Landtag\nMecklenburg-Vorpommern, Landesregierung, Landtag und Polizei\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "MW": {
+      "desc": "MittWeida\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "MY": {
+      "desc": "MaYen\nLandkreis Mayen-Koblenz\nRheinland-Pfalz",
+      "count": 0
+    },
+    "MYK": {
+      "desc": "MaYen, Koblenz\nLandkreis Mayen-Koblenz\nRheinland-Pfalz",
+      "count": 0
+    },
+    "MZ": {
+      "desc": "MainZ\nLandkreis Mainz-Bingen, Stadt Mainz (AA–KY 100–9999 und LA–ZZ 100–999)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "MZG": {
+      "desc": "MerZiG\nLandkreis Merzig-Wadern\nSaarland",
+      "count": 0
+    },
+    "N": {
+      "desc": "Nürnberg\nLandkreis Nürnberger Land (A–Z 1–999), Stadt Nürnberg (A–Z 1000–9999 und AA–ZZ 100–9999)\nBayern",
+      "count": 0
+    },
+    "NAB": {
+      "desc": "NABburg\nLandkreis Schwandorf, Landkreis Amberg-Sulzbach (B, F und G 1–999)\nBayern",
+      "count": 0
+    },
+    "NAI": {
+      "desc": "NAIla\nLandkreis Hof\nBayern",
+      "count": 0
+    },
+    "NAU": {
+      "desc": "NAUen\nLandkreis Havelland\nBrandenburg",
+      "count": 0
+    },
+    "NB": {
+      "desc": "NeuBrandenburg\nStadt Neubrandenburg (große kreisangehörige Stadt im Landkreis Mecklenburgische Seenplatte)\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "ND": {
+      "desc": "Neuburg an der Donau\nLandkreis Neuburg-Schrobenhausen\nBayern",
+      "count": 0
+    },
+    "NDH": {
+      "desc": "NorDHausen\nLandkreis Nordhausen\nThüringen",
+      "count": 0
+    },
+    "NE": {
+      "desc": "NEuss\nRhein-Kreis Neuss\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "NEA": {
+      "desc": "NEustadt an der Aisch\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
+      "count": 0
+    },
+    "NEB": {
+      "desc": "NEBra\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "NEC": {
+      "desc": "NEustadt bei Coburg\nStadt Coburg und Landkreis Coburg\nBayern",
+      "count": 0
+    },
+    "NEN": {
+      "desc": "NEuNburg\nLandkreis Schwandorf\nBayern",
+      "count": 0
+    },
+    "NES": {
+      "desc": "NEustadt an der Saale\nLandkreis Rhön-Grabfeld\nBayern",
+      "count": 0
+    },
+    "NEU": {
+      "desc": "Titisee-NEUstadt\nLandkreis Breisgau-Hochschwarzwald\nBaden-Württemberg",
+      "count": 0
+    },
+    "NEW": {
+      "desc": "NEustadt an der Waldnaab\nLandkreis Neustadt an der Waldnaab\nBayern",
+      "count": 0
+    },
+    "NF": {
+      "desc": "NordFriesland\nKreis Nordfriesland\nSchleswig-Holstein",
+      "count": 0
+    },
+    "NH": {
+      "desc": "NeuHaus\nLandkreis Sonneberg\nThüringen",
+      "count": 0
+    },
+    "NI": {
+      "desc": "NIenburg\nLandkreis Nienburg/Weser\nNiedersachsen",
+      "count": 0
+    },
+    "NK": {
+      "desc": "NeunKirchen\nLandkreis Neunkirchen\nSaarland",
+      "count": 0
+    },
+    "NL": {
+      "desc": "Niedersächsischer Landtag\nNiedersachsen, Landesregierung und Landtag\nNiedersachsen",
+      "count": 0
+    },
+    "NM": {
+      "desc": "NeuMarkt\nLandkreis Neumarkt in der Oberpfalz\nBayern",
+      "count": 0
+    },
+    "NMB": {
+      "desc": "NauMBurg\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "NMS": {
+      "desc": "NeuMünSter\nStadt Neumünster\nSchleswig-Holstein",
+      "count": 0
+    },
+    "NÖ": {
+      "desc": "NÖrdlingen\nLandkreis Donau-Ries\nBayern",
+      "count": 0
+    },
+    "NOH": {
+      "desc": "NOrdHorn\nLandkreis Grafschaft Bentheim\nNiedersachsen",
+      "count": 0
+    },
+    "NOL": {
+      "desc": "Niederschlesische OberLausitz\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "NOM": {
+      "desc": "NOrtheiM\nLandkreis Northeim\nNiedersachsen",
+      "count": 0
+    },
+    "NOR": {
+      "desc": "NORden\nLandkreis Aurich\nNiedersachsen",
+      "count": 0
+    },
+    "NP": {
+      "desc": "NeurupPin\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
+      "count": 0
+    },
+    "NR": {
+      "desc": "Neuwied am Rhein\nLandkreis Neuwied\nRheinland-Pfalz",
+      "count": 0
+    },
+    "NRW": {
+      "desc": "NordRhein-Westfalen\nNordrhein-Westfalen, Landesregierung, Landtag und Polizei\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "NT": {
+      "desc": "NürTingen\nLandkreis Esslingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "NU": {
+      "desc": "Neu-Ulm\nLandkreis Neu-Ulm\nBayern",
+      "count": 0
+    },
+    "NVP": {
+      "desc": "NordVorPommern\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "NW": {
+      "desc": "Neustadt an der Weinstraße\nStadt Neustadt an der Weinstraße\nRheinland-Pfalz",
+      "count": 0
+    },
+    "NWM": {
+      "desc": "NordWestMecklenburg\nLandkreis Nordwestmecklenburg ohne die Stadt Wismar\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "NY": {
+      "desc": "NieskY\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "NZ": {
+      "desc": "NeustrelitZ\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "OA": {
+      "desc": "OberAllgäu\nLandkreis Oberallgäu\nBayern",
+      "count": 0
+    },
+    "OAL": {
+      "desc": "OstALlgäu\nLandkreis Ostallgäu\nBayern",
+      "count": 0
+    },
+    "OB": {
+      "desc": "OBerhausen\nStadt Oberhausen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "OBB": {
+      "desc": "OBernBurg\nLandkreis Miltenberg\nBayern",
+      "count": 0
+    },
+    "OBG": {
+      "desc": "OsterBurG\nLandkreis Stendal\nSachsen-Anhalt",
+      "count": 0
+    },
+    "OC": {
+      "desc": "OsChersleben\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "OCH": {
+      "desc": "OCHsenfurt\nLandkreis Würzburg\nBayern",
+      "count": 0
+    },
+    "OD": {
+      "desc": "OlDesloe\nKreis Stormarn\nSchleswig-Holstein",
+      "count": 0
+    },
+    "OE": {
+      "desc": "OlpE\nKreis Olpe\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "OF": {
+      "desc": "OFfenbach\nLandkreis Offenbach und Stadt Offenbach am Main\nHessen",
+      "count": 0
+    },
+    "OG": {
+      "desc": "OffenburG\nOrtenaukreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "OH": {
+      "desc": "OstHolstein\nKreis Ostholstein\nSchleswig-Holstein",
+      "count": 0
+    },
+    "OHA": {
+      "desc": "Osterode am HArz\nLandkreis Göttingen\nNiedersachsen",
+      "count": 0
+    },
+    "ÖHR": {
+      "desc": "ÖHRingen\nHohenlohekreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "OHV": {
+      "desc": "OberHaVel\nLandkreis Oberhavel\nBrandenburg",
+      "count": 0
+    },
+    "OHZ": {
+      "desc": "OsterHolZ\nLandkreis Osterholz\nNiedersachsen",
+      "count": 0
+    },
+    "OK": {
+      "desc": "OhreKreis\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "OL": {
+      "desc": "OLdenburg\nLandkreis Oldenburg, Stadt Oldenburg (AA–ZZ 100–999)\nNiedersachsen",
+      "count": 0
+    },
+    "OP": {
+      "desc": "OPladen\nStadt Leverkusen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "OPR": {
+      "desc": "OstPrignitz, Ruppin\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
+      "count": 0
+    },
+    "OS": {
+      "desc": "OSnabrück\nStadt Osnabrück, Landkreis Osnabrück (AA–ZZ 100–999)\nNiedersachsen",
+      "count": 0
+    },
+    "OSL": {
+      "desc": "OberSpreewald, Lausitz\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
+      "count": 0
+    },
+    "OTW": {
+      "desc": "OTtWeiler\nLandkreis Ottweiler\nSaarland",
+      "count": 0
+    },
+    "OVI": {
+      "desc": "OberVIechtach\nLandkreis Schwandorf\nBayern",
+      "count": 0
+    },
+    "OVL": {
+      "desc": "OberVogtLand\nVogtlandkreis\nSachsen",
+      "count": 0
+    },
+    "OVP": {
+      "desc": "OstVorPommern\nLandkreis Ostvorpommern\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "OZ": {
+      "desc": "OschatZ\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "P": {
+      "desc": "Potsdam\nStadt Potsdam\nBrandenburg",
+      "count": 0
+    },
+    "PA": {
+      "desc": "PAssau\nStadt Passau (A–Z 1–9999), Landkreis Passau (AA–ZZ 1–999)\nBayern",
+      "count": 0
+    },
+    "PAF": {
+      "desc": "PfAFfenhofen\nLandkreis Pfaffenhofen an der Ilm\nBayern",
+      "count": 0
+    },
+    "PAN": {
+      "desc": "PfArrkircheN\nLandkreis Rottal-Inn\nBayern",
+      "count": 0
+    },
+    "PAR": {
+      "desc": "PARsberg\nLandkreis Neumarkt in der Oberpfalz, Landkreis Kelheim (Q, Y, BB und CC 1–999)\nBayern",
+      "count": 0
+    },
+    "PB": {
+      "desc": "PaderBorn\nKreis Paderborn\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "PCH": {
+      "desc": "ParCHim\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "PE": {
+      "desc": "PEine\nLandkreis Peine\nNiedersachsen",
+      "count": 0
+    },
+    "PEG": {
+      "desc": "PEGnitz\nLandkreis Forchheim, Landkreis Nürnberger Land (A 1–999), Landkreis Bayreuth (B–Z 1–999)\nBayern",
+      "count": 0
+    },
+    "PF": {
+      "desc": "PForzheim\nEnzkreis, Stadt Pforzheim (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "PI": {
+      "desc": "PInneberg\nKreis Pinneberg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "PIR": {
+      "desc": "PIRna\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
+      "count": 0
+    },
+    "PL": {
+      "desc": "PLauen\nVogtlandkreis\nSachsen",
+      "count": 0
+    },
+    "PLÖ": {
+      "desc": "PLÖn\nKreis Plön\nSchleswig-Holstein",
+      "count": 0
+    },
+    "PM": {
+      "desc": "Potsdam, Mittelmark\nLandkreis Potsdam-Mittelmark\nBrandenburg",
+      "count": 0
+    },
+    "PN": {
+      "desc": "PößNeck\nSaale-Orla-Kreis\nThüringen",
+      "count": 0
+    },
+    "PR": {
+      "desc": "PRignitz\nLandkreis Prignitz\nBrandenburg",
+      "count": 0
+    },
+    "PRÜ": {
+      "desc": "PRÜm\nEifelkreis Bitburg-Prüm\nRheinland-Pfalz",
+      "count": 0
+    },
+    "PS": {
+      "desc": "PirmaSens\nStadt Pirmasens (A–Z 1–9999), Landkreis Südwestpfalz (AA–ZZ 1–999)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "PW": {
+      "desc": "PaseWalk\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "PZ": {
+      "desc": "PrenZlau\nLandkreis Uckermark\nBrandenburg",
+      "count": 0
+    },
+    "QFT": {
+      "desc": "QuerFurT\nSaalekreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "QLB": {
+      "desc": "QuedLinBurg\nLandkreis Harz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "R": {
+      "desc": "Regensburg\nLandkreis Regensburg, Stadt Regensburg (AA–MM 1–999 und MN–ZZ 1000–9999)\nBayern",
+      "count": 0
+    },
+    "RA": {
+      "desc": "Württemberg\nLandkreis Rastatt\nBaden-Württemberg",
+      "count": 0
+    },
+    "RC": {
+      "desc": "ReiChenbach\nVogtlandkreis\nSachsen",
+      "count": 0
+    },
+    "RD": {
+      "desc": "RenDsburg\nKreis Rendsburg-Eckernförde\nSchleswig-Holstein",
+      "count": 0
+    },
+    "RDG": {
+      "desc": "Ribnitz-DamGarten\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "RE": {
+      "desc": "REcklinghausen\nKreis Recklinghausen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "REG": {
+      "desc": "REGen\nLandkreis Regen\nBayern",
+      "count": 0
+    },
+    "REH": {
+      "desc": "REHau\nLandkreis Hof, Landkreis Wunsiedel im Fichtelgebirge (A, E, F, H, J, M, N, P, R, S, V und X 1–999, AA, FF, GG, OO und ZZ 100–999 sowie AU 900–999)\nBayern",
+      "count": 0
+    },
+    "REI": {
+      "desc": "REIchenhall\nLandkreis Berchtesgadener Land\nBayern",
+      "count": 0
+    },
+    "RG": {
+      "desc": "Riesa, Großenhain\nLandkreis Meißen\nSachsen",
+      "count": 0
+    },
+    "RH": {
+      "desc": "RotH\nLandkreis Roth\nBayern",
+      "count": 0
+    },
+    "RI": {
+      "desc": "RInteln\nLandkreis Schaumburg\nNiedersachsen",
+      "count": 0
+    },
+    "RID": {
+      "desc": "RIeDenburg\nLandkreis Kelheim\nBayern",
+      "count": 0
+    },
+    "RIE": {
+      "desc": "RIEsa\nLandkreis Meißen\nSachsen",
+      "count": 0
+    },
+    "RL": {
+      "desc": "RochLitz\nLandkreis Mittelsachsen\nSachsen",
+      "count": 0
+    },
+    "RM": {
+      "desc": "Röbel/Müritz\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "RN": {
+      "desc": "RatheNow\nLandkreis Havelland\nBrandenburg",
+      "count": 0
+    },
+    "RO": {
+      "desc": "ROsenheim\nStadt Rosenheim, Landkreis Rosenheim (AA–ZZ 100–9999)\nBayern",
+      "count": 0
+    },
+    "ROD": {
+      "desc": "RODing\nLandkreis Cham, Landkreis Schwandorf (B 1–500, F 1–700, G 50–400 und I 100–1000)\nBayern",
+      "count": 0
+    },
+    "ROF": {
+      "desc": "ROtenburg an der Fulda\nLandkreis Hersfeld-Rotenburg\nHessen",
+      "count": 0
+    },
+    "ROK": {
+      "desc": "ROcKenhausen\nDonnersbergkreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "ROL": {
+      "desc": "ROttenburg an der Laaber\nLandkreis Landshut , Landkreis Kelheim (A bis Z)\nBayern",
+      "count": 0
+    },
+    "ROS": {
+      "desc": "ROStock\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "ROT": {
+      "desc": "ROthenburg ob der Tauber\nLandkreis Ansbach\nBayern",
+      "count": 0
+    },
+    "ROW": {
+      "desc": "ROtenburg (Wümme)\nLandkreis Rotenburg (Wümme)\nNiedersachsen",
+      "count": 0
+    },
+    "RP": {
+      "desc": "Rhein-Pfalz\nRhein-Pfalz-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "RPL": {
+      "desc": "Rheinland-Pfälzischer Landtag\nRheinland-Pfalz, Landesregierung, Landtag und Polizei\nRheinland-Pfalz",
+      "count": 0
+    },
+    "RS": {
+      "desc": "RemScheid\nStadt Remscheid\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "RSL": {
+      "desc": "RosSLau\nStadt Dessau-Roßlau\nSachsen-Anhalt",
+      "count": 0
+    },
+    "RT": {
+      "desc": "ReuTlingen\nLandkreis Reutlingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "RU": {
+      "desc": "RUdolstadt\nLandkreis Saalfeld-Rudolstadt\nThüringen",
+      "count": 0
+    },
+    "RÜD": {
+      "desc": "RÜDesheim\nRheingau-Taunus-Kreis\nHessen",
+      "count": 0
+    },
+    "RÜG": {
+      "desc": "RÜGen\nLandkreis Vorpommern-Rügen\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "RV": {
+      "desc": "RaVensburg\nLandkreis Ravensburg\nBaden-Württemberg",
+      "count": 0
+    },
+    "RW": {
+      "desc": "RottWeil\nLandkreis Rottweil\nBaden-Württemberg",
+      "count": 0
+    },
+    "RZ": {
+      "desc": "RatZeburg\nKreis Herzogtum Lauenburg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "S": {
+      "desc": "Stuttgart\nStadt Stuttgart\nBaden-Württemberg",
+      "count": 0
+    },
+    "SAB": {
+      "desc": "SAarBurg\nLandkreis Trier-Saarburg\nRheinland-Pfalz",
+      "count": 0
+    },
+    "SAD": {
+      "desc": "SchwAnDorf\nLandkreis Schwandorf\nBayern",
+      "count": 0
+    },
+    "SAL": {
+      "desc": "SAarländischer Landtag\nSaarland, Landesregierung, Landtag und Polizei\nSaarland",
+      "count": 0
+    },
+    "SAN": {
+      "desc": "StAdtsteiNach\nLandkreis Hof (W–Z 1–999), Landkreis Kulmbach (A–R 1–9999 und JA–ZZ 1–999), Landkreis Kronach (S–V 1–9999 und AA–IZ 1–999)\nBayern",
+      "count": 0
+    },
+    "SAW": {
+      "desc": "SAlzWedel\nAltmarkkreis Salzwedel\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SÄK": {
+      "desc": "SÄcKingen\nLandkreis Säckingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "SB": {
+      "desc": "SaarBrücken\nRegionalverband Saarbrücken ohne die Stadt Völklingen\nSaarland",
+      "count": 0
+    },
+    "SBG": {
+      "desc": "StrasBurG\nLandkreis Vorpommern-Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "SBK": {
+      "desc": "SchöneBecK\nSalzlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SC": {
+      "desc": "SChwabach\nStadt Schwabach\nBayern",
+      "count": 0
+    },
+    "SCZ": {
+      "desc": "SChleiZ\nSaale-Orla-Kreis\nThüringen",
+      "count": 0
+    },
+    "SDH": {
+      "desc": "SonDersHausen\nKyffhäuserkreis\nThüringen",
+      "count": 0
+    },
+    "SDL": {
+      "desc": "StenDaL\nLandkreis Stendal\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SDT": {
+      "desc": "SchweDT\nLandkreis Uckermark\nBrandenburg",
+      "count": 0
+    },
+    "SE": {
+      "desc": "SEgeberg\nKreis Segeberg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "SEB": {
+      "desc": "SEBnitz\nLandkreis Sächsische Schweiz-Osterzgebirge\nSachsen",
+      "count": 0
+    },
+    "SEE": {
+      "desc": "SEElow\nLandkreis Märkisch-Oderland\nBrandenburg",
+      "count": 0
+    },
+    "SEF": {
+      "desc": "SchEinFeld\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
+      "count": 0
+    },
+    "SEL": {
+      "desc": "SELb\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
+      "count": 0
+    },
+    "SFB": {
+      "desc": "SenFtenBerg\nLandkreis Oberspreewald-Lausitz\nBrandenburg",
+      "count": 0
+    },
+    "SFT": {
+      "desc": "StaßFurT\nSalzlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SG": {
+      "desc": "SolinGen\nStadt Solingen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "SGH": {
+      "desc": "SanGerHausen\nLandkreis Mansfeld-Südharz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SH": {
+      "desc": "Schleswig-Holstein\nSchleswig-Holstein, Landesregierung, Landtag und Polizei\nSchleswig-Holstein",
+      "count": 0
+    },
+    "SHA": {
+      "desc": "Schwäbisch HAll\nLandkreis Schwäbisch Hall\nBaden-Württemberg",
+      "count": 0
+    },
+    "SHG": {
+      "desc": "StadtHaGen\nLandkreis Schaumburg\nNiedersachsen",
+      "count": 0
+    },
+    "SHK": {
+      "desc": "Saale-Holzland-Kreis\nSaale-Holzland-Kreis\nThüringen",
+      "count": 0
+    },
+    "SHL": {
+      "desc": "SuHL\nStadt Suhl\nThüringen",
+      "count": 0
+    },
+    "SI": {
+      "desc": "SIegen\nKreis Siegen-Wittgenstein\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "SIG": {
+      "desc": "SIGmaringen\nLandkreis Sigmaringen\nBaden-Württemberg",
+      "count": 0
+    },
+    "SIH": {
+      "desc": "aus dem Film \"Hanne\"\nfiktiver Ort\nFilmproduktion",
+      "count": 0
+    },
+    "SIM": {
+      "desc": "SIMmern\nRhein-Hunsrück-Kreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "SK": {
+      "desc": "SaaleKreis\nSaalekreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SL": {
+      "desc": "SchLeswig\nKreis Schleswig-Flensburg\nSchleswig-Holstein",
+      "count": 0
+    },
+    "SLE": {
+      "desc": "SchLEiden\nKreis Düren, Kreis Euskirchen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "SLF": {
+      "desc": "SaaLFeld\nLandkreis Saalfeld-Rudolstadt\nThüringen",
+      "count": 0
+    },
+    "SLG": {
+      "desc": "SauLGau\nLandkreis Saulgau\nBaden-Württemberg",
+      "count": 0
+    },
+    "SLK": {
+      "desc": "SalzLandKreis\nSalzlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "SLN": {
+      "desc": "SchmölLN\nLandkreis Altenburger Land\nThüringen",
+      "count": 0
+    },
+    "SLS": {
+      "desc": "SaarLouiS\nLandkreis Saarlouis\nSaarland",
+      "count": 0
+    },
+    "SLÜ": {
+      "desc": "SchLÜchtern\nMain-Kinzig-Kreis ohne die Stadt Hanau\nHessen",
+      "count": 0
+    },
+    "SLZ": {
+      "desc": "SaLZungen\nWartburgkreis\nThüringen",
+      "count": 0
+    },
+    "SM": {
+      "desc": "SchMalkalden\nLandkreis Schmalkalden-Meiningen\nThüringen",
+      "count": 0
+    },
+    "SMÜ": {
+      "desc": "SchwabMÜnchen\nLandkreis Augsburg\nBayern",
+      "count": 0
+    },
+    "SN": {
+      "desc": "SchweriN\nStadt Schwerin\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "SO": {
+      "desc": "SOest\nKreis Soest\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "SOB": {
+      "desc": "SchrOBenhausen\nLandkreis Neuburg-Schrobenhausen\nBayern",
+      "count": 0
+    },
+    "SOG": {
+      "desc": "SchOnGau\nLandkreis Weilheim-Schongau\nBayern",
+      "count": 0
+    },
+    "SOK": {
+      "desc": "Saale-Orla-Kreis\nSaale-Orla-Kreis\nThüringen",
+      "count": 0
+    },
+    "SÖM": {
+      "desc": "SÖMmerda\nLandkreis Sömmerda\nThüringen",
+      "count": 0
+    },
+    "SON": {
+      "desc": "SONneberg\nLandkreis Sonneberg\nThüringen",
+      "count": 0
+    },
+    "SP": {
+      "desc": "SPeyer\nStadt Speyer\nRheinland-Pfalz",
+      "count": 0
+    },
+    "SPB": {
+      "desc": "SPremBerg\nLandkreis Spree-Neiße\nBrandenburg",
+      "count": 0
+    },
+    "SPN": {
+      "desc": "SPree, Neiße\nLandkreis Spree-Neiße\nBrandenburg",
+      "count": 0
+    },
+    "SR": {
+      "desc": "StRaubing\nStadt Straubing (A–Z 1–9999), Landkreis Straubing-Bogen (AA–ZZ 1–999)\nBayern",
+      "count": 0
+    },
+    "SRB": {
+      "desc": "StRausBerg\nLandkreis Märkisch-Oderland\nBrandenburg",
+      "count": 0
+    },
+    "SRO": {
+      "desc": "StadtROda\nSaale-Holzland-Kreis\nThüringen",
+      "count": 0
+    },
+    "ST": {
+      "desc": "STeinfurt\nKreis Steinfurt\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "STA": {
+      "desc": "STArnberg\nLandkreis Starnberg\nBayern",
+      "count": 0
+    },
+    "STB": {
+      "desc": "STernBerg\nLandkreis Ludwigslust-Parchim\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "STD": {
+      "desc": "STaDe\nLandkreis Stade\nNiedersachsen",
+      "count": 0
+    },
+    "STE": {
+      "desc": "STaffelstEin\nLandkreis Lichtenfels\nBayern",
+      "count": 0
+    },
+    "STL": {
+      "desc": "STolLberg\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "STO": {
+      "desc": "STOckach\nLandkreis Stockach\nBaden-Württemberg",
+      "count": 0
+    },
+    "SU": {
+      "desc": "SiegbUrg\nRhein-Sieg-Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "SUL": {
+      "desc": "SULzbach\nLandkreis Amberg-Sulzbach\nBayern",
+      "count": 0
+    },
+    "SÜW": {
+      "desc": "SÜdliche Weinstraße\nLandkreis Südliche Weinstraße\nRheinland-Pfalz",
+      "count": 0
+    },
+    "SW": {
+      "desc": "SchWeinfurt\nStadt Schweinfurt, Landkreis Schweinfurt (AA–ZZ 100–9999)\nBayern",
+      "count": 0
+    },
+    "SWA": {
+      "desc": "SchWAlbach\nRheingau-Taunus-Kreis\nHessen",
+      "count": 0
+    },
+    "SY": {
+      "desc": "SYke\nLandkreis Diepholz\nNiedersachsen",
+      "count": 0
+    },
+    "SZ": {
+      "desc": "SalZgitter\nStadt Salzgitter\nNiedersachsen",
+      "count": 0
+    },
+    "SZB": {
+      "desc": "SchwarZenBerg\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "TBB": {
+      "desc": "TauBerBischofsheim\nMain-Tauber-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "TDO": {
+      "desc": "Torgau, Delitzsch, Oschatz\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "TE": {
+      "desc": "TEcklenburg\nKreis Steinfurt\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "TET": {
+      "desc": "TETerow\nLandkreis Rostock\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "TF": {
+      "desc": "Teltow, Fläming\nLandkreis Teltow-Fläming\nBrandenburg",
+      "count": 0
+    },
+    "TG": {
+      "desc": "TorGau\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "THL": {
+      "desc": "THüringer Landtag\nThüringen, Landesregierung und Landtag\nThüringen",
+      "count": 0
+    },
+    "THW": {
+      "desc": "Technisches HilfsWerk\nBundesanstalt Technisches Hilfswerk\nbundesweit",
+      "count": 0
+    },
+    "TIR": {
+      "desc": "TIRschenreuth\nLandkreis Tirschenreuth\nBayern",
+      "count": 0
+    },
+    "TO": {
+      "desc": "Torgau, Oschatz\nLandkreis Nordsachsen\nSachsen",
+      "count": 0
+    },
+    "TÖL": {
+      "desc": "TÖLz\nLandkreis Bad Tölz-Wolfratshausen\nBayern",
+      "count": 0
+    },
+    "TP": {
+      "desc": "TemPlin\nLandkreis Uckermark\nBrandenburg",
+      "count": 0
+    },
+    "TR": {
+      "desc": "TRier\nLandkreis Trier-Saarburg und Stadt Trier\nRheinland-Pfalz",
+      "count": 0
+    },
+    "TS": {
+      "desc": "TraunStein\nLandkreis Traunstein\nBayern",
+      "count": 0
+    },
+    "TT": {
+      "desc": "TeTtnang\nBodenseekreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "TÜ": {
+      "desc": "TÜbingen\nLandkreis Tübingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "TUT": {
+      "desc": "TUTtlingen\nLandkreis Tuttlingen\nBaden-Württemberg",
+      "count": 0
+    },
+    "UE": {
+      "desc": "UElzen\nLandkreis Uelzen\nNiedersachsen",
+      "count": 0
+    },
+    "UEM": {
+      "desc": "UEckerMünde\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "UFF": {
+      "desc": "UFFenheim\nLandkreis Neustadt an der Aisch-Bad Windsheim\nBayern",
+      "count": 0
+    },
+    "UH": {
+      "desc": "Unstrut, Hainich\nUnstrut-Hainich-Kreis\nThüringen",
+      "count": 0
+    },
+    "UL": {
+      "desc": "ULm\nStadt Ulm, Alb-Donau-Kreis (AA–MZ 100–999 und NA–ZZ 100–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "UM": {
+      "desc": "UckerMark\nLandkreis Uckermark\nBrandenburg",
+      "count": 0
+    },
+    "UN": {
+      "desc": "UNna\nKreis Unna\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "USI": {
+      "desc": "USIngen\nHochtaunuskreis\nHessen",
+      "count": 0
+    },
+    "ÜB": {
+      "desc": "ÜBerlingen\nBodenseekreis, Landkreis Ravensburg\nBaden-Württemberg",
+      "count": 0
+    },
+    "V": {
+      "desc": "Vogtland\nVogtlandkreis\nSachsen",
+      "count": 0
+    },
+    "VAI": {
+      "desc": "VAIhingen\nLandkreis Ludwigsburg\nBaden-Württemberg",
+      "count": 0
+    },
+    "VB": {
+      "desc": "VogelsBerg\nVogelsbergkreis\nHessen",
+      "count": 0
+    },
+    "VEC": {
+      "desc": "VEChta\nLandkreis Vechta\nNiedersachsen",
+      "count": 0
+    },
+    "VER": {
+      "desc": "VERden\nLandkreis Verden\nNiedersachsen",
+      "count": 0
+    },
+    "VG": {
+      "desc": "Vorpommern, Greifswald\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "VIB": {
+      "desc": "VIlsBiburg\nLandkreis Landshut, Landkreis Rottal-Inn (B, I, O und Q 100–999)\nBayern",
+      "count": 0
+    },
+    "VIE": {
+      "desc": "VIErsen\nKreis Viersen\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "VIT": {
+      "desc": "VIechTach\nLandkreis Regen\nBayern",
+      "count": 0
+    },
+    "VK": {
+      "desc": "VölKlingen\nStadt Völklingen (Mittelstadt im Regionalverband Saarbrücken)\nSaarland",
+      "count": 0
+    },
+    "VOH": {
+      "desc": "VOHenstrauß\nLandkreis Neustadt an der Waldnaab\nBayern",
+      "count": 0
+    },
+    "VR": {
+      "desc": "Vorpommern, Rügen\nLandkreis Vorpommern-Rügen ohne die Stadt Stralsund\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "VS": {
+      "desc": "Villingen-Schwenningen\nSchwarzwald-Baar-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "W": {
+      "desc": "Wuppertal\nStadt Wuppertal\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WA": {
+      "desc": "WAldeck\nLandkreis Waldeck-Frankenberg\nHessen",
+      "count": 0
+    },
+    "WAF": {
+      "desc": "WArendorF\nKreis Warendorf\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WAK": {
+      "desc": "WArtburgKreis\nWartburgkreis\nThüringen",
+      "count": 0
+    },
+    "WAN": {
+      "desc": "WANne\nStadt Herne\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WAR": {
+      "desc": "WARburg\nKreis Höxter\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WAT": {
+      "desc": "WATtenscheid\nStadt Bochum\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WB": {
+      "desc": "WittenBerg\nLandkreis Wittenberg\nSachsen-Anhalt",
+      "count": 0
+    },
+    "WBS": {
+      "desc": "WorBiS\nLandkreis Eichsfeld\nThüringen",
+      "count": 0
+    },
+    "WDA": {
+      "desc": "WerDAu\nLandkreis Zwickau\nSachsen",
+      "count": 0
+    },
+    "WE": {
+      "desc": "WEimar\nStadt Weimar\nThüringen",
+      "count": 0
+    },
+    "WEL": {
+      "desc": "WEiLburg\nLandkreis Limburg-Weilburg\nHessen",
+      "count": 0
+    },
+    "WEN": {
+      "desc": "WEideN\nStadt Weiden in der Oberpfalz\nBayern",
+      "count": 0
+    },
+    "WER": {
+      "desc": "WERtingen\nLandkreis Dillingen an der Donau, Landkreis Augsburg (A–Z 7000–9999 und YA–YZ 1–999)\nBayern",
+      "count": 0
+    },
+    "WES": {
+      "desc": "WESel\nKreis Wesel\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WF": {
+      "desc": "WolFenbüttel\nLandkreis Wolfenbüttel\nNiedersachsen",
+      "count": 0
+    },
+    "WG": {
+      "desc": "WanGen\nLandkreis Ravensburg\nBaden-Württemberg",
+      "count": 0
+    },
+    "WHV": {
+      "desc": "WilhelmsHaVen\nStadt Wilhelmshaven\nNiedersachsen",
+      "count": 0
+    },
+    "WI": {
+      "desc": "WIesbaden\nStadt Wiesbaden\nHessen",
+      "count": 0
+    },
+    "WIL": {
+      "desc": "WIttLich\nLandkreis Bernkastel-Wittlich\nRheinland-Pfalz",
+      "count": 0
+    },
+    "WIN": {
+      "desc": "aus der Serie \"Dark\"\nWinden (fiktiver Ort)\nFilmproduktion",
+      "count": 0
+    },
+    "WIS": {
+      "desc": "WISmar\nLandkreis Nordwestmecklenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "WIT": {
+      "desc": "WITten\nEnnepe-Ruhr-Kreis\nNordrhein-Westfalen",
+      "count": 0
+    },
+    "WIV": {
+      "desc": "aus dem Film \"Hanne\"\nfiktiver Ort\nFilmproduktion",
+      "count": 0
+    },
+    "WIZ": {
+      "desc": "WItZenhausen\nWerra-Meißner-Kreis\nHessen",
+      "count": 0
+    },
+    "WK": {
+      "desc": "WittstocK\nLandkreis Ostprignitz-Ruppin\nBrandenburg",
+      "count": 0
+    },
+    "WL": {
+      "desc": "Winsen (Luhe)\nLandkreis Harburg\nNiedersachsen",
+      "count": 0
+    },
+    "WLG": {
+      "desc": "WoLGast\nLandkreis Vorpommern-Greifswald ohne die Stadt Greifswald\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "WM": {
+      "desc": "WeilheiM\nLandkreis Weilheim-Schongau\nBayern",
+      "count": 0
+    },
+    "WMS": {
+      "desc": "WolMirStedt\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "WN": {
+      "desc": "WaiblingeN\nRems-Murr-Kreis\nBaden-Württemberg",
+      "count": 0
+    },
+    "WND": {
+      "desc": "WeNDel\nLandkreis St. Wendel\nSaarland",
+      "count": 0
+    },
+    "WO": {
+      "desc": "WOrms\nStadt Worms\nRheinland-Pfalz",
+      "count": 0
+    },
+    "WOB": {
+      "desc": "WOlfsBurg\nStadt Wolfsburg\nNiedersachsen",
+      "count": 0
+    },
+    "WOH": {
+      "desc": "WOlfHagen\nLandkreis Kassel\nHessen",
+      "count": 0
+    },
+    "WOL": {
+      "desc": "WOLfach\nOrtenaukreis, Landkreis Freudenstadt (A bis E 9000–9999)\nBaden-Württemberg",
+      "count": 0
+    },
+    "WOR": {
+      "desc": "WOlfRatshausen\nLandkreis Bad Tölz-Wolfratshausen, Landkreis München (F und O 10–9999), Landkreis Starnberg (B und G 10–9999)\nBayern",
+      "count": 0
+    },
+    "WOS": {
+      "desc": "WOlfStein\nLandkreis Freyung-Grafenau\nBayern",
+      "count": 0
+    },
+    "WR": {
+      "desc": "WernigeRode\nLandkreis Harz\nSachsen-Anhalt",
+      "count": 0
+    },
+    "WRN": {
+      "desc": "WaReN\nLandkreis Mecklenburgische Seenplatte ohne die Stadt Neubrandenburg\nMecklenburg-Vorpommern",
+      "count": 0
+    },
+    "WS": {
+      "desc": "WasSerburg\nLandkreis Rosenheim\nBayern",
+      "count": 0
+    },
+    "WSF": {
+      "desc": "WeisSenFels\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    },
+    "WST": {
+      "desc": "WesterSTede\nLandkreis Ammerland\nNiedersachsen",
+      "count": 0
+    },
+    "WSW": {
+      "desc": "WeisSWasser\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "WT": {
+      "desc": "WaldshuT\nLandkreis Waldshut\nBaden-Württemberg",
+      "count": 0
+    },
+    "WTL": {
+      "desc": "WitTLage\nLandkreis Osnabrück\nNiedersachsen",
+      "count": 0
+    },
+    "WTM": {
+      "desc": "WitTMund\nLandkreis Wittmund\nNiedersachsen",
+      "count": 0
+    },
+    "WÜ": {
+      "desc": "WÜrzburg\nLandkreis Würzburg, Stadt Würzburg (AA–NZ 100–9999 und OA–ZZ 100–999)\nBayern",
+      "count": 0
+    },
+    "WUG": {
+      "desc": "WeißenbUrG\nLandkreis Weißenburg-Gunzenhausen\nBayern",
+      "count": 0
+    },
+    "WÜM": {
+      "desc": "WaldMÜnchen (mit einem Buchstabendreher)\nLandkreis Cham\nBayern",
+      "count": 0
+    },
+    "WUN": {
+      "desc": "WUNsiedel\nLandkreis Wunsiedel im Fichtelgebirge\nBayern",
+      "count": 0
+    },
+    "WUR": {
+      "desc": "WURzen\nLandkreis Leipzig\nSachsen",
+      "count": 0
+    },
+    "WW": {
+      "desc": "WesterWald\nWesterwaldkreis\nRheinland-Pfalz",
+      "count": 0
+    },
+    "WZ": {
+      "desc": "WetZlar\nStadt Wetzlar (Sonderstatusstadt im Lahn-Dill-Kreis)\nHessen",
+      "count": 0
+    },
+    "WZL": {
+      "desc": "WanZLeben\nLandkreis Börde\nSachsen-Anhalt",
+      "count": 0
+    },
+    "X": {
+      "desc": "willkürlich gewählt\nInternationale Hauptquartiere (NATO)\nbundesweit",
+      "count": 0
+    },
+    "Y": {
+      "desc": "willkürlich gewählt\nBundeswehr\nbundesweit",
+      "count": 0
+    },
+    "Z": {
+      "desc": "Zwickau\nLandkreis Zwickau\nSachsen",
+      "count": 0
+    },
+    "ZE": {
+      "desc": "ZErbst\nLandkreis Anhalt-Bitterfeld\nSachsen-Anhalt",
+      "count": 0
+    },
+    "ZEL": {
+      "desc": "ZELl\nLandkreis Cochem-Zell\nRheinland-Pfalz",
+      "count": 0
+    },
+    "ZI": {
+      "desc": "ZIttau\nLandkreis Görlitz\nSachsen",
+      "count": 0
+    },
+    "ZIG": {
+      "desc": "ZIeGenhain\nSchwalm-Eder-Kreis\nHessen",
+      "count": 0
+    },
+    "ZP": {
+      "desc": "ZschoPau\nErzgebirgskreis\nSachsen",
+      "count": 0
+    },
+    "ZR": {
+      "desc": "ZeulenRoda\nLandkreis Greiz\nThüringen",
+      "count": 0
+    },
+    "ZW": {
+      "desc": "ZWeibrücken\nStadt Zweibrücken, Landkreis Südwestpfalz (AA–ZZ 1–99)\nRheinland-Pfalz",
+      "count": 0
+    },
+    "ZZ": {
+      "desc": "ZeitZ\nBurgenlandkreis\nSachsen-Anhalt",
+      "count": 0
+    }
+  }
 }

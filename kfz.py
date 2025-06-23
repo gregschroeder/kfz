@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import sys
+from datetime import datetime
 
 URL = "https://www.kennzeichenking.de/kfz-kennzeichen-liste"
 HEADERS = {
@@ -31,6 +32,7 @@ def main():
         print("Error: Table has no data rows.", file=sys.stderr)
         sys.exit(1)
 
+    total = 0;
     for row in rows[1:]:
         cols = [td.get_text(strip=True) for td in row.find_all("td")]
         if len(cols) != 4:
@@ -39,13 +41,25 @@ def main():
         code, ursprung, landkreis, bundesland = cols
         descr = f"{ursprung}\n{landkreis}\n{bundesland}"
         data.append({"code": code, "description": descr})
+        total = total + 1
 
-    kfz_dict = {d["code"]: d["description"] for d in data}
+    timestamp = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    kfz_dict = {
+      "metadata": {
+        "createdAt": timestamp,
+        "total": total,
+      },
+      "data": {
+        d["code"]: {
+          "desc": d["description"],
+          "count": 0} for d in data
+        }
+      }
 
     with open("kfz_dict.json", "w", encoding="utf-8") as f:
         json.dump(kfz_dict, f, ensure_ascii=False, indent=2)
 
-    print(f"Saved {len(kfz_dict)} entries to kfz_dict.json")
+    print(f"Saved {len(kfz_dict)}[{total}] entries to kfz_dict.json")
 
 if __name__ == "__main__":
     main()
