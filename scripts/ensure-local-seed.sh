@@ -32,4 +32,4 @@ if [[ "${count:-0}" -ge "$MIN_PREFIXES" ]]; then
 fi
 
 echo "Local DB has ${count:-0} prefixes — seeding from data/kfz-list.json…"
-KFZ_LOCAL_ONLY=1 node "$ROOT_DIR/scripts/seed-from-list.mjs"
+KFZ_ENV=local node "$ROOT_DIR/scripts/seed-from-list.mjs"

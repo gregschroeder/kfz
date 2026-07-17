@@ -9,15 +9,14 @@
  *
  * Usage:
  *   pnpm data:local:seed
+ *   pnpm data:prod:seed
  *   pnpm data:local:seed:counts
- *   pnpm data:seed              (uses .env.local or .env — see README)
- *   node scripts/seed-from-list.mjs --counts path/to/stats.json
+ *   pnpm data:prod:seed:counts
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { closePool, getPool } from "./lib/db.mjs";
-import { assertLocalDevOnly } from "./lib/guard-local-only.mjs";
-import { kfzListPath, rootDir } from "./lib/load-env.mjs";
+import { initEnvForScript, kfzListPath, rootDir } from "./lib/load-env.mjs";
 
 function parseArgs(argv) {
   const countsIdx = argv.indexOf("--counts");
@@ -33,10 +32,7 @@ function loadJson(path) {
 }
 
 async function main() {
-  if (process.env.KFZ_LOCAL_ONLY === "1") {
-    assertLocalDevOnly();
-  }
-
+  const { target, path: envPath } = initEnvForScript();
   const { listPath, countsPath } = parseArgs(process.argv.slice(2));
   const list = loadJson(listPath);
   const entries = Object.entries(list.data ?? {});
@@ -88,11 +84,12 @@ async function main() {
     const legacyCount = legacy.rows[0]?.n ?? 0;
 
     console.log(
-      `Synced ${entries.length} prefixes from ${listPath}` +
+      `[${target}] Synced ${entries.length} prefixes from ${listPath}` +
         (countsPath ? ` with counts from ${countsPath}` : "") +
         (legacyCount > 0
           ? `; ${legacyCount} legacy prefix(es) retained (not in list)`
-          : ""),
+          : "") +
+        ` (${envPath})`,
     );
   } catch (error) {
     await conn.query("rollback");

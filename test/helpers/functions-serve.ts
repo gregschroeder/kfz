@@ -61,6 +61,6 @@ async function waitForFunctions(healthUrl: string, timeoutMs = 30_000) {
   }
 
   throw new Error(
-    `Timed out waiting for edge functions at ${healthUrl}. Run: pnpm functions:serve`,
+    `Timed out waiting for edge functions at ${healthUrl}. Run: pnpm functions:local:deploy`,
   );
 }

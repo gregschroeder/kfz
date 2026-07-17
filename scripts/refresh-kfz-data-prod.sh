@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scrape kennzeichenking.de → data/kfz-list.json → upsert into kfz.prefixes
+# Scrape → data/kfz-list.json → upsert kfz.prefixes on hosted prod (.env only).
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -14,7 +14,7 @@ fi
 echo "Scraping prefix list…"
 venv/bin/python scripts/kfz.py
 
-echo "Seeding database from data/kfz-list.json…"
-pnpm run data:seed
+echo "Seeding prod database from data/kfz-list.json…"
+pnpm run data:prod:seed
 
-echo "refresh-kfz-data complete."
+echo "data:prod:refresh complete."

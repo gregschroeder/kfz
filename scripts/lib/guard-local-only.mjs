@@ -36,15 +36,44 @@ export function assertLocalDevOnly() {
 
   if (isRemoteDatabaseUrl(process.env.DATABASE_URL)) {
     throw new Error(
-      "Refusing: DATABASE_URL points at hosted Supabase. Reset is local/dev only.",
+      "Refusing: DATABASE_URL points at hosted Supabase. Use data:prod:* for prod.",
     );
   }
 
   if (isRemoteSupabaseUrl(process.env.SUPABASE_URL)) {
     throw new Error(
-      "Refusing: SUPABASE_URL points at hosted Supabase. Reset is local/dev only.",
+      "Refusing: SUPABASE_URL points at hosted Supabase. Use data:prod:* for prod.",
     );
   }
 }
+
+export function assertProdOnly() {
+  if (process.env.KFZ_ALLOW_PROD_RESET === "1") {
+    console.warn("WARNING: KFZ_ALLOW_PROD_RESET=1 — prod guard disabled");
+    return;
+  }
+
+  const dbUrl = process.env.DATABASE_URL ?? "";
+  if (dbUrl) {
+    const host = hostnameFromUrl(dbUrl);
+    if (host && isLocalHost(host)) {
+      throw new Error(
+        "Refusing: DATABASE_URL is local. Use data:local:* for Docker, not data:prod:*.",
+      );
+    }
+  }
+
+  if (process.env.SUPABASE_URL) {
+    const host = hostnameFromUrl(process.env.SUPABASE_URL);
+    if (host && isLocalHost(host)) {
+      throw new Error(
+        "Refusing: SUPABASE_URL is local. Use data:prod:* for hosted Supabase only.",
+      );
+    }
+  }
+}
+
+/** @deprecated use assertProdOnly */
+export const assertRemoteOnly = assertProdOnly;
 
 export { PROD_PROJECT_REF, isLocalHost, isRemoteDatabaseUrl, isRemoteSupabaseUrl };

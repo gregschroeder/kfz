@@ -12,11 +12,8 @@ SQL fixtures for the local Supabase stack (`pnpm db:local:reset` or `pnpm db:loc
 After reset, load prefix data with:
 
 ```bash
-pnpm data:seed
-# or with historical counts:
-pnpm data:seed:counts
-# or minimal rows only (tests):
-docker exec -i supabase_db_kfz psql -U postgres -d postgres < test/fixtures/seed-minimal.sql
+pnpm data:local:seed
+pnpm data:local:seed:counts
 ```
 
-`data:seed` / `refresh-kfz-data` never delete prefixes — legacy codes stay in the DB.
+`data:prod:*` never delete prefixes — legacy codes stay in the DB.

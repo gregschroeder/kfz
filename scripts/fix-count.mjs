@@ -3,20 +3,21 @@
  * Adjust sighting count for one prefix (corrections / undo mistaken lookups).
  *
  * Usage:
- *   pnpm data:fix-count -- KF 2
- *   node scripts/fix-count.mjs KF 2
- *   node scripts/fix-count.mjs KF --decrement
+ *   pnpm data:local:fix-count -- KF 2
+ *   pnpm data:prod:fix-count -- KF 2
  */
 import { closePool, queryDb } from "./lib/db.mjs";
-import "./lib/load-env.mjs";
+import { initEnvForScript } from "./lib/load-env.mjs";
 
 function usage() {
-  console.error("Usage: node scripts/fix-count.mjs <PREFIX> <COUNT>");
-  console.error("       node scripts/fix-count.mjs <PREFIX> --decrement");
+  console.error("Usage: pnpm data:prod:fix-count -- <PREFIX> <COUNT>");
+  console.error("       pnpm data:prod:fix-count -- <PREFIX> --decrement");
   process.exit(1);
 }
 
 async function main() {
+  initEnvForScript();
+
   const [prefixArg, valueArg] = process.argv.slice(2);
   if (!prefixArg) usage();
 

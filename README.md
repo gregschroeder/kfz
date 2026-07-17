@@ -4,6 +4,8 @@ German license plate (KFZ) lookup — PWA + Watch deferred capture.
 
 Shares the Supabase Postgres project with [hgv](../hgv) (`wchzccrcqlxgsftjbpgn`). App data lives in the **`kfz`** schema (`hgv` uses `hgv.*`).
 
+Every script that touches Supabase is prefixed **`local`** (Docker on `127.0.0.1`) or **`prod`** (hosted project). There are no ambiguous names.
+
 ## Prerequisites
 
 - [nodenv](https://github.com/nodenv/nodenv) — Node version from `.node-version` (same as hgv/flippy)
@@ -18,88 +20,135 @@ corepack enable
 
 All CLI tools (`supabase`, etc.) are **devDependencies** — use `pnpm run …` or `pnpm exec …`, not global installs.
 
-## Setup (scripted — no Supabase dashboard)
+## Script reference
+
+| Script | Target | What it does |
+|---|---|---|
+| **Setup (neutral)** | | |
+| `pnpm db:login` | — | Supabase CLI login |
+| `pnpm db:init` | — | Create supabase/ scaffold |
+| `pnpm db:migration:new` | — | New SQL migration file |
+| **Prod** (hosted `wchzccrcqlxgsftjbpgn`, uses `.env`) | | |
+| `pnpm db:prod:link` | prod | Link CLI to hosted project |
+| `pnpm db:prod:push` | prod | Apply migrations |
+| `pnpm db:prod:pull` | prod | Pull remote schema |
+| `pnpm db:prod:dump` | prod | Schema dump → `tmp/` |
+| `pnpm db:prod:dump:data` | prod | Data dump → `tmp/` |
+| `pnpm db:prod:reset` | prod | **Always refuses** |
+| `pnpm db:prod:config:push` | prod | Push `supabase/config.toml` |
+| `pnpm db:prod:secrets:push` | prod | Push `KFZ_API_KEY` etc. to edge runtime |
+| `pnpm prod:up` | prod | **Shortcut:** migrations + deploy functions |
+| `pnpm functions:prod:deploy` | prod | Edge functions only |
+| `pnpm data:prod:refresh` | prod | Scrape → `data/kfz-list.json` → upsert prefixes |
+| `pnpm data:prod:seed` | prod | Upsert prefixes from `data/kfz-list.json` |
+| `pnpm data:prod:seed:counts` | prod | Same + counts from `tmp/kfz_stats.json` |
+| `pnpm data:prod:fix-count` | prod | Set/decrement one prefix count |
+| `pnpm web:build` | prod | PWA build using `.env` → `web/dist/` |
+| **Local** (Docker `:54331`/`:54332`, uses `.env.local`) | | |
+| `pnpm db:local:start` | local | Start Docker stack |
+| `pnpm db:local:stop` | local | Stop Docker stack |
+| `pnpm db:local:status` | local | Show local URLs/keys |
+| `pnpm db:local:push` | local | Apply migrations to local DB |
+| `pnpm db:local:reset` | local | Reset + seed from `data/kfz-list.json` |
+| `pnpm db:local:reset:empty` | local | Reset, no seed |
+| `pnpm db:local:restore:fixtures` | local | Test fixtures only |
+| `pnpm db:local:dump` | local | Schema dump → `tmp/` |
+| `pnpm db:local:dump:data` | local | Data dump → `tmp/` |
+| `pnpm local:up` | local | **Shortcut:** migrations + refresh `.env.local` |
+| `pnpm functions:local:deploy` | local | Edge functions only (if not using dev:local) |
+| `pnpm env:local` | local | Write `.env.local`, `web/.env.local`, etc. |
+| `pnpm data:local:seed` | local | Upsert prefixes locally |
+| `pnpm data:local:seed:counts` | local | Same + legacy counts |
+| `pnpm data:local:fix-count` | local | Fix one count locally |
+| `pnpm dev:local` | local | Supabase + functions + PWA `:5173` |
+| `pnpm web:dev` | local | PWA dev server |
+| `pnpm test:integration` | local | API integration tests |
+| **Other** | | |
+| `pnpm assets:sync` | — | Icons → `web/public/` |
+| `pnpm web:preview` | — | Preview built PWA |
+
+Prod scripts print `→ prod Supabase (wchzccrcqlxgsftjbpgn)` and verify the linked project ref. Data scripts print `→ prod database (.env)` or `→ local database (.env.local)`.
+
+## What to run when you change things
+
+| You changed… | Local | Prod |
+|---|---|---|
+| **Edge function** (`supabase/functions/`) | Nothing extra if `pnpm dev:local` is running — **hot reload**. Otherwise restart `dev:local` or run `functions:local:deploy`. | `pnpm prod:up` or `pnpm functions:prod:deploy` |
+| **SQL migration** (`supabase/migrations/`) | `pnpm local:up` or `pnpm db:local:push` | `pnpm prod:up` or `pnpm db:prod:push` |
+| **PWA** (`web/`) | Auto reload via Vite while `dev:local` / `web:dev` runs | `pnpm web:build` then redeploy `web/dist/` to static host |
+| **Prefix list / scrape** (`scripts/kfz.py`) | `pnpm data:local:seed` | `pnpm data:prod:refresh` |
+| **Secrets** (`.env` keys for functions) | `pnpm env:local` | `pnpm db:prod:secrets:push` |
+
+**Shortcut — “make prod up to date”** after code changes (migrations + functions):
 
 ```bash
-cp .env.example .env          # fill in passwords/keys
+pnpm prod:up
+```
+
+**Shortcut — “make local DB up to date”** after new migrations:
+
+```bash
+pnpm local:up
+pnpm dev:local    # daily driver: DB + functions (hot reload) + PWA
+```
+
+`prod:up` does **not** rebuild the PWA, refresh prefix data, or push secrets — only schema + functions.
+
+## First-time prod setup
+
+```bash
+cp .env.example .env          # fill in prod passwords/keys
 pnpm install
 python3 -m venv venv && venv/bin/pip install -r requirements.txt
 
 pnpm db:login
-pnpm db:link                # links wchzccrcqlxgsftjbpgn
-pnpm db:remote:push         # apply kfz migrations to shared project
-pnpm secrets:push           # push KFZ_API_KEY etc. to edge functions
-pnpm functions:deploy       # deploy kfz-* edge functions
+pnpm db:prod:link
+pnpm db:prod:push
+pnpm db:prod:secrets:push
+pnpm functions:prod:deploy
 
-pnpm data:local:seed:counts # local Docker only: list + tmp/kfz_stats.json counts
+pnpm data:prod:seed:counts    # prefixes + legacy counts from tmp/kfz_stats.json
 ```
 
-## Data refresh (Mac)
+## Data refresh (Mac → prod)
 
 ```bash
-pnpm refresh-kfz-data       # scrape → data/kfz-list.json → upsert kfz.prefixes
+pnpm data:prod:refresh        # scrape → data/kfz-list.json → upsert prod prefixes
 ```
 
-Sync is **additive only**: new and changed prefixes are inserted/updated; prefixes
-that drop off the official list stay in the database (they may still be on the road).
-Counts and `queried_at` are not touched unless you run `pnpm data:local:seed:counts` (local) or `pnpm data:seed:counts` (whichever DB `.env.local` / `.env` points at).
+Sync is **additive only**: new/changed prefixes are upserted; removed official codes stay in the DB.
+Counts and `queried_at` are untouched unless you run `pnpm data:prod:seed:counts`.
 
 ## Count correction
 
 ```bash
-pnpm data:fix-count -- KF 2
-pnpm data:fix-count -- KF --decrement
+pnpm data:prod:fix-count -- KF 2
+pnpm data:prod:fix-count -- KF --decrement
+pnpm data:local:fix-count -- KF 2
 ```
 
 ## Local development
 
 Local stack uses ports **54331** (API) / **54332** (DB) so it can run alongside flippy/hgv.
-Reset/truncate is **local only** — guarded in scripts and SQL.
 
 ```bash
-pnpm dev                    # local Supabase + edge functions + PWA (never prod)
-pnpm db:local:start
-pnpm db:local:reset         # guarded: local Docker only + seed from data/kfz-list.json
-pnpm db:local:restore:fixtures
-pnpm env:local              # write .env.local + web/.env.local + supabase/.env
-pnpm data:local:seed        # local Docker only (refuses hosted Supabase URLs)
-pnpm data:seed              # uses .env.local when present, else .env (may be remote)
-pnpm test:integration       # local Supabase + edge functions only
+pnpm dev:local                # or: db:local:start + functions:local:deploy + web:dev
+pnpm db:local:reset
+pnpm test:integration
 ```
 
-Local dev points the PWA at **localhost** (`web/.env.local`). That DB starts with only test fixtures (KF, M) until seeded — `pnpm dev` and `pnpm db:local:reset` auto-seed from `data/kfz-list.json` when fewer than 100 prefixes are present.
-
-`pnpm web:dev` uses `.env.local` when it exists (falls back to `.env` for prod builds).
-
-`pnpm db:remote:reset` always fails (by design).
+`pnpm env:local` writes `.env.local` — prod scripts never read it.
 
 ## PWA (iPhone)
 
-The web app lives in `web/` — Vite + vanilla TS, iOS-first (standalone, safe areas, large tap targets).
-
 ```bash
-pnpm assets:sync          # assets/ → web/public/icons/
-pnpm web:dev              # sync + Vite dev server on :5173
-pnpm web:build            # sync + production build → web/dist/
-pnpm web:preview          # preview production build locally
+pnpm assets:sync
+pnpm web:dev                  # local
+pnpm web:build                # prod bundle → web/dist/
+pnpm web:preview
 ```
 
-Icon preview (after sync): open `web/public/icons/preview.html` in a browser.
-
-**Install on iPhone**
-
-1. Deploy `web/dist/` to static hosting (Cloudflare Pages, etc.) over HTTPS
-2. Open the site in **Safari**
-3. Share → **Add to Home Screen**
-
-**Features**
-
-- Text lookup + mic (Web Speech API, tap to speak)
-- Always increments on successful lookup
-- Processes Watch/server queue on open: Look up / Not now / Delete
-- Offline: saves to local queue, syncs when back online
-- Last 20 lookups in recent history
-- API key from build env (`VITE_KFZ_API_KEY`) or one-time device setup
+**Install on iPhone:** deploy `web/dist/` over HTTPS → Safari → Add to Home Screen.
 
 ## API (edge functions)
 
@@ -117,16 +166,9 @@ All requests require header: `x-kfz-key: <KFZ_API_KEY>`
 
 Base URL: `https://wchzccrcqlxgsftjbpgn.supabase.co/functions/v1/`
 
-## Patterns copied from sibling repos
-
-| From | What |
-|---|---|
-| **hgv** | Shared Supabase project, `kfz` schema isolation, `db:link` / `db:push`, schema-qualified SQL, nodenv |
-| **flippy** | pnpm, `db:local:*` / `db:remote:*` scripts, fixture reset, RLS deny policies, `pnpm exec supabase` |
-
 ## Files
 
-- `data/kfz-list.json` — scraped prefix reference data (source of truth for list refresh)
+- `data/kfz-list.json` — scraped prefix reference data
 - `scripts/kfz.py` — regenerates `data/kfz-list.json`
-- `assets/` — logo/icon sources (synced to PWA via `pnpm assets:sync`)
-- `tmp/kfz_stats.json` — legacy sighting counts for one-time seed
+- `assets/` — logo/icon sources
+- `tmp/kfz_stats.json` — legacy sighting counts for one-time prod seed

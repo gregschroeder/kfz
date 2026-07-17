@@ -42,7 +42,7 @@ export function writeLocalEnvFiles(rootDir: string) {
 export function readWebEnvLocal(rootDir: string): Record<string, string> {
   const envPath = path.join(rootDir, "web", ".env.local");
   if (!fs.existsSync(envPath)) {
-    throw new Error(`Missing ${envPath}. Run: pnpm dev or node scripts/write-local-env.mjs`);
+    throw new Error(`Missing ${envPath}. Run: pnpm dev:local or node scripts/write-local-env.mjs`);
   }
 
   const vars: Record<string, string> = {};
