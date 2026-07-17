@@ -31,7 +31,7 @@ pnpm db:remote:push         # apply kfz migrations to shared project
 pnpm secrets:push           # push KFZ_API_KEY etc. to edge functions
 pnpm functions:deploy       # deploy kfz-* edge functions
 
-pnpm data:seed:counts       # load data/kfz-list.json + tmp/kfz_stats.json counts
+pnpm data:local:seed:counts # local Docker only: list + tmp/kfz_stats.json counts
 ```
 
 ## Data refresh (Mac)
@@ -42,7 +42,7 @@ pnpm refresh-kfz-data       # scrape → data/kfz-list.json → upsert kfz.prefi
 
 Sync is **additive only**: new and changed prefixes are inserted/updated; prefixes
 that drop off the official list stay in the database (they may still be on the road).
-Counts and `queried_at` are not touched unless you run `pnpm data:seed:counts`.
+Counts and `queried_at` are not touched unless you run `pnpm data:local:seed:counts` (local) or `pnpm data:seed:counts` (whichever DB `.env.local` / `.env` points at).
 
 ## Count correction
 
@@ -62,7 +62,8 @@ pnpm db:local:start
 pnpm db:local:reset         # guarded: local Docker only + seed from data/kfz-list.json
 pnpm db:local:restore:fixtures
 pnpm env:local              # write .env.local + web/.env.local + supabase/.env
-pnpm data:seed              # uses .env.local when present
+pnpm data:local:seed        # local Docker only (refuses hosted Supabase URLs)
+pnpm data:seed              # uses .env.local when present, else .env (may be remote)
 pnpm test:integration       # local Supabase + edge functions only
 ```
 

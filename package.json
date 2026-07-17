@@ -2,10 +2,12 @@
   "name": "kfz",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.11.0+sha512.4463f65fd80ed80d69bc1d4bf163ee94f605c7380fc318bb5b2ebe15f8cd12d49c51a4d59e951b401e764d3b6ca751cbf51bc50ed7001a6bcb4935e684c34882",
+  "packageManager": "pnpm@11.13.1+sha512.b2fc7683b8a6525414e7d13e1ba28caaddde96bf66ec540bfaeb7e702b81f3e0be4d1f295edf7f9fe0396740a8dce4509c582ddf79891f4543fea32d37645f25",
   "description": "German license plate lookup — PWA + Watch capture",
   "scripts": {
     "refresh-kfz-data": "bash scripts/refresh-kfz-data.sh",
+    "data:local:seed": "KFZ_LOCAL_ONLY=1 node scripts/seed-from-list.mjs",
+    "data:local:seed:counts": "KFZ_LOCAL_ONLY=1 node scripts/seed-from-list.mjs --counts tmp/kfz_stats.json",
     "data:seed": "node scripts/seed-from-list.mjs",
     "data:seed:counts": "node scripts/seed-from-list.mjs --counts tmp/kfz_stats.json",
     "data:fix-count": "node scripts/fix-count.mjs",

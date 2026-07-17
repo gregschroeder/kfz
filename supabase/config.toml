@@ -32,7 +32,7 @@ enabled = false
 enabled = true
 port = 54333
 
-[inbucket]
+[local_smtp]
 enabled = false
 
 [storage]

@@ -8,13 +8,15 @@
  * Never sets queried_at (only lookup_and_increment does, on successful lookup).
  *
  * Usage:
- *   pnpm data:seed
- *   pnpm data:seed:counts
+ *   pnpm data:local:seed
+ *   pnpm data:local:seed:counts
+ *   pnpm data:seed              (uses .env.local or .env — see README)
  *   node scripts/seed-from-list.mjs --counts path/to/stats.json
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { closePool, getPool } from "./lib/db.mjs";
+import { assertLocalDevOnly } from "./lib/guard-local-only.mjs";
 import { kfzListPath, rootDir } from "./lib/load-env.mjs";
 
 function parseArgs(argv) {
@@ -31,6 +33,10 @@ function loadJson(path) {
 }
 
 async function main() {
+  if (process.env.KFZ_LOCAL_ONLY === "1") {
+    assertLocalDevOnly();
+  }
+
   const { listPath, countsPath } = parseArgs(process.argv.slice(2));
   const list = loadJson(listPath);
   const entries = Object.entries(list.data ?? {});
