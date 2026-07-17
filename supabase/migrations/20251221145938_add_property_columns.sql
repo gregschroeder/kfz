@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20251221145938_add_property_columns.sql

@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20251224000000_add_third_party_data.sql

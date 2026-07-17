@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20251221084704_add_site_detail_data.sql

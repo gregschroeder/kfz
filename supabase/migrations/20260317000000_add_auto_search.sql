@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20260317000000_add_auto_search.sql

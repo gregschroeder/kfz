@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20240117000000_properties.sql

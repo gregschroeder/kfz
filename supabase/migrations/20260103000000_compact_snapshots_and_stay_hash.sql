@@ -1,0 +1,1 @@
+/Users/greg/dev/schroeder/hgv/supabase/migrations/20260103000000_compact_snapshots_and_stay_hash.sql

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="theme-color" content="#1a1f2e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KFZ" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="description" content="German license plate lookup" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <title>KFZ</title>
+  </head>
+  <body>
+    <div id="setup-modal" class="modal" hidden>
+      <div class="modal-card">
+        <h1>Household key</h1>
+        <p class="muted">Enter the shared KFZ API key once on this device.</p>
+        <form id="setup-form">
+          <input
+            id="setup-key"
+            type="password"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="API key"
+            required
+          />
+          <button type="submit" class="btn primary">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="app" hidden>
+      <header class="topbar">
+        <div class="topbar-brand">
+          <img class="logo" src="/icons/logo-plate.png" alt="KFZ" width="114" height="36" />
+          <p id="progress" class="progress" aria-live="polite">—</p>
+        </div>
+        <span id="online-badge" class="conn-status" data-state="online" role="status" aria-label="Online"></span>
+      </header>
+
+      <main class="main">
+        <div id="message" class="message" hidden role="alert"></div>
+
+        <form id="lookup-form" class="lookup-form">
+          <input
+            id="prefix-input"
+            class="prefix-input"
+            name="prefix"
+            type="text"
+            inputmode="text"
+            autocapitalize="characters"
+            autocorrect="off"
+            autocomplete="off"
+            enterkeyhint="go"
+            maxlength="3"
+            placeholder="KFZ"
+            aria-label="License plate prefix"
+          />
+          <button id="search-btn" type="button" class="btn icon" aria-label="Search prefixes">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.5" />
+              <path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+          </button>
+          <button id="mic-btn" type="button" class="btn icon" aria-label="Speak prefix">
+            🎤
+          </button>
+          <button type="submit" class="btn primary">Submit</button>
+        </form>
+
+        <section id="search-results" class="search-results" hidden aria-live="polite"></section>
+        <section id="result" class="result" hidden aria-live="polite"></section>
+        <section id="history" class="history"></section>
+      </main>
+    </div>
+
+    <div id="queue-modal" class="modal queue-modal" hidden>
+      <div class="modal-card">
+        <p id="queue-title" class="queue-title">Queued 1/1</p>
+        <p id="queue-prefix" class="queue-prefix">KF</p>
+        <p class="muted">Process this queued plate?</p>
+        <div class="queue-actions">
+          <button id="queue-lookup" type="button" class="btn primary">Submit</button>
+          <button id="queue-delete" type="button" class="btn danger">Delete</button>
+          <button id="queue-later" type="button" class="btn ghost">Not now</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
