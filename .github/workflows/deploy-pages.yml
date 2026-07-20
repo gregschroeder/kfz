@@ -38,13 +38,11 @@ jobs:
           SUPABASE_PROJECT_REF: wchzccrcqlxgsftjbpgn
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           VITE_FUNCTIONS_URL: ${{ vars.VITE_FUNCTIONS_URL }}
-          KFZ_API_KEY: ${{ secrets.KFZ_API_KEY }}
         run: |
           cat > .env <<EOF
           SUPABASE_PROJECT_REF=${SUPABASE_PROJECT_REF}
           SUPABASE_URL=${SUPABASE_URL}
           VITE_FUNCTIONS_URL=${VITE_FUNCTIONS_URL}
-          KFZ_API_KEY=${KFZ_API_KEY}
           EOF
 
       - name: Build web app

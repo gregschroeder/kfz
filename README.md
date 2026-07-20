@@ -166,7 +166,7 @@ On every push to `main`, it:
 Requires [GitHub CLI](https://cli.github.com/) (`brew install gh && gh auth login`).
 
 ```bash
-# Default domain: kfz.schroeder.org (reads KFZ_API_KEY / URLs from .env)
+# Default domain: kfz.schroeder.org (reads Supabase URLs from .env)
 pnpm pages:prod:setup
 
 # Override domain if needed:
@@ -176,10 +176,11 @@ pnpm pages:prod:setup -- --domain other.example.com
 That script:
 
 1. sets Pages **source = GitHub Actions** (`build_type=workflow`)
-2. sets Actions **secret** `KFZ_API_KEY`
-3. sets Actions **variables** `SUPABASE_URL`, `VITE_FUNCTIONS_URL`, `PAGES_CNAME`
-4. sets the Pages **custom domain** (default `kfz.schroeder.org`)
-5. prints the Namecheap DNS record to add
+2. sets Actions **variables** `SUPABASE_URL`, `VITE_FUNCTIONS_URL`, `PAGES_CNAME`
+3. sets the Pages **custom domain** (default `kfz.schroeder.org`)
+4. prints the Namecheap DNS record to add
+
+The household API key is **not** embedded in the PWA build. Each device enters it once on first launch.
 
 ### Namecheap DNS (manual)
 
@@ -211,6 +212,15 @@ GitHub Actions will rebuild and publish the PWA.
 ## API (edge functions)
 
 All requests require header: `x-kfz-key: <KFZ_API_KEY>`
+
+### Security
+
+- **Household key** — shared secret checked by every edge function. The prod PWA does **not** ship this key; each device enters it once (stored in `localStorage`).
+- **Rate limits** — 30 mutations/min and 120 reads/min per IP (lookup, capture, etc.).
+- **RLS** — Postgres tables are inaccessible to anon/authenticated clients; only edge functions (service role) touch data.
+- **Watch Shortcut** — still uses `x-kfz-key` directly (configure the key in the shortcut).
+
+This is household-grade protection, not public-internet hardened. Anyone who obtains the key can still call the API (e.g. from curl). Rotate `KFZ_API_KEY` via `pnpm db:prod:secrets:push` if it leaks.
 
 | Function | Method | Body | Purpose |
 |---|---|---|---|

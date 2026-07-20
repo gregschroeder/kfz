@@ -44,7 +44,7 @@ if ! gh auth status >/dev/null 2>&1; then
 fi
 
 if [[ ! -f "$ROOT_DIR/.env" ]]; then
-  echo "Missing .env — copy .env.example and set KFZ_API_KEY (and Supabase URLs)." >&2
+  echo "Missing .env — copy .env.example and set Supabase URLs." >&2
   exit 1
 fi
 
@@ -52,11 +52,6 @@ set -a
 # shellcheck disable=SC1091
 source "$ROOT_DIR/.env"
 set +a
-
-if [[ -z "${KFZ_API_KEY:-}" ]]; then
-  echo "KFZ_API_KEY is not set in .env" >&2
-  exit 1
-fi
 
 SUPABASE_URL="${SUPABASE_URL:-https://wchzccrcqlxgsftjbpgn.supabase.co}"
 VITE_FUNCTIONS_URL="${VITE_FUNCTIONS_URL:-${SUPABASE_URL%/}/functions/v1}"
@@ -90,10 +85,7 @@ else
   fi
 fi
 
-# --- Actions secrets / variables ---
-echo "Setting Actions secret KFZ_API_KEY…"
-gh secret set KFZ_API_KEY --repo "$REPO" --body "$KFZ_API_KEY"
-
+# --- Actions variables (no API key — household key is entered in the PWA) ---
 echo "Setting Actions variables…"
 gh variable set SUPABASE_URL --repo "$REPO" --body "$SUPABASE_URL"
 gh variable set VITE_FUNCTIONS_URL --repo "$REPO" --body "$VITE_FUNCTIONS_URL"

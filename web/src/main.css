@@ -724,6 +724,12 @@ input:focus {
   padding: 20px 16px 16px;
 }
 
+.setup-error {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  padding: 12px 14px;
+}
+
 .queue-title {
   color: var(--muted);
   margin-bottom: 8px;

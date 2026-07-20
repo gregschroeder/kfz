@@ -1,10 +1,10 @@
-import { checkApiKey, corsPreflight, json } from "../_shared/auth.ts";
+import { authorize, corsPreflight, json } from "../_shared/auth.ts";
 import { getServiceClient, prefixToResponse } from "../_shared/client.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return corsPreflight();
 
-  const authError = checkApiKey(req);
+  const authError = authorize(req, "read");
   if (authError) return authError;
 
   if (req.method !== "GET") {

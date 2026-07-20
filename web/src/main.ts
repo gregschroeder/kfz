@@ -11,6 +11,7 @@ import {
   processQueueItem,
   searchPrefixes,
   setApiKey,
+  verifyApiKey,
   type PrefixResult,
   type QueueItem,
   type StatsResult,
@@ -61,6 +62,7 @@ const els = {
   setupModal: document.getElementById("setup-modal")!,
   setupForm: document.getElementById("setup-form") as HTMLFormElement,
   setupKey: document.getElementById("setup-key") as HTMLInputElement,
+  setupError: document.getElementById("setup-error")!,
   app: document.getElementById("app")!,
   form: document.getElementById("lookup-form") as HTMLFormElement,
   input: document.getElementById("prefix-input") as HTMLInputElement,
@@ -776,9 +778,7 @@ async function syncLocalQueueOnline(): Promise<void> {
 }
 
 function ensureSetup(): boolean {
-  const key = getApiKey();
-  const fromEnv = Boolean(import.meta.env.VITE_KFZ_API_KEY);
-  if (key || fromEnv) {
+  if (getApiKey()) {
     els.setupModal.hidden = true;
     els.app.hidden = false;
     return true;
@@ -786,6 +786,16 @@ function ensureSetup(): boolean {
   els.setupModal.hidden = false;
   els.app.hidden = true;
   return false;
+}
+
+function showSetupError(message: string): void {
+  els.setupError.textContent = message;
+  els.setupError.hidden = false;
+}
+
+function clearSetupError(): void {
+  els.setupError.hidden = true;
+  els.setupError.textContent = "";
 }
 
 function registerServiceWorker(): void {
@@ -810,9 +820,27 @@ async function init(): Promise<void> {
     event.preventDefault();
     const key = els.setupKey.value.trim();
     if (!key) return;
-    setApiKey(key);
-    ensureSetup();
-    void bootstrap();
+
+    clearSetupError();
+    const submitBtn = els.setupForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+    submitBtn.disabled = true;
+
+    void (async () => {
+      try {
+        const ok = await verifyApiKey(key);
+        if (!ok) {
+          showSetupError("Invalid household key");
+          return;
+        }
+        setApiKey(key);
+        ensureSetup();
+        await bootstrap();
+      } catch {
+        showSetupError("Could not verify key — check connection");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    })();
   });
 
   if (!ensureSetup()) return;

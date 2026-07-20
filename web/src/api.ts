@@ -40,12 +40,23 @@ export function getFunctionsUrl(): string {
 
 export function getApiKey(): string | null {
   const fromEnv = import.meta.env.VITE_KFZ_API_KEY;
-  if (fromEnv) return fromEnv;
+  if (fromEnv && import.meta.env.DEV) return fromEnv;
   return localStorage.getItem(STORAGE_KEY);
 }
 
 export function setApiKey(key: string): void {
   localStorage.setItem(STORAGE_KEY, key.trim());
+}
+
+export function clearApiKey(): void {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+export async function verifyApiKey(key: string): Promise<boolean> {
+  const res = await fetch(`${getFunctionsUrl()}/kfz-stats`, {
+    headers: { "x-kfz-key": key.trim() },
+  });
+  return res.ok;
 }
 
 export function isOnline(): boolean {
