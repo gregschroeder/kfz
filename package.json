@@ -41,6 +41,7 @@
     "web:dev": "KFZ_ENV=local node scripts/write-web-env.mjs && node scripts/sync-web-assets.mjs && pnpm --dir web dev",
     "web:build": "KFZ_ENV=prod node scripts/write-web-env.mjs && node scripts/sync-web-assets.mjs && pnpm --dir web build",
     "web:preview": "pnpm --dir web preview",
+    "pages:prod:setup": "bash scripts/setup-github-pages.sh",
     "assets:sync": "node scripts/sync-web-assets.mjs",
     "test": "pnpm test:integration",
     "test:integration": "vitest run --config test/integration/vitest.config.ts"

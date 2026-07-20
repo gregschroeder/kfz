@@ -44,6 +44,7 @@ All CLI tools (`supabase`, etc.) are **devDependencies** — use `pnpm run …` 
 | `pnpm data:prod:seed:counts` | prod | Same + counts from `tmp/kfz_stats.json` |
 | `pnpm data:prod:fix-count` | prod | Set/decrement one prefix count |
 | `pnpm web:build` | prod | PWA build using `.env` → `web/dist/` |
+| `pnpm pages:prod:setup` | prod | GitHub Pages + Actions secrets/vars via `gh` |
 | **Local** (Docker `:54331`/`:54332`, uses `.env.local`) | | |
 | `pnpm db:local:start` | local | Start Docker stack |
 | `pnpm db:local:stop` | local | Stop Docker stack |
@@ -149,6 +150,63 @@ pnpm web:preview
 ```
 
 **Install on iPhone:** deploy `web/dist/` over HTTPS → Safari → Add to Home Screen.
+
+## Hosting (GitHub Pages + custom domain)
+
+The repo includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`.
+On every push to `main`, it:
+
+1. installs dependencies
+2. writes a temporary prod `.env`
+3. runs `pnpm web:build`
+4. publishes `web/dist/` to **GitHub Pages**
+
+### GitHub repo setup (CLI)
+
+Requires [GitHub CLI](https://cli.github.com/) (`brew install gh && gh auth login`).
+
+```bash
+# Default domain: kfz.schroeder.org (reads KFZ_API_KEY / URLs from .env)
+pnpm pages:prod:setup
+
+# Override domain if needed:
+pnpm pages:prod:setup -- --domain other.example.com
+```
+
+That script:
+
+1. sets Pages **source = GitHub Actions** (`build_type=workflow`)
+2. sets Actions **secret** `KFZ_API_KEY`
+3. sets Actions **variables** `SUPABASE_URL`, `VITE_FUNCTIONS_URL`, `PAGES_CNAME`
+4. sets the Pages **custom domain** (default `kfz.schroeder.org`)
+5. prints the Namecheap DNS record to add
+
+### Namecheap DNS (manual)
+
+Still one manual step — Namecheap isn’t configured by this repo:
+
+- **Type**: `CNAME`
+- **Host**: `kfz`
+- **Value**: `gregschroeder.github.io`
+- **TTL**: automatic/default
+
+After DNS resolves, re-run `pnpm pages:prod:setup` if HTTPS wasn’t enforced yet. GitHub Pages provisions the certificate automatically. Site: `https://kfz.schroeder.org`.
+
+### Deploy flow
+
+After backend changes:
+
+```bash
+pnpm prod:up
+```
+
+After frontend changes:
+
+```bash
+git push origin main
+```
+
+GitHub Actions will rebuild and publish the PWA.
 
 ## API (edge functions)
 
