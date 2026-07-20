@@ -467,19 +467,18 @@ p {
 }
 
 .prefix-input {
-  width: 4.5ch;
-  min-width: 0;
-  max-width: 5.5ch;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 5ch;
   min-height: 56px;
-  flex: 0 1 auto;
   text-align: center;
   font-size: 1.6rem;
   font-weight: 700;
-  padding: 12px 8px;
+  padding: 12px 10px;
 }
 
 #search-btn {
-  margin-left: 0;
+  margin-left: auto;
 }
 
 input:not(.prefix-input) {
@@ -581,6 +580,11 @@ input:focus {
   font-size: 1.2rem;
 }
 
+.lookup-form #mic-btn {
+  min-width: 64px;
+  width: 64px;
+}
+
 .lookup-form .btn.icon .icon-svg {
   width: 1.2rem;
   height: 1.2rem;
@@ -588,10 +592,12 @@ input:focus {
 
 .lookup-form .btn.primary {
   min-height: 56px;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
   padding: 0 14px;
-  flex: 1 1 auto;
-  min-width: 0;
   font-size: 1rem;
+  white-space: nowrap;
 }
 
 .btn.icon {
@@ -768,8 +774,8 @@ input:focus {
   .prefix-input {
     min-height: 50px;
     font-size: 1.45rem;
-    padding: 10px 6px;
-    max-width: 5ch;
+    padding: 10px 8px;
+    min-width: 4.5ch;
   }
 
   .lookup-form .btn.icon {
@@ -779,9 +785,14 @@ input:focus {
     font-size: 1.1rem;
   }
 
+  .lookup-form #mic-btn {
+    min-width: 56px;
+    width: 56px;
+  }
+
   .lookup-form .btn.primary {
     min-height: 50px;
-    padding: 0 10px;
+    padding: 0 12px;
     font-size: 0.92rem;
   }
 
