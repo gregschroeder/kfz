@@ -39,14 +39,25 @@
 
     <div id="app" hidden>
       <header class="topbar">
-        <div class="topbar-brand">
-          <img class="logo" src="/icons/logo-plate.png" alt="KFZ" width="114" height="36" />
+        <img class="logo" src="/icons/logo-plate.png" alt="KFZ" width="114" height="36" />
+        <div class="topbar-meta">
           <p id="progress" class="progress" aria-live="polite">—</p>
+          <button id="stats-btn" type="button" class="btn icon stats-btn" aria-pressed="false" aria-label="Bundesland stats">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="13" width="4" height="7" rx="1" fill="currentColor" />
+              <rect x="10" y="9" width="4" height="11" rx="1" fill="currentColor" />
+              <rect x="16" y="5" width="4" height="15" rx="1" fill="currentColor" />
+            </svg>
+          </button>
         </div>
         <span id="online-badge" class="conn-status" data-state="online" role="status" aria-label="Online"></span>
       </header>
 
-      <main class="main">
+      <section id="stats-view" class="stats-view" hidden aria-label="Bundesland statistics">
+        <div id="stats-content" class="stats-content"></div>
+      </section>
+
+      <main id="main-view" class="main">
         <div id="message" class="message" hidden role="alert"></div>
 
         <form id="lookup-form" class="lookup-form">

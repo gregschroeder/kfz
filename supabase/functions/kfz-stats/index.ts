@@ -12,15 +12,32 @@ Deno.serve(async (req) => {
   }
 
   const supabase = getServiceClient();
-  const { data, error } = await supabase.rpc("stats");
+  const summary = await supabase.rpc("stats");
 
-  if (error) {
-    return json({ error: error.message }, 500);
+  if (summary.error) {
+    return json({ error: summary.error.message }, 500);
   }
 
-  const row = Array.isArray(data) ? data[0] : data;
+  const row = Array.isArray(summary.data) ? summary.data[0] : summary.data;
   const found = Number(row?.found ?? 0);
   const total = Number(row?.total ?? 0);
 
-  return json({ found, total });
+  const breakdown = await supabase.rpc("stats_by_bundesland");
+  const bundeslaender = breakdown.error
+    ? []
+    : (breakdown.data ?? []).map(
+        (entry: {
+          bundesland: string;
+          total: number;
+          found: number;
+          percent: number;
+        }) => ({
+          bundesland: entry.bundesland,
+          total: Number(entry.total ?? 0),
+          count: Number(entry.found ?? 0),
+          percent: Number(entry.percent ?? 0),
+        }),
+      );
+
+  return json({ found, total, bundeslaender });
 });

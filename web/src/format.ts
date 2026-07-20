@@ -9,10 +9,14 @@ export function formatCount(count: number): string {
 
 export function formatProgress(found: number, total: number): string {
   if (total <= 0) {
-    return "0.00% · 0/0";
+    return "0.00% · 0 / 0";
   }
   const pct = (found / total) * 100;
-  return `${pct.toFixed(2)}% · ${found}/${total}`;
+  return `${pct.toFixed(2)}% · ${found} / ${total}`;
+}
+
+export function formatPercent(value: number): string {
+  return `${value.toFixed(2)}%`;
 }
 
 export function formatQueriedAt(iso: string | null | undefined): string | null {

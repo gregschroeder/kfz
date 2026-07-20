@@ -12,6 +12,8 @@ import {
   setApiKey,
   type PrefixResult,
   type QueueItem,
+  type StatsResult,
+  type BundeslandStats,
 } from "./api";
 import {
   addLocalQueue,
@@ -22,7 +24,7 @@ import {
   type HistoryEntry,
   type LocalQueueItem,
 } from "./db";
-import { formatCount, formatHerleitung, formatProgress, formatQueriedAt } from "./format";
+import { formatCount, formatHerleitung, formatPercent, formatProgress, formatQueriedAt } from "./format";
 import { speechSupported, startPrefixListen, type SpeechSession } from "./speech";
 import "./main.css";
 
@@ -52,6 +54,10 @@ const els = {
   toast: document.getElementById("toast")!,
   onlineBadge: document.getElementById("online-badge")!,
   progress: document.getElementById("progress")!,
+  statsBtn: document.getElementById("stats-btn") as HTMLButtonElement,
+  statsView: document.getElementById("stats-view")!,
+  statsContent: document.getElementById("stats-content")!,
+  mainView: document.getElementById("main-view")!,
 };
 
 let pendingQueue: PendingItem[] = [];
@@ -62,7 +68,12 @@ let listenSession: SpeechSession | null = null;
 let focusHandlersRegistered = false;
 
 function canFocusInput(): boolean {
-  return !els.app.hidden && els.queueModal.hidden && els.setupModal.hidden;
+  return (
+    !els.app.hidden &&
+    els.queueModal.hidden &&
+    els.setupModal.hidden &&
+    els.statsView.hidden
+  );
 }
 
 function focusInput(): void {
@@ -190,6 +201,113 @@ async function refreshProgress(): Promise<void> {
   } catch {
     els.progress.textContent = "—";
   }
+}
+
+const SPECIAL_BUNDESLAENDER = new Set(["Filmproduktion", "bundesweit"]);
+
+function sortBundeslandRows(rows: BundeslandStats[]): BundeslandStats[] {
+  return [...rows].sort((a, b) => {
+    if (b.percent !== a.percent) return b.percent - a.percent;
+    return a.bundesland.localeCompare(b.bundesland, "de");
+  });
+}
+
+function renderStatsTableRows(rows: BundeslandStats[]): string {
+  return rows
+    .map(
+      (row) => `
+          <tr>
+            <td>${escapeHtml(row.bundesland)}</td>
+            <td>${formatCount(row.total)}</td>
+            <td>${formatCount(row.count)}</td>
+            <td>${formatPercent(row.percent)}</td>
+          </tr>`,
+    )
+    .join("");
+}
+
+function renderStatsPage(stats: StatsResult): void {
+  const all = stats.bundeslaender ?? [];
+  const main = sortBundeslandRows(
+    all.filter((row) => !SPECIAL_BUNDESLAENDER.has(row.bundesland)),
+  );
+  const special = sortBundeslandRows(
+    all.filter((row) => SPECIAL_BUNDESLAENDER.has(row.bundesland)),
+  );
+
+  if (all.length === 0) {
+    els.statsContent.innerHTML = `
+      <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
+      <p class="muted">Bundesland breakdown unavailable until the database is updated.</p>
+    `;
+    return;
+  }
+
+  const specialTable = special.length
+    ? `
+    <table class="stats-table stats-table-special">
+      <tbody>
+        ${renderStatsTableRows(special)}
+      </tbody>
+    </table>`
+    : "";
+
+  els.statsContent.innerHTML = `
+    <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
+    <div class="stats-tables">
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th scope="col">Bundesland</th>
+            <th scope="col">Total</th>
+            <th scope="col">Count</th>
+            <th scope="col">Percent</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${renderStatsTableRows(main)}
+        </tbody>
+      </table>
+      ${specialTable}
+    </div>
+  `;
+}
+
+function setStatsOpen(open: boolean): void {
+  els.statsView.hidden = !open;
+  els.mainView.hidden = open;
+  els.statsBtn.setAttribute("aria-pressed", open ? "true" : "false");
+  els.statsBtn.setAttribute(
+    "aria-label",
+    open ? "Close Bundesland stats" : "Bundesland stats",
+  );
+
+  if (!open) {
+    focusInput();
+    return;
+  }
+
+  els.statsContent.innerHTML = `<p class="muted">Loading…</p>`;
+
+  if (!isOnline()) {
+    els.statsContent.innerHTML = `<p class="muted">Stats require an internet connection.</p>`;
+    return;
+  }
+
+  void (async () => {
+    try {
+      const stats = await fetchStats();
+      renderStatsPage(stats);
+    } catch (error) {
+      els.statsContent.innerHTML = `<p class="muted">${escapeHtml(
+        error instanceof Error ? error.message : "Could not load stats",
+      )}</p>`;
+    }
+  })();
+}
+
+function toggleStatsView(): void {
+  setStatsOpen(els.statsView.hidden);
 }
 
 function formatHistoryMeta(entry: HistoryEntry): string {
@@ -570,6 +688,10 @@ async function bootstrap(): Promise<void> {
     void deleteCurrentQueueItem();
   });
   els.queueLater.addEventListener("click", deferQueue);
+
+  els.statsBtn.addEventListener("click", () => {
+    toggleStatsView();
+  });
 
   focusInput();
 }

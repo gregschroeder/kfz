@@ -8,9 +8,17 @@ export type PrefixResult = {
   previous_queried_at?: string | null;
 };
 
+export type BundeslandStats = {
+  bundesland: string;
+  total: number;
+  count: number;
+  percent: number;
+};
+
 export type StatsResult = {
   found: number;
   total: number;
+  bundeslaender: BundeslandStats[];
 };
 
 export type QueueItem = {
