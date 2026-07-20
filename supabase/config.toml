@@ -67,3 +67,6 @@ verify_jwt = false
 
 [functions.kfz-search]
 verify_jwt = false
+
+[functions.kfz-bundesland]
+verify_jwt = false

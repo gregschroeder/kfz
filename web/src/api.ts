@@ -90,6 +90,15 @@ async function apiFetch<T>(
   return payload as T;
 }
 
+export async function fetchPrefixesByBundesland(
+  bundesland: string,
+): Promise<PrefixResult[]> {
+  const data = await apiFetch<{ items: PrefixResult[] }>(
+    `kfz-bundesland?bl=${encodeURIComponent(bundesland)}`,
+  );
+  return data.items ?? [];
+}
+
 export async function fetchStats(): Promise<StatsResult> {
   return apiFetch<StatsResult>("kfz-stats");
 }

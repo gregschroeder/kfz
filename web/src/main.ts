@@ -1,6 +1,7 @@
 import {
   capturePrefix,
   deleteQueueItem,
+  fetchPrefixesByBundesland,
   fetchQueue,
   fetchStats,
   getApiKey,
@@ -24,9 +25,33 @@ import {
   type HistoryEntry,
   type LocalQueueItem,
 } from "./db";
-import { formatCount, formatHerleitung, formatPercent, formatProgress, formatQueriedAt } from "./format";
+import { formatCount, formatHerleitung, formatPercent, formatProgress, displayQueriedAt } from "./format";
 import { speechSupported, startPrefixListen, type SpeechSession } from "./speech";
 import "./main.css";
+
+const STATS_ICON_CHART = `<svg class="icon-svg stats-icon-chart" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="13" width="4" height="7" rx="1" fill="currentColor" /><rect x="10" y="9" width="4" height="11" rx="1" fill="currentColor" /><rect x="16" y="5" width="4" height="15" rx="1" fill="currentColor" /></svg>`;
+
+const STATS_ICON_CLOSE = `<svg class="icon-svg stats-icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" /></svg>`;
+
+const STATS_PREFIX_COLGROUP = `<colgroup><col class="col-prefix" /><col class="col-ursprung" /><col class="col-landkreis" /><col class="col-count" /></colgroup>`;
+
+const STATS_OVERVIEW_COLGROUP = `<colgroup><col class="col-bundesland" /><col class="col-total" /><col class="col-count" /><col class="col-percent" /></colgroup>`;
+
+const STATS_OVERVIEW_HEAD = `
+  <tr>
+    <th scope="col">Bundesland</th>
+    <th scope="col">Total</th>
+    <th scope="col">Count</th>
+    <th scope="col">Percent</th>
+  </tr>`;
+
+const STATS_PREFIX_HEAD = `
+  <tr>
+    <th scope="col">Kennzeichen</th>
+    <th scope="col">Herleitung</th>
+    <th scope="col">Landkreis</th>
+    <th scope="col">Count</th>
+  </tr>`;
 
 type PendingItem =
   | { kind: "server"; id: string; prefix: string }
@@ -66,6 +91,8 @@ let queueDeferred = false;
 let toastTimer: number | undefined;
 let listenSession: SpeechSession | null = null;
 let focusHandlersRegistered = false;
+let cachedStats: StatsResult | null = null;
+let statsDrilldown: string | null = null;
 
 function canFocusInput(): boolean {
   return (
@@ -212,21 +239,73 @@ function sortBundeslandRows(rows: BundeslandStats[]): BundeslandStats[] {
   });
 }
 
+function renderPercentBar(percent: number): string {
+  const clamped = Math.max(0, Math.min(100, percent));
+  const label = formatPercent(clamped);
+  return `<td class="stats-percent-cell"><div class="stats-percent-bar" style="--pct: ${clamped}"><div class="stats-percent-fill" aria-hidden="true"></div><span class="stats-percent-label">${escapeHtml(label)}</span></div></td>`;
+}
+
 function renderStatsTableRows(rows: BundeslandStats[]): string {
   return rows
     .map(
       (row) => `
-          <tr>
+          <tr class="stats-bl-row" data-bundesland="${escapeHtml(row.bundesland)}" role="button" tabindex="0">
             <td>${escapeHtml(row.bundesland)}</td>
             <td>${formatCount(row.total)}</td>
             <td>${formatCount(row.count)}</td>
-            <td>${formatPercent(row.percent)}</td>
+            ${renderPercentBar(row.percent)}
           </tr>`,
     )
     .join("");
 }
 
+function renderPrefixDetailRows(items: PrefixResult[]): string {
+  return items
+    .map((item) => {
+      const queried =
+        item.count > 0
+          ? `<span class="stats-queried-at">${formatQueriedAtHtml(item.queried_at)}</span>`
+          : "";
+      return `
+          <tr class="${item.count > 0 ? "stats-prefix-found" : "stats-prefix-unfound"}">
+            <td>${escapeHtml(item.code)}</td>
+            <td>${escapeHtml(formatHerleitung(item.ursprung))}</td>
+            <td>${escapeHtml(item.landkreis)}</td>
+            <td class="stats-count-cell">${formatCount(item.count)}${queried}</td>
+          </tr>`;
+    })
+    .join("");
+}
+
+function updateStatsBtnState(): void {
+  const open = els.statsBtn.getAttribute("aria-pressed") === "true";
+  const blMode = open && Boolean(statsDrilldown);
+
+  els.statsBtn.innerHTML = blMode ? STATS_ICON_CLOSE : STATS_ICON_CHART;
+
+  if (!open) {
+    els.statsBtn.dataset.mode = "closed";
+    els.statsBtn.setAttribute("aria-label", "Bundesland stats");
+    return;
+  }
+  if (statsDrilldown) {
+    els.statsBtn.dataset.mode = "bl";
+    els.statsBtn.setAttribute("aria-label", "Back to stats overview");
+    return;
+  }
+  els.statsBtn.dataset.mode = "overview";
+  els.statsBtn.setAttribute("aria-label", "Close Bundesland stats");
+}
+
+function setStatsScrollLock(active: boolean): void {
+  document.body.classList.toggle("stats-scroll-lock", active);
+  els.statsView.classList.toggle("stats-view-scroll", active);
+}
+
 function renderStatsPage(stats: StatsResult): void {
+  cachedStats = stats;
+  statsDrilldown = null;
+  updateStatsBtnState();
   const all = stats.bundeslaender ?? [];
   const main = sortBundeslandRows(
     all.filter((row) => !SPECIAL_BUNDESLAENDER.has(row.bundesland)),
@@ -236,6 +315,7 @@ function renderStatsPage(stats: StatsResult): void {
   );
 
   if (all.length === 0) {
+    setStatsScrollLock(false);
     els.statsContent.innerHTML = `
       <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
       <p class="muted">Bundesland breakdown unavailable until the database is updated.</p>
@@ -245,49 +325,121 @@ function renderStatsPage(stats: StatsResult): void {
 
   const specialTable = special.length
     ? `
-    <table class="stats-table stats-table-special">
-      <tbody>
-        ${renderStatsTableRows(special)}
-      </tbody>
-    </table>`
+        <table class="stats-table stats-table-overview stats-table-special">
+          ${STATS_OVERVIEW_COLGROUP}
+          <tbody>
+            ${renderStatsTableRows(special)}
+          </tbody>
+        </table>`
     : "";
 
   els.statsContent.innerHTML = `
-    <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
-    <div class="stats-tables">
-      <table class="stats-table">
-        <thead>
-          <tr>
-            <th scope="col">Bundesland</th>
-            <th scope="col">Total</th>
-            <th scope="col">Count</th>
-            <th scope="col">Percent</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${renderStatsTableRows(main)}
-        </tbody>
-      </table>
-      ${specialTable}
+    <div class="stats-scroll-layout">
+      <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
+      <div class="stats-scroll-table-head">
+        <table class="stats-table stats-table-overview">
+          ${STATS_OVERVIEW_COLGROUP}
+          <thead>${STATS_OVERVIEW_HEAD}</thead>
+        </table>
+      </div>
+      <div class="stats-scroll-body">
+        <table class="stats-table stats-table-overview">
+          ${STATS_OVERVIEW_COLGROUP}
+          <thead aria-hidden="true">${STATS_OVERVIEW_HEAD}</thead>
+          <tbody>
+            ${renderStatsTableRows(main)}
+          </tbody>
+        </table>
+        ${specialTable}
+      </div>
     </div>
   `;
+  setStatsScrollLock(true);
+}
+
+function renderBundeslandDetail(bundesland: string, items: PrefixResult[]): void {
+  statsDrilldown = bundesland;
+  updateStatsBtnState();
+
+  const blStats = cachedStats?.bundeslaender?.find(
+    (row) => row.bundesland === bundesland,
+  );
+  const summary = blStats
+    ? formatProgress(blStats.count, blStats.total)
+    : bundesland;
+
+  els.statsContent.innerHTML = `
+    <div class="stats-scroll-layout">
+      <p class="stats-summary">${escapeHtml(summary)} · ${escapeHtml(bundesland)}</p>
+      <div class="stats-scroll-table-head">
+        <table class="stats-table stats-table-prefixes">
+          ${STATS_PREFIX_COLGROUP}
+          <thead>${STATS_PREFIX_HEAD}</thead>
+        </table>
+      </div>
+      <div class="stats-scroll-body">
+        <table class="stats-table stats-table-prefixes">
+          ${STATS_PREFIX_COLGROUP}
+          <thead aria-hidden="true">${STATS_PREFIX_HEAD}</thead>
+          <tbody>
+            ${renderPrefixDetailRows(items)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  setStatsScrollLock(true);
+}
+
+async function showBundeslandDetail(bundesland: string): Promise<void> {
+  els.statsContent.innerHTML = `<p class="muted">Loading…</p>`;
+
+  try {
+    const items = await fetchPrefixesByBundesland(bundesland);
+    renderBundeslandDetail(bundesland, items);
+  } catch (error) {
+    statsDrilldown = null;
+    setStatsScrollLock(false);
+    updateStatsBtnState();
+    els.statsContent.innerHTML = `<p class="muted">${escapeHtml(
+      error instanceof Error ? error.message : "Could not load prefixes",
+    )}</p>`;
+  }
+}
+
+function showStatsOverview(): void {
+  if (cachedStats) {
+    renderStatsPage(cachedStats);
+    return;
+  }
+
+  void (async () => {
+    try {
+      const stats = await fetchStats();
+      renderStatsPage(stats);
+    } catch (error) {
+      els.statsContent.innerHTML = `<p class="muted">${escapeHtml(
+        error instanceof Error ? error.message : "Could not load stats",
+      )}</p>`;
+    }
+  })();
 }
 
 function setStatsOpen(open: boolean): void {
   els.statsView.hidden = !open;
   els.mainView.hidden = open;
   els.statsBtn.setAttribute("aria-pressed", open ? "true" : "false");
-  els.statsBtn.setAttribute(
-    "aria-label",
-    open ? "Close Bundesland stats" : "Bundesland stats",
-  );
 
   if (!open) {
+    statsDrilldown = null;
+    setStatsScrollLock(false);
+    updateStatsBtnState();
     focusInput();
     return;
   }
 
   els.statsContent.innerHTML = `<p class="muted">Loading…</p>`;
+  updateStatsBtnState();
 
   if (!isOnline()) {
     els.statsContent.innerHTML = `<p class="muted">Stats require an internet connection.</p>`;
@@ -307,16 +459,33 @@ function setStatsOpen(open: boolean): void {
 }
 
 function toggleStatsView(): void {
+  if (!els.statsView.hidden && statsDrilldown) {
+    showStatsOverview();
+    return;
+  }
   setStatsOpen(els.statsView.hidden);
 }
 
-function formatHistoryMeta(entry: HistoryEntry): string {
-  const parts = [`${formatHerleitung(entry.ursprung)} · ${entry.count}×`];
-  const previous = formatQueriedAt(entry.previous_queried_at);
-  if (previous) {
-    parts.push(`zuvor ${previous}`);
-  }
-  return parts.join(" · ");
+function handleStatsContentClick(event: Event): void {
+  const target = event.target as HTMLElement;
+  const row = target.closest<HTMLElement>(".stats-bl-row");
+  if (!row?.dataset.bundesland) return;
+  void showBundeslandDetail(row.dataset.bundesland);
+}
+
+function handleStatsContentKeydown(event: KeyboardEvent): void {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const target = event.target as HTMLElement;
+  const row = target.closest<HTMLElement>(".stats-bl-row");
+  if (!row?.dataset.bundesland) return;
+  event.preventDefault();
+  void showBundeslandDetail(row.dataset.bundesland);
+}
+
+function formatHistoryMetaHtml(entry: HistoryEntry): string {
+  const head = `${escapeHtml(formatHerleitung(entry.ursprung))} · ${entry.count}×`;
+  if (entry.count <= 1) return head;
+  return `${head} · zuvor ${formatQueriedAtHtml(entry.previous_queried_at)}`;
 }
 
 function renderResult(result: PrefixResult): void {
@@ -324,10 +493,10 @@ function renderResult(result: PrefixResult): void {
   hideSearchResults();
   els.result.hidden = false;
 
-  const queried = formatQueriedAt(result.queried_at);
-  const countLine = queried
-    ? `[${formatCount(result.count)}] · ${escapeHtml(queried)}`
-    : `[${formatCount(result.count)}]`;
+  const countLine =
+    result.count > 0
+      ? `[${formatCount(result.count)}] · ${formatQueriedAtHtml(result.queried_at)}`
+      : `[${formatCount(result.count)}]`;
 
   els.result.innerHTML = `
     <p class="result-count">${countLine}</p>
@@ -351,7 +520,7 @@ function renderHistory(entries: HistoryEntry[]): void {
         <li>
           <button type="button" class="history-item" data-prefix="${escapeHtml(h.code)}">
             <span class="history-code">${escapeHtml(h.code)}</span>
-            <span class="history-meta">${escapeHtml(formatHistoryMeta(h))}</span>
+            <span class="history-meta">${formatHistoryMetaHtml(h)}</span>
           </button>
         </li>`,
         )
@@ -374,6 +543,15 @@ function escapeHtml(value: string): string {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function formatQueriedAtHtml(iso: string | null | undefined): string {
+  const display = displayQueriedAt(iso);
+  const text = escapeHtml(display.text);
+  if (display.preSwitchover) {
+    return `<em class="pre-switchover">*${text}</em>`;
+  }
+  return text;
 }
 
 function renderSearchResults(items: PrefixResult[], query: string): void {
@@ -619,6 +797,7 @@ function registerServiceWorker(): void {
 async function init(): Promise<void> {
   registerServiceWorker();
   registerInputFocusHandlers();
+  updateStatsBtnState();
   updateOnlineBadge();
   renderHistory(loadHistory());
 
@@ -692,6 +871,8 @@ async function bootstrap(): Promise<void> {
   els.statsBtn.addEventListener("click", () => {
     toggleStatsView();
   });
+  els.statsContent.addEventListener("click", handleStatsContentClick);
+  els.statsContent.addEventListener("keydown", handleStatsContentKeydown);
 
   focusInput();
 }

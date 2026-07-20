@@ -12,7 +12,7 @@ source "$ROOT_DIR/scripts/lib/supabase-cli.sh"
 
 guard_prod_only "$ROOT_DIR"
 
-FUNCTIONS=(kfz-capture kfz-queue kfz-lookup kfz-process kfz-delete kfz-stats kfz-search)
+FUNCTIONS=(kfz-capture kfz-queue kfz-lookup kfz-process kfz-delete kfz-stats kfz-search kfz-bundesland)
 
 for fn in "${FUNCTIONS[@]}"; do
   echo "Deploying ${fn} to prod…"

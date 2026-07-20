@@ -3,6 +3,9 @@ export function formatHerleitung(ursprung: string): string {
   return ursprung.trim();
 }
 
+/** Last day of legacy counts-only tracking; earlier sightings have no queried_at. */
+export const APP_SWITCHOVER_DATE_LABEL = "20-Jul-2026";
+
 export function formatCount(count: number): string {
   return String(count);
 }
@@ -26,4 +29,18 @@ export function formatQueriedAt(iso: string | null | undefined): string | null {
 
   const pad = (n: number) => String(n).padStart(2, "0");
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+}
+
+export type QueriedAtDisplay = {
+  text: string;
+  preSwitchover: boolean;
+};
+
+/** Text to show for queried_at; null timestamps use the app switchover date. */
+export function displayQueriedAt(iso: string | null | undefined): QueriedAtDisplay {
+  const formatted = formatQueriedAt(iso);
+  if (formatted) {
+    return { text: formatted, preSwitchover: false };
+  }
+  return { text: APP_SWITCHOVER_DATE_LABEL, preSwitchover: true };
 }
