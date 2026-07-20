@@ -460,26 +460,26 @@ p {
 
 .lookup-form {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: stretch;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 24px;
 }
 
 .prefix-input {
-  width: 8ch;
-  min-width: 96px;
-  max-width: 8ch;
-  min-height: 60px;
-  flex: 0 0 auto;
+  width: 4.5ch;
+  min-width: 0;
+  max-width: 5.5ch;
+  min-height: 56px;
+  flex: 0 1 auto;
   text-align: center;
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  padding: 14px 12px;
+  padding: 12px 8px;
 }
 
 #search-btn {
-  margin-left: 6px;
+  margin-left: 0;
 }
 
 input:not(.prefix-input) {
@@ -570,6 +570,28 @@ input:focus {
   height: 1.35rem;
   display: block;
   margin: 0 auto;
+}
+
+.lookup-form .btn.icon {
+  min-width: 52px;
+  width: 52px;
+  min-height: 56px;
+  flex-shrink: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.lookup-form .btn.icon .icon-svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.lookup-form .btn.primary {
+  min-height: 56px;
+  padding: 0 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 1rem;
 }
 
 .btn.icon {
@@ -731,6 +753,45 @@ input:focus {
 
 .toast[hidden] {
   display: none !important;
+}
+
+@media (max-width: 414px) {
+  body {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .lookup-form {
+    gap: 6px;
+  }
+
+  .prefix-input {
+    min-height: 50px;
+    font-size: 1.45rem;
+    padding: 10px 6px;
+    max-width: 5ch;
+  }
+
+  .lookup-form .btn.icon {
+    min-width: 46px;
+    width: 46px;
+    min-height: 50px;
+    font-size: 1.1rem;
+  }
+
+  .lookup-form .btn.primary {
+    min-height: 50px;
+    padding: 0 10px;
+    font-size: 0.92rem;
+  }
+
+  .progress {
+    font-size: 0.82rem;
+  }
+
+  .logo {
+    max-width: min(44vw, 140px);
+  }
 }
 
 @media (min-width: 480px) {
