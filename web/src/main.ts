@@ -502,9 +502,11 @@ function renderResult(result: PrefixResult): void {
 
   const countNum = `<span class="result-count-num">${formatCount(result.count)}</span>`;
   const countLine =
-    result.count > 0
-      ? `${countNum} · ${formatQueriedAtHtml(result.previous_queried_at)}`
-      : countNum;
+    result.count === 1
+      ? `${countNum} · <span class="result-new">NEW!</span>`
+      : result.count > 0
+        ? `${countNum} · ${formatQueriedAtHtml(result.previous_queried_at)}`
+        : countNum;
 
   els.result.innerHTML = `
     <p class="result-count">${countLine}</p>

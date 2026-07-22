@@ -657,6 +657,12 @@ input:focus {
   line-height: 1;
 }
 
+.result-new {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ok);
+}
+
 @keyframes celebrate-border-flash {
   0%,
   100% {
