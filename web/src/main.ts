@@ -28,6 +28,7 @@ import {
 } from "./db";
 import { formatCount, formatHerleitung, formatPercent, formatProgress, displayQueriedAt } from "./format";
 import { speechSupported, startPrefixListen, type SpeechSession } from "./speech";
+import { celebrateDiscovery } from "./celebrate";
 import "./main.css";
 
 const STATS_ICON_CHART = `<svg class="icon-svg stats-icon-chart" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="13" width="4" height="7" rx="1" fill="currentColor" /><rect x="10" y="9" width="4" height="11" rx="1" fill="currentColor" /><rect x="16" y="5" width="4" height="15" rx="1" fill="currentColor" /></svg>`;
@@ -486,19 +487,24 @@ function handleStatsContentKeydown(event: KeyboardEvent): void {
 
 function formatHistoryMetaHtml(entry: HistoryEntry): string {
   const head = `${escapeHtml(formatHerleitung(entry.ursprung))} · ${entry.count}×`;
-  if (entry.count <= 1) return head;
-  return `${head} · zuvor ${formatQueriedAtHtml(entry.previous_queried_at)}`;
+  // Legacy counts had no timestamp — only then show "zuvor" with the switchover date.
+  if (entry.count > 1 && !entry.previous_queried_at) {
+    return `${head} · zuvor ${formatQueriedAtHtml(null)}`;
+  }
+  return head;
 }
 
 function renderResult(result: PrefixResult): void {
   clearMessage();
   hideSearchResults();
   els.result.hidden = false;
+  els.result.classList.remove("celebrate-flash", "celebrate-done");
 
+  const countNum = `<span class="result-count-num">${formatCount(result.count)}</span>`;
   const countLine =
     result.count > 0
-      ? `[${formatCount(result.count)}] · ${formatQueriedAtHtml(result.queried_at)}`
-      : `[${formatCount(result.count)}]`;
+      ? `${countNum} · ${formatQueriedAtHtml(result.previous_queried_at)}`
+      : countNum;
 
   els.result.innerHTML = `
     <p class="result-count">${countLine}</p>
@@ -506,6 +512,10 @@ function renderResult(result: PrefixResult): void {
     <p class="result-line">${escapeHtml(result.landkreis)}</p>
     <p class="result-line">${escapeHtml(result.bundesland)}</p>
   `;
+
+  if (result.count === 1) {
+    celebrateDiscovery(els.result);
+  }
 }
 
 function renderHistory(entries: HistoryEntry[]): void {
