@@ -29,10 +29,16 @@ open shortcuts/kzq/KZQ.local.shortcut
 
 After deploy: **[https://kfz.schroeder.org/shortcuts/](https://kfz.schroeder.org/shortcuts/)**
 
-Or open:
+**Reliable:** open/download the file directly:
 
 ```
-shortcuts://import-shortcut?url=https://kfz.schroeder.org/shortcuts/KZQ.shortcut&name=KZQ
+https://kfz.schroeder.org/shortcuts/KZQ.shortcut
+```
+
+**Deep link** (often fails on iOS for self-hosted files — “URL invalid”; do not encode the `&`):
+
+```
+shortcuts://import-shortcut?url=https%3A%2F%2Fkfz.schroeder.org%2Fshortcuts%2FKZQ.shortcut&name=KZQ
 ```
 
 Import asks for the **household KFZ API key** once (same key as the PWA).
