@@ -162,5 +162,8 @@ export async function deleteQueueItem(queueId: string): Promise<void> {
 }
 
 export function normalizePrefix(raw: string): string {
-  return raw.trim().toUpperCase().replace(/\s+/g, "");
+  return raw
+    .normalize("NFC")
+    .replace(/[^a-zA-ZäöüÄÖÜ]/gu, "")
+    .toLocaleUpperCase("de-DE");
 }
