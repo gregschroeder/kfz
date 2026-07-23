@@ -744,6 +744,28 @@ input:focus {
   gap: 4px;
 }
 
+details.history-item {
+  padding: 0;
+  display: block;
+}
+
+.history-item > summary.history-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+  touch-action: manipulation;
+}
+
+.history-item > summary.history-summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-item[open] > summary.history-summary {
+  padding-bottom: 10px;
+}
+
 .history-code {
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -752,6 +774,18 @@ input:focus {
 .history-meta {
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.history-detail {
+  padding: 0 16px 14px;
+  display: grid;
+  gap: 4px;
+}
+
+.history-detail-line {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
 }
 
 .muted {

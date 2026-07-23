@@ -487,11 +487,8 @@ function handleStatsContentKeydown(event: KeyboardEvent): void {
 
 function formatHistoryMetaHtml(entry: HistoryEntry): string {
   const head = `${escapeHtml(formatHerleitung(entry.ursprung))} · ${entry.count}×`;
-  // Legacy counts had no timestamp — only then show "zuvor" with the switchover date.
-  if (entry.count > 1 && !entry.previous_queried_at) {
-    return `${head} · zuvor ${formatQueriedAtHtml(null)}`;
-  }
-  return head;
+  const when = formatQueriedAtHtml(entry.queried_at ?? entry.savedAt);
+  return `${head} · ${when}`;
 }
 
 function renderResult(result: PrefixResult): void {
@@ -520,6 +517,18 @@ function renderResult(result: PrefixResult): void {
   }
 }
 
+function formatHistoryDetailHtml(entry: HistoryEntry): string {
+  const lines = [
+    `<p class="history-detail-line">${escapeHtml(entry.landkreis)}</p>`,
+    `<p class="history-detail-line">${escapeHtml(entry.bundesland)}</p>`,
+  ];
+  if (entry.count > 1) {
+    const prev = formatQueriedAtHtml(entry.previous_queried_at);
+    lines.push(`<p class="history-detail-line muted">zuvor ${prev}</p>`);
+  }
+  return lines.join("");
+}
+
 function renderHistory(entries: HistoryEntry[]): void {
   if (entries.length === 0) {
     els.history.innerHTML = `<p class="muted">Recent lookups appear here.</p>`;
@@ -532,21 +541,26 @@ function renderHistory(entries: HistoryEntry[]): void {
         .map(
           (h) => `
         <li>
-          <button type="button" class="history-item" data-prefix="${escapeHtml(h.code)}">
-            <span class="history-code">${escapeHtml(h.code)}</span>
-            <span class="history-meta">${formatHistoryMetaHtml(h)}</span>
-          </button>
+          <details class="history-item">
+            <summary class="history-summary">
+              <span class="history-code">${escapeHtml(h.code)}</span>
+              <span class="history-meta">${formatHistoryMetaHtml(h)}</span>
+            </summary>
+            <div class="history-detail">${formatHistoryDetailHtml(h)}</div>
+          </details>
         </li>`,
         )
         .join("")}
     </ul>
   `;
 
-  els.history.querySelectorAll<HTMLButtonElement>(".history-item").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const prefix = btn.dataset.prefix ?? "";
-      els.input.value = prefix;
-      void submitLookup(prefix);
+  const panels = els.history.querySelectorAll<HTMLDetailsElement>("details.history-item");
+  panels.forEach((panel) => {
+    panel.addEventListener("toggle", () => {
+      if (!panel.open) return;
+      panels.forEach((other) => {
+        if (other !== panel) other.open = false;
+      });
     });
   });
 }
