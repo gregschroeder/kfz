@@ -218,7 +218,7 @@ All requests require header: `x-kfz-key: <KFZ_API_KEY>`
 - **Household key** — shared secret checked by every edge function. The prod PWA does **not** ship this key; each device enters it once (stored in `localStorage`).
 - **Rate limits** — 30 mutations/min and 120 reads/min per IP (lookup, capture, etc.).
 - **RLS** — Postgres tables are inaccessible to anon/authenticated clients; only edge functions (service role) touch data.
-- **Watch Shortcut** — still uses `x-kfz-key` directly (configure the key in the shortcut).
+- **Watch / KZQ Shortcut** — install from [kfz.schroeder.org/shortcuts](https://kfz.schroeder.org/shortcuts/); import asks for the same household API key once.
 
 This is household-grade protection, not public-internet hardened. Anyone who obtains the key can still call the API (e.g. from curl). Rotate `KFZ_API_KEY` via `pnpm db:prod:secrets:push` if it leaks.
 
@@ -238,5 +238,6 @@ Base URL: `https://wchzccrcqlxgsftjbpgn.supabase.co/functions/v1/`
 
 - `data/kfz-list.json` — scraped prefix reference data
 - `scripts/kfz.py` — regenerates `data/kfz-list.json`
-- `assets/` — logo/icon sources
+- `assets/` — logo/icon sources (incl. KZQ)
+- `shortcuts/kzq/` — Kennzeichen Queue Shortcut source + signed artifact
 - `tmp/kfz_stats.json` — legacy sighting counts for one-time prod seed

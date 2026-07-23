@@ -1,5 +1,6 @@
 import { authorize, corsPreflight, json } from "../_shared/auth.ts";
 import { getServiceClient } from "../_shared/client.ts";
+import { normalizePrefix } from "../_shared/prefix.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return corsPreflight();
@@ -18,7 +19,7 @@ Deno.serve(async (req) => {
     return json({ error: "invalid json" }, 400);
   }
 
-  const prefix = body.prefix?.trim();
+  const prefix = normalizePrefix(body.prefix ?? "");
   if (!prefix) {
     return json({ error: "prefix required" }, 400);
   }
@@ -39,6 +40,7 @@ Deno.serve(async (req) => {
   return json({
     saved: true,
     duplicate: row?.duplicate ?? false,
+    prefix,
     queue: row,
   });
 });

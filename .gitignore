@@ -18,6 +18,10 @@ __pycache__/
 tmp/
 !tmp/.gitkeep
 
+# Unsigned shortcut plists (signed .shortcut is committed for Pages)
+shortcuts/**/*.unsigned.shortcut
+shortcuts/**/*.local.shortcut
+
 # IDE / OS
 .DS_Store
 .idea/

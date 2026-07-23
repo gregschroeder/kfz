@@ -130,6 +130,11 @@ function registerInputFocusHandlers(): void {
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") {
       focusInput();
+      if (els.app.hidden) return;
+      void (async () => {
+        await syncLocalQueueOnline();
+        await maybeProcessQueue();
+      })();
     }
   });
 

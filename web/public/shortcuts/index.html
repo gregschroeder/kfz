@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>KZQ — Kennzeichen Queue</title>
+    <link rel="icon" href="/shortcuts/kzq-icon.png" type="image/png" />
+    <style>
+      :root {
+        --bg: #0b1220;
+        --surface: #141d2e;
+        --text: #e8eef7;
+        --muted: #9fb0c7;
+        --accent: #3b82f6;
+        --accent-pressed: #2563eb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+        background:
+          radial-gradient(ellipse 80% 50% at 50% -10%, #1e3a5f 0%, transparent 55%),
+          var(--bg);
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+      }
+      main {
+        width: min(100%, 420px);
+        text-align: center;
+      }
+      .logo {
+        width: min(100%, 320px);
+        height: auto;
+        margin: 0 auto 20px;
+        display: block;
+        filter: drop-shadow(0 8px 24px rgb(0 0 0 / 35%));
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+      .tag {
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+      .actions {
+        display: grid;
+        gap: 12px;
+      }
+      a.btn {
+        display: block;
+        text-decoration: none;
+        color: white;
+        background: var(--accent);
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 16px 18px;
+        border-radius: 14px;
+        min-height: 56px;
+        line-height: 1.3;
+      }
+      a.btn:active { background: var(--accent-pressed); }
+      a.btn.secondary {
+        background: var(--surface);
+        color: var(--text);
+        border: 1px solid #243049;
+      }
+      .hint {
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.45;
+        text-align: left;
+      }
+      .hint code {
+        font-size: 0.85em;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="logo" src="/shortcuts/kzq-logo.png" width="520" height="110" alt="KZQ" />
+      <h1>KZQ</h1>
+      <p class="tag">Kennzeichen Queue — Watch / iPhone / iPad / Mac</p>
+      <div class="actions">
+        <a
+          class="btn"
+          href="shortcuts://import-shortcut?url=https://kfz.schroeder.org/shortcuts/KZQ.shortcut&amp;name=KZQ"
+        >Install in Shortcuts</a>
+        <a class="btn secondary" href="/shortcuts/KZQ.shortcut" download="KZQ.shortcut"
+          >Download .shortcut</a
+        >
+      </div>
+      <p class="hint">
+        On install you’ll be asked for the household KFZ API key (once). Then enable
+        <strong>Show on Apple Watch</strong> and add a Shortcuts complication or Action Button.
+      </p>
+    </main>
+  </body>
+</html>
