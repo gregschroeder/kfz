@@ -3,22 +3,21 @@
  * Apple Shortcut (Watch-first; also iPhone / iPad / Mac).
  *
  * Import question fills the API key Text action — no secret in git.
- * Server-side normalize handles case / non-letters; shortcut keeps UI minimal.
+ * Server-side normalize handles case / non-letters.
+ *
+ * Keep actions minimal: German iOS localizes magic-variable names;
+ * attachments use OutputUUID only (no OutputName).
  */
 
 const OBJ = "\uFFFC";
 
-/** Valid hex UUIDs only (Shortcuts breaks on non-hex). */
+/** Valid hex UUIDs only. */
 export const IDS = {
   apiKeyText: "A1000001-0000-4000-8000-000000000001",
   ask: "A1000002-0000-4000-8000-000000000002",
   setPrefix: "A1000003-0000-4000-8000-000000000003",
   post: "A1000004-0000-4000-8000-000000000004",
-  gotPrefix: "A1000006-0000-4000-8000-000000000006",
-  gotError: "A1000007-0000-4000-8000-000000000007",
-  ifSavedGroup: "B1000001-0000-4000-8000-000000000001",
-  resultNote: "A1000008-0000-4000-8000-000000000008",
-  errNote: "A1000009-0000-4000-8000-000000000009",
+  resultNote: "A1000005-0000-4000-8000-000000000005",
 };
 
 const DEFAULT_FUNCTIONS_URL =
@@ -58,10 +57,10 @@ function textToken(string, attachments = {}) {
         </dict>`;
 }
 
-function actionOutput(uuid, outputName) {
+/** Action output ref — UUID only (OutputName is localized on device). */
+function actionOutput(uuid) {
   return {
     OutputUUID: uuid,
-    OutputName: outputName,
     Type: "ActionOutput",
   };
 }
@@ -77,8 +76,8 @@ function plainText(s) {
   return textToken(s, {});
 }
 
-function attachOutput(uuid, outputName) {
-  return textToken(OBJ, { "{0, 1}": actionOutput(uuid, outputName) });
+function attachOutput(uuid) {
+  return textToken(OBJ, { "{0, 1}": actionOutput(uuid) });
 }
 
 function attachVariable(name) {
@@ -170,14 +169,14 @@ export function buildShortcutPlist(opts = {}) {
         <key>WFVariableName</key>
         <string>Prefix</string>
         <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.ask, "Provided Input"))}
+        ${attachmentOnly(actionOutput(IDS.ask))}
       </dict>
     </dict>`);
 
   // 3 — POST
   const headers = dictField(`
               ${dictStringItem("Content-Type", plainText("application/json"))}
-              ${dictStringItem("x-kfz-key", attachOutput(IDS.apiKeyText, "Text"))}
+              ${dictStringItem("x-kfz-key", attachOutput(IDS.apiKeyText))}
             `);
   const jsonBody = dictField(`
               ${dictStringItem("prefix", attachVariable("Prefix"))}
@@ -206,84 +205,7 @@ export function buildShortcutPlist(opts = {}) {
       </dict>
     </dict>`);
 
-  // 4 — Read prefix from response (present only on success)
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.getvalueforkey</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>UUID</key>
-        <string>${IDS.gotPrefix}</string>
-        <key>WFDictionaryKey</key>
-        <string>prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.post, "Contents of URL"))}
-      </dict>
-    </dict>`);
-
-  // 5 — If prefix empty → error
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.conditional</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>GroupingIdentifier</key>
-        <string>${IDS.ifSavedGroup}</string>
-        <key>WFControlFlowMode</key>
-        <integer>0</integer>
-        <key>WFCondition</key>
-        <integer>100</integer>
-        <key>WFConditionalActionString</key>
-        <string></string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.gotPrefix, "Dictionary Value"))}
-      </dict>
-    </dict>`);
-
-  // 6 — error detail
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.getvalueforkey</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>UUID</key>
-        <string>${IDS.gotError}</string>
-        <key>WFDictionaryKey</key>
-        <string>error</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.post, "Contents of URL"))}
-      </dict>
-    </dict>`);
-
-  // 7 — error notification
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.notification</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>UUID</key>
-        <string>${IDS.errNote}</string>
-        <key>WFNotificationActionTitle</key>
-        <string>KZQ failed</string>
-        <key>WFNotificationActionBody</key>
-        ${attachOutput(IDS.gotError, "Dictionary Value")}
-      </dict>
-    </dict>`);
-
-  // 8 — Otherwise (got a prefix)
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.conditional</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>GroupingIdentifier</key>
-        <string>${IDS.ifSavedGroup}</string>
-        <key>WFControlFlowMode</key>
-        <integer>1</integer>
-      </dict>
-    </dict>`);
-
-  // 9 — success notification
+  // 4 — Notify using Prefix variable (not response parsing)
   actions.push(`<dict>
       <key>WFWorkflowActionIdentifier</key>
       <string>is.workflow.actions.notification</string>
@@ -295,21 +217,8 @@ export function buildShortcutPlist(opts = {}) {
         <string>KZQ</string>
         <key>WFNotificationActionBody</key>
         ${textToken(`Queued ${OBJ}`, {
-          "{7, 1}": actionOutput(IDS.gotPrefix, "Dictionary Value"),
+          "{7, 1}": variableRef("Prefix"),
         })}
-      </dict>
-    </dict>`);
-
-  // 10 — end if
-  actions.push(`<dict>
-      <key>WFWorkflowActionIdentifier</key>
-      <string>is.workflow.actions.conditional</string>
-      <key>WFWorkflowActionParameters</key>
-      <dict>
-        <key>GroupingIdentifier</key>
-        <string>${IDS.ifSavedGroup}</string>
-        <key>WFControlFlowMode</key>
-        <integer>2</integer>
       </dict>
     </dict>`);
 
