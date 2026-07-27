@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "createdAt": "2026-07-17-08:43:13",
-    "total": 736
+    "createdAt": "2026-07-27-10:02:00",
+    "total": 737
   },
   "data": {
     "A": {
@@ -358,6 +358,11 @@
       "ursprung": "BundesPolizei",
       "landkreis": "Bundespolizei",
       "bundesland": "bundesweit"
+    },
+    "BR": {
+      "ursprung": "BRuchsal",
+      "landkreis": "Landkreis Karlsruhe",
+      "bundesland": "Baden-Württemberg"
     },
     "BRA": {
       "ursprung": "BRAke",

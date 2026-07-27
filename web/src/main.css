@@ -644,6 +644,10 @@ input:focus {
   border: 3px solid transparent;
 }
 
+.result.result-replayable {
+  cursor: pointer;
+}
+
 .result-count {
   color: var(--muted);
   margin-bottom: 8px;
@@ -680,7 +684,7 @@ input:focus {
 }
 
 .result.celebrate-flash {
-  animation: celebrate-border-flash 0.35s ease-in-out 9;
+  animation: celebrate-border-flash 0.35s ease-in-out 23;
 }
 
 .result.celebrate-done {

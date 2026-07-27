@@ -517,6 +517,8 @@ function renderResult(result: PrefixResult): void {
     <p class="result-line">${escapeHtml(result.bundesland)}</p>
   `;
 
+  els.result.classList.toggle("result-replayable", result.count === 1);
+  els.result.title = result.count === 1 ? "Tap to celebrate again" : "";
   if (result.count === 1) {
     celebrateDiscovery(els.result);
   }
@@ -926,6 +928,11 @@ async function bootstrap(): Promise<void> {
     void deleteCurrentQueueItem();
   });
   els.queueLater.addEventListener("click", deferQueue);
+
+  els.result.addEventListener("click", () => {
+    if (!els.result.classList.contains("result-replayable")) return;
+    celebrateDiscovery(els.result);
+  });
 
   els.statsBtn.addEventListener("click", () => {
     toggleStatsView();
