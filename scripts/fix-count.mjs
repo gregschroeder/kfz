@@ -15,10 +15,15 @@ function usage() {
   process.exit(1);
 }
 
+function scriptArgs() {
+  const args = process.argv.slice(2);
+  return args[0] === "--" ? args.slice(1) : args;
+}
+
 async function main() {
   initEnvForScript();
 
-  const [prefixArg, valueArg] = process.argv.slice(2);
+  const [prefixArg, valueArg] = scriptArgs();
   if (!prefixArg) usage();
 
   const code = prefixArg.toUpperCase().trim();
@@ -26,7 +31,9 @@ async function main() {
   if (valueArg === "--decrement") {
     const result = await queryDb(
       `update kfz.prefixes
-       set count = greatest(count - 1, 0)
+       set
+         count = greatest(count - 1, 0),
+         queried_at = case when greatest(count - 1, 0) = 0 then null else queried_at end
        where code = $1
        returning code, count, queried_at`,
       [code],
@@ -47,7 +54,9 @@ async function main() {
 
   const result = await queryDb(
     `update kfz.prefixes
-     set count = $2
+     set
+       count = $2,
+       queried_at = case when $2 = 0 then null else queried_at end
      where code = $1
      returning code, count, queried_at`,
     [code, count],
