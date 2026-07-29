@@ -6,9 +6,14 @@ Apple Shortcuts as **source** in this repo, built into installable `.shortcut` f
 
 Watch-first capture of German plate prefixes (1–3 letters, including Ä/Ö/Ü). Queues via `kfz-capture`.
 
+**Flow:** Dictate (stops after a short pause) → parse spoken tokens into a prefix → **Ask** to confirm/edit → POST. No autosubmit.
+
+**Spoken commands** (before letter filtering): `backspace` / `delete` drop the last character; `clear` / `erase` / `reset` wipe the buffer. Example: `A B C backspace A` → `ABA`.
+
 | File | Role |
 |------|------|
 | `definition.mjs` | Source of truth |
+| `parse-spoken-prefix.mjs` | Parser algorithm (keep in sync with shortcut) |
 | `KZQ.shortcut` | Signed installable (generated) |
 | `KZQ.unsigned.shortcut` | Pre-sign plist (generated, gitignored) |
 
