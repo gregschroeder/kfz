@@ -1,64 +1,71 @@
 /**
  * KZQ — Kennzeichen Queue
- * Apple Shortcut (Watch-first; also iPhone / iPad / Mac).
+ * Apple Shortcut (Mac / iPhone / iPad / Watch).
  *
- * Flow:
- *   1. Dictate Text (stops after short pause)
- *   2. Parse spoken tokens → Prefix (commands, then letters max 3)
- *   3. Ask for Input with Prefix as default (visual confirm / edit)
- *   4. Re-sanitize field → POST kfz-capture
+ * Flow (inside Repeat so Retry can re-dictate):
+ *   1. Dictate Text (After Short Pause, de-DE)
+ *   2. Set Spoken ← dictate; Text(Spoken) for Replace wiring
+ *   3. Strip non-letters → Set Prefix
+ *   4. If Prefix has any value:
+ *        Menu — Queue / Retry / Edit / Cancel
+ *          Queue → POST + exit
+ *          Retry → next dictate attempt
+ *          Edit  → Ask → POST + exit
+ *          Cancel → exit
+ *      Otherwise:
+ *        Ask for Input (blank) → strip → POST + exit
  *
- * Import question fills the API key Text action — no secret in git.
- * Parser algorithm: parse-spoken-prefix.mjs (keep in sync).
- *
- * Keep attachments UUID-only (no OutputName) — German iOS localizes magic names.
+ * Replace Text WFInput must be WFTextTokenString (not Attachment).
+ * Do not init Prefix to "" — blank can count as “has value”.
  */
 
 const OBJ = "\uFFFC";
 
-/** Valid hex UUIDs only. */
 export const IDS = {
-  apiKeyText: "A1000001-0000-4000-8000-000000000001",
-  dictate: "A1000002-0000-4000-8000-000000000002",
-  emptyPrefix: "A1000003-0000-4000-8000-000000000003",
-  setPrefixEmpty: "A1000004-0000-4000-8000-000000000004",
-  split: "A1000005-0000-4000-8000-000000000005",
-  forEachStart: "A1000006-0000-4000-8000-000000000006",
-  tokenLower: "A1000007-0000-4000-8000-000000000007",
-  tokenStrip: "A1000007-0000-4000-8000-000000000027",
-  setToken: "A1000008-0000-4000-8000-000000000008",
-  popReplace: "A1000009-0000-4000-8000-000000000009",
-  setPrefixPop: "A100000A-0000-4000-8000-00000000000A",
-  clearEmpty: "A100000B-0000-4000-8000-00000000000B",
-  setPrefixClear: "A100000C-0000-4000-8000-00000000000C",
-  stripLetters: "A100000D-0000-4000-8000-00000000000D",
-  upperLetters: "A100000E-0000-4000-8000-00000000000E",
-  combineAppend: "A100000F-0000-4000-8000-00000000000F",
-  truncate: "A1000010-0000-4000-8000-000000000010",
-  setPrefixAppend: "A1000011-0000-4000-8000-000000000011",
-  forEachEnd: "A1000012-0000-4000-8000-000000000012",
-  askConfirm: "A1000013-0000-4000-8000-000000000013",
-  sanitizeStrip: "A1000014-0000-4000-8000-000000000014",
-  sanitizeUpper: "A1000015-0000-4000-8000-000000000015",
-  sanitizeTrunc: "A1000016-0000-4000-8000-000000000016",
-  setPrefixFinal: "A1000017-0000-4000-8000-000000000017",
-  post: "A1000018-0000-4000-8000-000000000018",
-  resultNote: "A1000019-0000-4000-8000-000000000019",
-  emptyNote: "A100001A-0000-4000-8000-00000000001A",
+  apiKeyText:     "A1000001-0000-4000-8000-000000000001",
+  repeatStart:    "A1000040-0000-4000-8000-000000000040",
+  dictate:        "A1000002-0000-4000-8000-000000000002",
+  setSpoken:      "A100002E-0000-4000-8000-00000000002E",
+  spokenText:     "A1000030-0000-4000-8000-000000000030",
+  strip:          "A100001C-0000-4000-8000-00000000001C",
+  setPrefix:      "A100001F-0000-4000-8000-00000000001F",
+  promptLabel:    "A100002F-0000-4000-8000-00000000002F",
+  menuStart:      "A1000022-0000-4000-8000-000000000022",
+  menuQueue:      "A1000023-0000-4000-8000-000000000023",
+  menuRetry:      "A1000041-0000-4000-8000-000000000041",
+  menuEdit:       "A1000024-0000-4000-8000-000000000024",
+  menuCancel:     "A1000025-0000-4000-8000-000000000025",
+  menuEnd:        "A1000026-0000-4000-8000-000000000026",
+  menuExit:       "A1000032-0000-4000-8000-000000000032",
+  askEdit:        "A1000013-0000-4000-8000-000000000013",
+  editStrip:      "A1000014-0000-4000-8000-000000000014",
+  setEditPrefix:  "A1000017-0000-4000-8000-000000000017",
+  askBlank:       "A1000028-0000-4000-8000-000000000028",
+  blankStrip:     "A1000029-0000-4000-8000-000000000029",
+  setBlankPrefix: "A100002C-0000-4000-8000-00000000002C",
+  postQueue:      "A1000018-0000-4000-8000-000000000018",
+  noteQueue:      "A1000019-0000-4000-8000-000000000019",
+  exitQueue:      "A1000042-0000-4000-8000-000000000042",
+  postEdit:       "A1000043-0000-4000-8000-000000000043",
+  noteEdit:       "A1000044-0000-4000-8000-000000000044",
+  exitEdit:       "A1000045-0000-4000-8000-000000000045",
+  postBlank:      "A1000046-0000-4000-8000-000000000046",
+  noteBlank:      "A1000047-0000-4000-8000-000000000047",
+  exitBlank:      "A1000048-0000-4000-8000-000000000048",
+  repeatEnd:      "A1000049-0000-4000-8000-000000000049",
 };
 
 const GROUPS = {
-  forEach: "B1000001-0000-4000-8000-000000000001",
-  tokenIf: "B1000002-0000-4000-8000-000000000002",
-  prefixIf: "B1000003-0000-4000-8000-000000000003",
+  retryLoop:   "B100000A-0000-4000-8000-00000000000A",
+  prefixIf:    "B1000005-0000-4000-8000-000000000005",
+  confirmMenu: "B1000006-0000-4000-8000-000000000006",
 };
 
 const DEFAULT_FUNCTIONS_URL =
   "https://wchzccrcqlxgsftjbpgn.supabase.co/functions/v1/kfz-capture";
 
-const LETTER_STRIP = "[^a-zA-ZäöüÄÖÜ]";
-const TRUNCATE_3 = "^(.{0,3}).*$";
-const POP_LAST = ".$";
+// POSIX alpha — includes Ä/Ö/Ü. Hand export confirmed plain-string find + regex.
+const LETTER_STRIP = "[^[:alpha:]]";
 
 function esc(s) {
   return String(s)
@@ -94,19 +101,14 @@ function textToken(string, attachments = {}) {
         </dict>`;
 }
 
-/** Action output ref — UUID only (OutputName is localized on device). */
-function actionOutput(uuid) {
-  return {
-    OutputUUID: uuid,
-    Type: "ActionOutput",
-  };
+function actionOutput(uuid, outputName) {
+  const att = { OutputUUID: uuid, Type: "ActionOutput" };
+  if (outputName) att.OutputName = outputName;
+  return att;
 }
 
 function variableRef(name) {
-  return {
-    VariableName: name,
-    Type: "Variable",
-  };
+  return { VariableName: name, Type: "Variable" };
 }
 
 function plainText(s) {
@@ -121,6 +123,7 @@ function attachVariable(name) {
   return textToken(OBJ, { "{0, 1}": variableRef(name) });
 }
 
+/** WFTextTokenAttachment — Set Variable WFInput (bare magic var). */
 function attachmentOnly(att) {
   return `<dict>
           <key>Value</key>
@@ -134,7 +137,14 @@ function attachmentOnly(att) {
         </dict>`;
 }
 
-/** WFInput wrapper required by modern conditionals. */
+/**
+ * WFInput for Replace — MUST be WFTextTokenString.
+ * Hand-exported Replace uses this; WFTextTokenAttachment yields empty output.
+ */
+function textActionInput(att) {
+  return textToken(OBJ, { "{0, 1}": att });
+}
+
 function conditionInputFromVariable(name) {
   return `<dict>
           <key>Type</key>
@@ -151,34 +161,6 @@ function conditionInputFromVariable(name) {
             <key>WFSerializationType</key>
             <string>WFTextTokenAttachment</string>
           </dict>
-        </dict>`;
-}
-
-function stringEqualsTemplate(variableName, value) {
-  return `<dict>
-                        <key>WFCondition</key>
-                        <integer>4</integer>
-                        <key>WFConditionalActionString</key>
-                        <string>${esc(value)}</string>
-                        <key>WFInput</key>
-                        ${conditionInputFromVariable(variableName)}
-                      </dict>`;
-}
-
-/** Any-of string equals (OR). */
-function anyOfEquals(variableName, values) {
-  return `<dict>
-          <key>Value</key>
-          <dict>
-            <key>WFActionParameterFilterPrefix</key>
-            <integer>0</integer>
-            <key>WFActionParameterFilterTemplates</key>
-            <array>
-              ${values.map((v) => stringEqualsTemplate(variableName, v)).join("\n              ")}
-            </array>
-          </dict>
-          <key>WFSerializationType</key>
-          <string>WFContentPredicateTableTemplate</string>
         </dict>`;
 }
 
@@ -218,392 +200,28 @@ function action(id, paramsXml) {
     </dict>`;
 }
 
-/**
- * @param {{ functionsUrl?: string }} [opts]
- * @returns {string} XML plist
- */
-export function buildShortcutPlist(opts = {}) {
-  const functionsUrl = opts.functionsUrl ?? DEFAULT_FUNCTIONS_URL;
-  const actions = [];
-
-  // 0 — Household key (import question)
-  actions.push(
-    action(
-      "is.workflow.actions.gettext",
-      `<key>UUID</key>
-        <string>${IDS.apiKeyText}</string>
-        <key>WFTextActionText</key>
-        <string></string>`,
-    ),
-  );
-
-  // 1 — Dictate (auto-stop after short pause)
-  actions.push(
-    action(
-      "is.workflow.actions.dictatetext",
-      `<key>UUID</key>
-        <string>${IDS.dictate}</string>
-        <key>WFDictateTextStopListening</key>
-        <string>After Short Pause</string>
-        <key>WFSpeechLanguage</key>
-        <string>de-DE</string>`,
-    ),
-  );
-
-  // 2 — Prefix = ""
-  actions.push(
-    action(
-      "is.workflow.actions.gettext",
-      `<key>UUID</key>
-        <string>${IDS.emptyPrefix}</string>
-        <key>WFTextActionText</key>
-        <string></string>`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setPrefixEmpty}</string>
-        <key>WFVariableName</key>
-        <string>Prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.emptyPrefix))}`,
-    ),
-  );
-
-  // 3 — Split dictated text on spaces
-  actions.push(
-    action(
-      "is.workflow.actions.text.split",
-      `<key>UUID</key>
-        <string>${IDS.split}</string>
-        <key>WFTextSeparator</key>
-        <string>Spaces</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.dictate))}`,
-    ),
-  );
-
-  // 4 — Repeat with Each token
-  actions.push(
-    action(
-      "is.workflow.actions.repeat.each",
-      `<key>UUID</key>
-        <string>${IDS.forEachStart}</string>
-        <key>GroupingIdentifier</key>
-        <string>${GROUPS.forEach}</string>
-        <key>WFControlFlowMode</key>
-        <integer>0</integer>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.split))}`,
-    ),
-  );
-
-  // 4a — Token = lowercase letters-only (commands; strips dictation punctuation)
-  actions.push(
-    action(
-      "is.workflow.actions.text.changecase",
-      `<key>UUID</key>
-        <string>${IDS.tokenLower}</string>
-        <key>WFCaseType</key>
-        <string>lowercase</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.forEachStart))}`,
-    ),
-  );
-  actions.push(
+/** Strip non-letters → Set Variable "Prefix". */
+function sanitizeToPrefix({ inputAtt, stripId, setId }) {
+  return [
     action(
       "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.tokenStrip}</string>
-        <key>WFReplaceTextFind</key>
-        <string>[^a-z]</string>
-        <key>WFReplaceTextReplace</key>
-        <string></string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <false/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.tokenLower))}`,
+      `<key>UUID</key><string>${stripId}</string>
+        <key>WFReplaceTextFind</key><string>${esc(LETTER_STRIP)}</string>
+        <key>WFReplaceTextReplace</key><string></string>
+        <key>WFReplaceTextCaseSensitive</key><false/>
+        <key>WFReplaceTextRegularExpression</key><true/>
+        <key>WFInput</key>${textActionInput(inputAtt)}`,
     ),
-  );
-  actions.push(
     action(
       "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setToken}</string>
-        <key>WFVariableName</key>
-        <string>Token</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.tokenStrip))}`,
+      `<key>UUID</key><string>${setId}</string>
+        <key>WFVariableName</key><string>Prefix</string>
+        <key>WFInput</key>${attachmentOnly(actionOutput(stripId, "Updated Text"))}`,
     ),
-  );
+  ];
+}
 
-  // 4b — If Token is backspace|delete → pop last char
-  actions.push(
-    action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.tokenIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>0</integer>
-        <key>WFConditions</key>
-        ${anyOfEquals("Token", ["backspace", "delete"])}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.popReplace}</string>
-        <key>WFReplaceTextFind</key>
-        <string>${esc(POP_LAST)}</string>
-        <key>WFReplaceTextReplace</key>
-        <string></string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <true/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(variableRef("Prefix"))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setPrefixPop}</string>
-        <key>WFVariableName</key>
-        <string>Prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.popReplace))}`,
-    ),
-  );
-
-  // 4c — Otherwise If Token is clear|erase|reset → clear
-  actions.push(
-    action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.tokenIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>1</integer>
-        <key>WFConditions</key>
-        ${anyOfEquals("Token", ["clear", "erase", "reset"])}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.gettext",
-      `<key>UUID</key>
-        <string>${IDS.clearEmpty}</string>
-        <key>WFTextActionText</key>
-        <string></string>`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setPrefixClear}</string>
-        <key>WFVariableName</key>
-        <string>Prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.clearEmpty))}`,
-    ),
-  );
-
-  // 4d — Otherwise → append letters, cap 3
-  actions.push(
-    action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.tokenIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>1</integer>`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.stripLetters}</string>
-        <key>WFReplaceTextFind</key>
-        <string>${esc(LETTER_STRIP)}</string>
-        <key>WFReplaceTextReplace</key>
-        <string></string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <false/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.forEachStart))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.changecase",
-      `<key>UUID</key>
-        <string>${IDS.upperLetters}</string>
-        <key>WFCaseType</key>
-        <string>UPPERCASE</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.stripLetters))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.gettext",
-      `<key>UUID</key>
-        <string>${IDS.combineAppend}</string>
-        <key>WFTextActionText</key>
-        ${textToken(`${OBJ}${OBJ}`, {
-          "{0, 1}": variableRef("Prefix"),
-          "{1, 1}": actionOutput(IDS.upperLetters),
-        })}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.truncate}</string>
-        <key>WFReplaceTextFind</key>
-        <string>${esc(TRUNCATE_3)}</string>
-        <key>WFReplaceTextReplace</key>
-        <string>$1</string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <true/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.combineAppend))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setPrefixAppend}</string>
-        <key>WFVariableName</key>
-        <string>Prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.truncate))}`,
-    ),
-  );
-
-  // End If + End Repeat
-  actions.push(
-    action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.tokenIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>2</integer>`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.repeat.each",
-      `<key>UUID</key>
-        <string>${IDS.forEachEnd}</string>
-        <key>GroupingIdentifier</key>
-        <string>${GROUPS.forEach}</string>
-        <key>WFControlFlowMode</key>
-        <integer>2</integer>`,
-    ),
-  );
-
-  // 5 — Confirm / edit field (no autosubmit)
-  actions.push(
-    action(
-      "is.workflow.actions.ask",
-      `<key>UUID</key>
-        <string>${IDS.askConfirm}</string>
-        <key>WFAskActionPrompt</key>
-        <string>KZQ</string>
-        <key>WFAskActionDefaultAnswer</key>
-        ${attachVariable("Prefix")}
-        <key>WFInputType</key>
-        <string>Text</string>`,
-    ),
-  );
-
-  // 6 — Sanitize confirmed field → Prefix
-  actions.push(
-    action(
-      "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.sanitizeStrip}</string>
-        <key>WFReplaceTextFind</key>
-        <string>${esc(LETTER_STRIP)}</string>
-        <key>WFReplaceTextReplace</key>
-        <string></string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <false/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.askConfirm))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.changecase",
-      `<key>UUID</key>
-        <string>${IDS.sanitizeUpper}</string>
-        <key>WFCaseType</key>
-        <string>UPPERCASE</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.sanitizeStrip))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.text.replace",
-      `<key>UUID</key>
-        <string>${IDS.sanitizeTrunc}</string>
-        <key>WFReplaceTextFind</key>
-        <string>${esc(TRUNCATE_3)}</string>
-        <key>WFReplaceTextReplace</key>
-        <string>$1</string>
-        <key>WFReplaceTextCaseSensitive</key>
-        <true/>
-        <key>WFReplaceTextRegularExpression</key>
-        <true/>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.sanitizeUpper))}`,
-    ),
-  );
-  actions.push(
-    action(
-      "is.workflow.actions.setvariable",
-      `<key>UUID</key>
-        <string>${IDS.setPrefixFinal}</string>
-        <key>WFVariableName</key>
-        <string>Prefix</string>
-        <key>WFInput</key>
-        ${attachmentOnly(actionOutput(IDS.sanitizeTrunc))}`,
-    ),
-  );
-
-  // 7 — If Prefix has value → POST + notify; else empty notice
-  actions.push(
-    action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.prefixIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>0</integer>
-        <key>WFCondition</key>
-        <integer>100</integer>
-        <key>WFInput</key>
-        ${conditionInputFromVariable("Prefix")}`,
-    ),
-  );
-
+function postNotifyExit(functionsUrl, { postId, noteId, exitId }) {
   const headers = dictField(`
               ${dictStringItem("Content-Type", plainText("application/json"))}
               ${dictStringItem("x-kfz-key", attachOutput(IDS.apiKeyText))}
@@ -612,68 +230,270 @@ export function buildShortcutPlist(opts = {}) {
               ${dictStringItem("prefix", attachVariable("Prefix"))}
               ${dictStringItem("source", plainText("watch"))}
             `);
+  return [
+    action(
+      "is.workflow.actions.downloadurl",
+      `<key>UUID</key><string>${postId}</string>
+        <key>ShowHeaders</key><true/>
+        <key>WFHTTPMethod</key><string>POST</string>
+        <key>WFHTTPBodyType</key><string>JSON</string>
+        <key>WFURL</key>${plainText(functionsUrl)}
+        <key>WFHTTPHeaders</key>${headers}
+        <key>WFJSONValues</key>${jsonBody}`,
+    ),
+    action(
+      "is.workflow.actions.notification",
+      `<key>UUID</key><string>${noteId}</string>
+        <key>WFNotificationActionTitle</key><string>KZQ</string>
+        <key>WFNotificationActionBody</key>
+        ${textToken(`Queued ${OBJ}`, { "{7, 1}": variableRef("Prefix") })}`,
+    ),
+    action(
+      "is.workflow.actions.exit",
+      `<key>UUID</key><string>${exitId}</string>`,
+    ),
+  ];
+}
+
+/**
+ * @param {{ functionsUrl?: string }} [opts]
+ * @returns {string} XML plist
+ */
+export function buildShortcutPlist(opts = {}) {
+  const functionsUrl = opts.functionsUrl ?? DEFAULT_FUNCTIONS_URL;
+  const actions = [];
 
   actions.push(
     action(
-      "is.workflow.actions.downloadurl",
-      `<key>UUID</key>
-        <string>${IDS.post}</string>
-        <key>ShowHeaders</key>
-        <true/>
-        <key>WFHTTPMethod</key>
-        <string>POST</string>
-        <key>WFHTTPBodyType</key>
-        <string>JSON</string>
-        <key>WFURL</key>
-        ${plainText(functionsUrl)}
-        <key>WFHTTPHeaders</key>
-        ${headers}
-        <key>WFJSONValues</key>
-        ${jsonBody}`,
+      "is.workflow.actions.gettext",
+      `<key>UUID</key><string>${IDS.apiKeyText}</string>
+        <key>WFTextActionText</key><string></string>`,
+    ),
+  );
+
+  // Retry loops back to Dictate (cap attempts so a runaway can't spin forever)
+  actions.push(
+    action(
+      "is.workflow.actions.repeat.count",
+      `<key>UUID</key><string>${IDS.repeatStart}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.retryLoop}</string>
+        <key>WFControlFlowMode</key><integer>0</integer>
+        <key>WFRepeatCount</key><integer>20</integer>`,
     ),
   );
 
   actions.push(
     action(
-      "is.workflow.actions.notification",
-      `<key>UUID</key>
-        <string>${IDS.resultNote}</string>
-        <key>WFNotificationActionTitle</key>
-        <string>KZQ</string>
-        <key>WFNotificationActionBody</key>
-        ${textToken(`Queued ${OBJ}`, {
-          "{7, 1}": variableRef("Prefix"),
+      "is.workflow.actions.dictatetext",
+      `<key>UUID</key><string>${IDS.dictate}</string>
+        <key>WFDictateTextStopListening</key><string>After Short Pause</string>
+        <key>WFSpeechLanguage</key><string>de-DE</string>`,
+    ),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.setvariable",
+      `<key>UUID</key><string>${IDS.setSpoken}</string>
+        <key>WFVariableName</key><string>Spoken</string>
+        <key>WFInput</key>${attachmentOnly(actionOutput(IDS.dictate, "Dictated Text"))}`,
+    ),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.gettext",
+      `<key>UUID</key><string>${IDS.spokenText}</string>
+        <key>WFTextActionText</key>${attachVariable("Spoken")}`,
+    ),
+  );
+
+  actions.push(
+    ...sanitizeToPrefix({
+      inputAtt: actionOutput(IDS.spokenText, "Text"),
+      stripId: IDS.strip,
+      setId: IDS.setPrefix,
+    }),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.conditional",
+      `<key>GroupingIdentifier</key><string>${GROUPS.prefixIf}</string>
+        <key>WFControlFlowMode</key><integer>0</integer>
+        <key>WFCondition</key><integer>100</integer>
+        <key>WFInput</key>${conditionInputFromVariable("Prefix")}`,
+    ),
+  );
+
+  const QUEUE_LABEL = "✅  QUEUE";
+  const RETRY_LABEL = "🔄  RETRY";
+  const EDIT_LABEL = "✏️  EDIT";
+  const CANCEL_LABEL = "❌  CANCEL";
+
+  actions.push(
+    action(
+      "is.workflow.actions.gettext",
+      `<key>UUID</key><string>${IDS.promptLabel}</string>
+        <key>WFTextActionText</key>
+        ${textToken(`Prefix: ${OBJ}`, {
+          "{8, 1}": variableRef("Prefix"),
         })}`,
     ),
   );
 
   actions.push(
     action(
-      "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.prefixIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>1</integer>`,
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuStart}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>0</integer>
+        <key>WFMenuPrompt</key>${attachOutput(IDS.promptLabel)}
+        <key>WFMenuItems</key>
+        <array>
+          <string>${esc(QUEUE_LABEL)}</string>
+          <string>${esc(RETRY_LABEL)}</string>
+          <string>${esc(EDIT_LABEL)}</string>
+          <string>${esc(CANCEL_LABEL)}</string>
+        </array>`,
+    ),
+  );
+
+  // Queue → POST + exit
+  actions.push(
+    action(
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuQueue}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>1</integer>
+        <key>WFMenuItemTitle</key><string>${esc(QUEUE_LABEL)}</string>`,
+    ),
+  );
+  actions.push(
+    ...postNotifyExit(functionsUrl, {
+      postId: IDS.postQueue,
+      noteId: IDS.noteQueue,
+      exitId: IDS.exitQueue,
+    }),
+  );
+
+  // Retry → empty branch; loop continues to next Dictate
+  actions.push(
+    action(
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuRetry}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>1</integer>
+        <key>WFMenuItemTitle</key><string>${esc(RETRY_LABEL)}</string>`,
+    ),
+  );
+
+  // Edit → Ask → POST + exit
+  actions.push(
+    action(
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuEdit}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>1</integer>
+        <key>WFMenuItemTitle</key><string>${esc(EDIT_LABEL)}</string>`,
     ),
   );
   actions.push(
     action(
-      "is.workflow.actions.notification",
-      `<key>UUID</key>
-        <string>${IDS.emptyNote}</string>
-        <key>WFNotificationActionTitle</key>
-        <string>KZQ</string>
-        <key>WFNotificationActionBody</key>
-        <string>Empty prefix</string>`,
+      "is.workflow.actions.ask",
+      `<key>UUID</key><string>${IDS.askEdit}</string>
+        <key>WFAskActionPrompt</key>
+        ${textToken(`Prefix: ${OBJ}`, { "{8, 1}": variableRef("Prefix") })}
+        <key>WFAskActionDefaultAnswer</key>${attachVariable("Prefix")}
+        <key>WFInputType</key><string>Text</string>`,
+    ),
+  );
+  actions.push(
+    ...sanitizeToPrefix({
+      inputAtt: actionOutput(IDS.askEdit, "Provided Input"),
+      stripId: IDS.editStrip,
+      setId: IDS.setEditPrefix,
+    }),
+  );
+  actions.push(
+    ...postNotifyExit(functionsUrl, {
+      postId: IDS.postEdit,
+      noteId: IDS.noteEdit,
+      exitId: IDS.exitEdit,
+    }),
+  );
+
+  // Cancel → exit
+  actions.push(
+    action(
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuCancel}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>1</integer>
+        <key>WFMenuItemTitle</key><string>${esc(CANCEL_LABEL)}</string>`,
     ),
   );
   actions.push(
     action(
+      "is.workflow.actions.exit",
+      `<key>UUID</key><string>${IDS.menuExit}</string>`,
+    ),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.choosefrommenu",
+      `<key>UUID</key><string>${IDS.menuEnd}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.confirmMenu}</string>
+        <key>WFControlFlowMode</key><integer>2</integer>`,
+    ),
+  );
+
+  // Empty dictate → Ask → POST + exit
+  actions.push(
+    action(
       "is.workflow.actions.conditional",
-      `<key>GroupingIdentifier</key>
-        <string>${GROUPS.prefixIf}</string>
-        <key>WFControlFlowMode</key>
-        <integer>2</integer>`,
+      `<key>GroupingIdentifier</key><string>${GROUPS.prefixIf}</string>
+        <key>WFControlFlowMode</key><integer>1</integer>`,
+    ),
+  );
+  actions.push(
+    action(
+      "is.workflow.actions.ask",
+      `<key>UUID</key><string>${IDS.askBlank}</string>
+        <key>WFAskActionPrompt</key>${plainText("Prefix:")}
+        <key>WFInputType</key><string>Text</string>`,
+    ),
+  );
+  actions.push(
+    ...sanitizeToPrefix({
+      inputAtt: actionOutput(IDS.askBlank, "Provided Input"),
+      stripId: IDS.blankStrip,
+      setId: IDS.setBlankPrefix,
+    }),
+  );
+  actions.push(
+    ...postNotifyExit(functionsUrl, {
+      postId: IDS.postBlank,
+      noteId: IDS.noteBlank,
+      exitId: IDS.exitBlank,
+    }),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.conditional",
+      `<key>GroupingIdentifier</key><string>${GROUPS.prefixIf}</string>
+        <key>WFControlFlowMode</key><integer>2</integer>`,
+    ),
+  );
+
+  actions.push(
+    action(
+      "is.workflow.actions.repeat.count",
+      `<key>UUID</key><string>${IDS.repeatEnd}</string>
+        <key>GroupingIdentifier</key><string>${GROUPS.retryLoop}</string>
+        <key>WFControlFlowMode</key><integer>2</integer>`,
     ),
   );
 
