@@ -112,6 +112,43 @@ let progressMap: ProgressMap | null = null;
 let prefixByCode = new Map<string, PrefixResult>();
 let mapInitGeneration = 0;
 let prefixIndexPromise: Promise<Map<string, PrefixResult>> | null = null;
+let mapDockObserver: ResizeObserver | null = null;
+
+function syncMapDockLayout(): void {
+  const layout = document.querySelector<HTMLElement>(".stats-scroll-layout");
+  const block = document.querySelector<HTMLElement>(".stats-map-block");
+  const lower = document.querySelector<HTMLElement>(".stats-map-lower");
+  if (!layout || !block || !lower) return;
+  const lowerHeight = Math.max(140, layout.clientHeight - block.offsetHeight);
+  lower.style.height = `${lowerHeight}px`;
+}
+
+function observeMapDockLayout(): void {
+  mapDockObserver?.disconnect();
+  mapDockObserver = null;
+  const layout = document.querySelector(".stats-scroll-layout");
+  const block = document.querySelector(".stats-map-block");
+  if (!layout || !block) {
+    syncMapDockLayout();
+    return;
+  }
+  if (typeof ResizeObserver === "undefined") {
+    syncMapDockLayout();
+    return;
+  }
+  mapDockObserver = new ResizeObserver(() => syncMapDockLayout());
+  mapDockObserver.observe(layout);
+  mapDockObserver.observe(block);
+  syncMapDockLayout();
+}
+
+function stopMapDockObserver(): void {
+  mapDockObserver?.disconnect();
+  mapDockObserver = null;
+  document
+    .querySelector<HTMLElement>(".stats-map-lower")
+    ?.style.removeProperty("height");
+}
 
 function canFocusInput(): boolean {
   return (
@@ -311,11 +348,13 @@ function updateStatsBtnState(): void {
 }
 
 function setStatsScrollLock(active: boolean): void {
+  document.documentElement.classList.toggle("stats-scroll-lock", active);
   document.body.classList.toggle("stats-scroll-lock", active);
   els.statsView.classList.toggle("stats-view-scroll", active);
 }
 
 function destroyProgressMap(): void {
+  stopMapDockObserver();
   progressMap?.destroy();
   progressMap = null;
   mapInitGeneration += 1;
@@ -727,11 +766,13 @@ function renderMapBody(_stats: StatsResult): void {
     </div>
   `;
   updateStatsBreadcrumb();
+  observeMapDockLayout();
 
   void (async () => {
     try {
       await ensureMapMounted();
       if (!progressMap) return;
+      syncMapDockLayout();
       if (land) {
         await enterMapLand(land);
         if (featureKeySaved) {
@@ -742,6 +783,8 @@ function renderMapBody(_stats: StatsResult): void {
         progressMap.showCountry();
         syncMapSummary();
       }
+      syncMapDockLayout();
+      requestAnimationFrame(() => syncMapDockLayout());
     } catch (error) {
       const mapEl = document.getElementById("stats-map");
       if (mapEl) {
