@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-08-04T06:32:57.650Z",
+  "source": "https://sgx.geodatenzentrum.de/wfs_kfz250?service=WFS",
+  "sourceFull": "https://gdz.bkg.bund.de/index.php/default/open-data/kfz-kennzeichen-1-250-000-kfz250.html",
+  "license": "Datenlizenz Deutschland – Namensnennung – Version 2.0",
+  "attribution": "© GeoBasis-DE / BKG, Datenquellen: Kraftfahrt-Bundesamt",
+  "features": 408,
+  "bundeslaender": 16,
+  "pseudoFeatures": 15,
+  "mapPrefixCount": 702,
+  "simplifyTolerance": 0.004,
+  "rawBytes": 9265451,
+  "simplifiedBytes": 890932,
+  "diff": {
+    "map": 702,
+    "app": 737,
+    "both": 701,
+    "onlyInMap": 1,
+    "onlyInAppPseudo": 9,
+    "onlyInAppUnmapped": 27
+  }
+}

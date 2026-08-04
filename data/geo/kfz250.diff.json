@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-08-04T06:32:51.056Z",
+  "counts": {
+    "map": 702,
+    "app": 737,
+    "both": 701,
+    "onlyInMap": 1,
+    "onlyInAppPseudo": 9,
+    "onlyInAppUnmapped": 27
+  },
+  "onlyInMap": [
+    "WBG"
+  ],
+  "onlyInAppPseudo": [
+    {
+      "code": "BD",
+      "bundesland": "bundesweit"
+    },
+    {
+      "code": "BP",
+      "bundesland": "bundesweit"
+    },
+    {
+      "code": "BW",
+      "bundesland": "bundesweit"
+    },
+    {
+      "code": "SIH",
+      "bundesland": "Filmproduktion"
+    },
+    {
+      "code": "THW",
+      "bundesland": "bundesweit"
+    },
+    {
+      "code": "WIN",
+      "bundesland": "Filmproduktion"
+    },
+    {
+      "code": "WIV",
+      "bundesland": "Filmproduktion"
+    },
+    {
+      "code": "X",
+      "bundesland": "bundesweit"
+    },
+    {
+      "code": "Y",
+      "bundesland": "bundesweit"
+    }
+  ],
+  "onlyInAppUnmapped": [
+    {
+      "code": "BBL",
+      "bundesland": "Brandenburg",
+      "landkreis": "Brandenburg, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "BEL",
+      "bundesland": "Brandenburg",
+      "landkreis": "Landkreis Potsdam-Mittelmark"
+    },
+    {
+      "code": "BR",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Landkreis Karlsruhe"
+    },
+    {
+      "code": "BWL",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Baden-Württemberg, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "BYL",
+      "bundesland": "Bayern",
+      "landkreis": "Bayern, Landesregierung und Landtag"
+    },
+    {
+      "code": "DS",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Schwarzwald-Baar-Kreis"
+    },
+    {
+      "code": "DT",
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Lippe"
+    },
+    {
+      "code": "HEL",
+      "bundesland": "Hessen",
+      "landkreis": "Hessen, Landesregierung und Landtag"
+    },
+    {
+      "code": "JB",
+      "bundesland": "Brandenburg",
+      "landkreis": "Landkreis Teltow-Fläming"
+    },
+    {
+      "code": "LE",
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Lippe"
+    },
+    {
+      "code": "LK",
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke"
+    },
+    {
+      "code": "LSA",
+      "bundesland": "Sachsen-Anhalt",
+      "landkreis": "Sachsen-Anhalt, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "LSN",
+      "bundesland": "Sachsen",
+      "landkreis": "Sachsen, Landesregierung und Landtag"
+    },
+    {
+      "code": "LUK",
+      "bundesland": "Brandenburg",
+      "landkreis": "Landkreis Teltow-Fläming"
+    },
+    {
+      "code": "MU",
+      "bundesland": "Bayern",
+      "landkreis": "Kreis München"
+    },
+    {
+      "code": "MUC",
+      "bundesland": "Bayern",
+      "landkreis": "Stadt München"
+    },
+    {
+      "code": "MVL",
+      "bundesland": "Mecklenburg-Vorpommern",
+      "landkreis": "Mecklenburg-Vorpommern, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "MÜL",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Landkreis Breisgau-Hochschwarzwald"
+    },
+    {
+      "code": "NEU",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Landkreis Breisgau-Hochschwarzwald"
+    },
+    {
+      "code": "NL",
+      "bundesland": "Niedersachsen",
+      "landkreis": "Niedersachsen, Landesregierung und Landtag"
+    },
+    {
+      "code": "NRW",
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Nordrhein-Westfalen, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "RPL",
+      "bundesland": "Rheinland-Pfalz",
+      "landkreis": "Rheinland-Pfalz, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "SAL",
+      "bundesland": "Saarland",
+      "landkreis": "Saarland, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "SH",
+      "bundesland": "Schleswig-Holstein",
+      "landkreis": "Schleswig-Holstein, Landesregierung, Landtag und Polizei"
+    },
+    {
+      "code": "SÄK",
+      "bundesland": "Baden-Württemberg",
+      "landkreis": "Landkreis Säckingen"
+    },
+    {
+      "code": "THL",
+      "bundesland": "Thüringen",
+      "landkreis": "Thüringen, Landesregierung und Landtag"
+    },
+    {
+      "code": "ZS",
+      "bundesland": "Brandenburg",
+      "landkreis": "Landkreis Teltow-Fläming"
+    }
+  ]
+}

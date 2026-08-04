@@ -1,0 +1,1257 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "bundesweit",
+        "land": "bundesweit",
+        "ars": "",
+        "oba": "pseudo",
+        "kfz": [
+          "BD",
+          "BP",
+          "BW",
+          "THW",
+          "X",
+          "Y"
+        ],
+        "haupt": "BD",
+        "pseudo": true,
+        "level": "land"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              19.2,
+              51
+            ],
+            [
+              22.400000000000002,
+              51
+            ],
+            [
+              22.400000000000002,
+              53.599999999999994
+            ],
+            [
+              19.2,
+              53.599999999999994
+            ],
+            [
+              19.2,
+              51
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Filmproduktion",
+        "land": "Filmproduktion",
+        "ars": "",
+        "oba": "pseudo",
+        "kfz": [
+          "SIH",
+          "WIN",
+          "WIV"
+        ],
+        "haupt": "SIH",
+        "pseudo": true,
+        "level": "land"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              19.2,
+              48
+            ],
+            [
+              22.400000000000002,
+              48
+            ],
+            [
+              22.400000000000002,
+              50.400000000000006
+            ],
+            [
+              19.2,
+              50.400000000000006
+            ],
+            [
+              19.2,
+              48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BR",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "BR"
+        ],
+        "haupt": "BR",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              49.3059225
+            ],
+            [
+              10.9790108,
+              49.3059225
+            ],
+            [
+              10.9790108,
+              49.576942499999994
+            ],
+            [
+              10.621002799999998,
+              49.576942499999994
+            ],
+            [
+              10.621002799999998,
+              49.3059225
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BWL",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "BWL"
+        ],
+        "haupt": "BWL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              48.9942495
+            ],
+            [
+              10.9790108,
+              48.9942495
+            ],
+            [
+              10.9790108,
+              49.265269499999995
+            ],
+            [
+              10.621002799999998,
+              49.265269499999995
+            ],
+            [
+              10.621002799999998,
+              48.9942495
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DS",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "DS"
+        ],
+        "haupt": "DS",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              48.6825765
+            ],
+            [
+              10.9790108,
+              48.6825765
+            ],
+            [
+              10.9790108,
+              48.953596499999996
+            ],
+            [
+              10.621002799999998,
+              48.953596499999996
+            ],
+            [
+              10.621002799999998,
+              48.6825765
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MÜL",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "MÜL"
+        ],
+        "haupt": "MÜL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              48.370903500000004
+            ],
+            [
+              10.9790108,
+              48.370903500000004
+            ],
+            [
+              10.9790108,
+              48.6419235
+            ],
+            [
+              10.621002799999998,
+              48.6419235
+            ],
+            [
+              10.621002799999998,
+              48.370903500000004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NEU",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "NEU"
+        ],
+        "haupt": "NEU",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              48.059230500000005
+            ],
+            [
+              10.9790108,
+              48.059230500000005
+            ],
+            [
+              10.9790108,
+              48.3302505
+            ],
+            [
+              10.621002799999998,
+              48.3302505
+            ],
+            [
+              10.621002799999998,
+              48.059230500000005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SÄK",
+        "land": "Baden-Württemberg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "SÄK"
+        ],
+        "haupt": "SÄK",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.621002799999998,
+              47.7475575
+            ],
+            [
+              10.9790108,
+              47.7475575
+            ],
+            [
+              10.9790108,
+              48.01857749999999
+            ],
+            [
+              10.621002799999998,
+              48.01857749999999
+            ],
+            [
+              10.621002799999998,
+              47.7475575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BYL",
+        "land": "Bayern",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "BYL"
+        ],
+        "haupt": "BYL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.043746,
+              49.1738852
+            ],
+            [
+              14.627305999999999,
+              49.1738852
+            ],
+            [
+              14.627305999999999,
+              49.5690932
+            ],
+            [
+              14.043746,
+              49.5690932
+            ],
+            [
+              14.043746,
+              49.1738852
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MU",
+        "land": "Bayern",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "MU"
+        ],
+        "haupt": "MU",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.043746,
+              48.719396
+            ],
+            [
+              14.627305999999999,
+              48.719396
+            ],
+            [
+              14.627305999999999,
+              49.114604
+            ],
+            [
+              14.043746,
+              49.114604
+            ],
+            [
+              14.043746,
+              48.719396
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MUC",
+        "land": "Bayern",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "MUC"
+        ],
+        "haupt": "MUC",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.043746,
+              48.2649068
+            ],
+            [
+              14.627305999999999,
+              48.2649068
+            ],
+            [
+              14.627305999999999,
+              48.660114799999995
+            ],
+            [
+              14.043746,
+              48.660114799999995
+            ],
+            [
+              14.043746,
+              48.2649068
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BBL",
+        "land": "Brandenburg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "BBL"
+        ],
+        "haupt": "BBL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.911866400000001,
+              52.93369880000001
+            ],
+            [
+              15.3317704,
+              52.93369880000001
+            ],
+            [
+              15.3317704,
+              53.197614800000004
+            ],
+            [
+              14.911866400000001,
+              53.197614800000004
+            ],
+            [
+              14.911866400000001,
+              52.93369880000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BEL",
+        "land": "Brandenburg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "BEL"
+        ],
+        "haupt": "BEL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.911866400000001,
+              52.63019540000001
+            ],
+            [
+              15.3317704,
+              52.63019540000001
+            ],
+            [
+              15.3317704,
+              52.89411140000001
+            ],
+            [
+              14.911866400000001,
+              52.89411140000001
+            ],
+            [
+              14.911866400000001,
+              52.63019540000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "JB",
+        "land": "Brandenburg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "JB"
+        ],
+        "haupt": "JB",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.911866400000001,
+              52.32669200000001
+            ],
+            [
+              15.3317704,
+              52.32669200000001
+            ],
+            [
+              15.3317704,
+              52.590608
+            ],
+            [
+              14.911866400000001,
+              52.590608
+            ],
+            [
+              14.911866400000001,
+              52.32669200000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LUK",
+        "land": "Brandenburg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "LUK"
+        ],
+        "haupt": "LUK",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.911866400000001,
+              52.02318860000001
+            ],
+            [
+              15.3317704,
+              52.02318860000001
+            ],
+            [
+              15.3317704,
+              52.287104600000006
+            ],
+            [
+              14.911866400000001,
+              52.287104600000006
+            ],
+            [
+              14.911866400000001,
+              52.02318860000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ZS",
+        "land": "Brandenburg",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "ZS"
+        ],
+        "haupt": "ZS",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.911866400000001,
+              51.71968520000001
+            ],
+            [
+              15.3317704,
+              51.71968520000001
+            ],
+            [
+              15.3317704,
+              51.9836012
+            ],
+            [
+              14.911866400000001,
+              51.9836012
+            ],
+            [
+              14.911866400000001,
+              51.71968520000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HEL",
+        "land": "Hessen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "HEL"
+        ],
+        "haupt": "HEL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.3478,
+              50.390836
+            ],
+            [
+              10.6678,
+              50.390836
+            ],
+            [
+              10.6678,
+              50.662264
+            ],
+            [
+              10.3478,
+              50.662264
+            ],
+            [
+              10.3478,
+              50.390836
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MVL",
+        "land": "Mecklenburg-Vorpommern",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "MVL"
+        ],
+        "haupt": "MVL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              14.5727602,
+              53.777300000000004
+            ],
+            [
+              15.0309322,
+              53.777300000000004
+            ],
+            [
+              15.0309322,
+              54.0173
+            ],
+            [
+              14.5727602,
+              54.0173
+            ],
+            [
+              14.5727602,
+              53.777300000000004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NL",
+        "land": "Niedersachsen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "NL"
+        ],
+        "haupt": "NL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              11.8063696,
+              52.436824
+            ],
+            [
+              12.4014256,
+              52.436824
+            ],
+            [
+              12.4014256,
+              52.748176
+            ],
+            [
+              11.8063696,
+              52.748176
+            ],
+            [
+              11.8063696,
+              52.436824
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DT",
+        "land": "Nordrhein-Westfalen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "DT"
+        ],
+        "haupt": "DT",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.6124984,
+              51.751834800000005
+            ],
+            [
+              10.0439224,
+              51.751834800000005
+            ],
+            [
+              10.0439224,
+              52.0168428
+            ],
+            [
+              9.6124984,
+              52.0168428
+            ],
+            [
+              9.6124984,
+              51.751834800000005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LE",
+        "land": "Nordrhein-Westfalen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "LE"
+        ],
+        "haupt": "LE",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.6124984,
+              51.447075600000005
+            ],
+            [
+              10.0439224,
+              51.447075600000005
+            ],
+            [
+              10.0439224,
+              51.7120836
+            ],
+            [
+              9.6124984,
+              51.7120836
+            ],
+            [
+              9.6124984,
+              51.447075600000005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LK",
+        "land": "Nordrhein-Westfalen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "LK"
+        ],
+        "haupt": "LK",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.6124984,
+              51.142316400000006
+            ],
+            [
+              10.0439224,
+              51.142316400000006
+            ],
+            [
+              10.0439224,
+              51.4073244
+            ],
+            [
+              9.6124984,
+              51.4073244
+            ],
+            [
+              9.6124984,
+              51.142316400000006
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NRW",
+        "land": "Nordrhein-Westfalen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "NRW"
+        ],
+        "haupt": "NRW",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.6124984,
+              50.837557200000006
+            ],
+            [
+              10.0439224,
+              50.837557200000006
+            ],
+            [
+              10.0439224,
+              51.1025652
+            ],
+            [
+              9.6124984,
+              51.1025652
+            ],
+            [
+              9.6124984,
+              50.837557200000006
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "RPL",
+        "land": "Rheinland-Pfalz",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "RPL"
+        ],
+        "haupt": "RPL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              8.6202,
+              49.834450000000004
+            ],
+            [
+              8.9402,
+              49.834450000000004
+            ],
+            [
+              8.9402,
+              50.07445
+            ],
+            [
+              8.6202,
+              50.07445
+            ],
+            [
+              8.6202,
+              49.834450000000004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SAL",
+        "land": "Saarland",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "SAL"
+        ],
+        "haupt": "SAL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              7.5158000000000005,
+              49.2562
+            ],
+            [
+              7.835800000000001,
+              49.2562
+            ],
+            [
+              7.835800000000001,
+              49.496199999999995
+            ],
+            [
+              7.5158000000000005,
+              49.496199999999995
+            ],
+            [
+              7.5158000000000005,
+              49.2562
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LSN",
+        "land": "Sachsen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "LSN"
+        ],
+        "haupt": "LSN",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.174952600000001,
+              50.806850000000004
+            ],
+            [
+              15.5553886,
+              50.806850000000004
+            ],
+            [
+              15.5553886,
+              51.04685
+            ],
+            [
+              15.174952600000001,
+              51.04685
+            ],
+            [
+              15.174952600000001,
+              50.806850000000004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LSA",
+        "land": "Sachsen-Anhalt",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "LSA"
+        ],
+        "haupt": "LSA",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              13.2991,
+              51.863584
+            ],
+            [
+              13.6191,
+              51.863584
+            ],
+            [
+              13.6191,
+              52.116016
+            ],
+            [
+              13.2991,
+              52.116016
+            ],
+            [
+              13.2991,
+              51.863584
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SH",
+        "land": "Schleswig-Holstein",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "SH"
+        ],
+        "haupt": "SH",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              11.457331199999999,
+              54.08935
+            ],
+            [
+              11.8705632,
+              54.08935
+            ],
+            [
+              11.8705632,
+              54.32935
+            ],
+            [
+              11.457331199999999,
+              54.32935
+            ],
+            [
+              11.457331199999999,
+              54.08935
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "THL",
+        "land": "Thüringen",
+        "ars": "",
+        "oba": "unmapped",
+        "kfz": [
+          "THL"
+        ],
+        "haupt": "THL",
+        "pseudo": true,
+        "unmapped": true,
+        "level": "region"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.770671,
+              50.806900000000006
+            ],
+            [
+              13.103731,
+              50.806900000000006
+            ],
+            [
+              13.103731,
+              51.0469
+            ],
+            [
+              12.770671,
+              51.0469
+            ],
+            [
+              12.770671,
+              50.806900000000006
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

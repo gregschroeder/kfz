@@ -29,11 +29,17 @@ import {
 import { formatCount, formatHerleitung, formatPercent, formatProgress, displayQueriedAt } from "./format";
 import { speechSupported, startPrefixListen, type SpeechSession } from "./speech";
 import { celebrateDiscovery } from "./celebrate";
+import {
+  createProgressMap,
+  featureKey,
+  legendHtml,
+  type MapFeatureProps,
+  type ProgressMap,
+  type RegionSummary,
+} from "./mapProgress";
 import "./main.css";
 
 const STATS_ICON_CHART = `<svg class="icon-svg stats-icon-chart" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="13" width="4" height="7" rx="1" fill="currentColor" /><rect x="10" y="9" width="4" height="11" rx="1" fill="currentColor" /><rect x="16" y="5" width="4" height="15" rx="1" fill="currentColor" /></svg>`;
-
-const STATS_ICON_CLOSE = `<svg class="icon-svg stats-icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" /></svg>`;
 
 const STATS_PREFIX_COLGROUP = `<colgroup><col class="col-prefix" /><col class="col-ursprung" /><col class="col-landkreis" /><col class="col-count" /></colgroup>`;
 
@@ -96,6 +102,49 @@ let listenSession: SpeechSession | null = null;
 let focusHandlersRegistered = false;
 let cachedStats: StatsResult | null = null;
 let statsDrilldown: string | null = null;
+let statsViewMode: "list" | "map" = "list";
+let mapLand: string | null = null;
+let mapFeatureKey: string | null = null;
+let mapRegionRows: RegionSummary[] = [];
+/** Full Bundesland prefix list (same source as list-view drill-in). */
+let mapLandPrefixItems: PrefixResult[] = [];
+let progressMap: ProgressMap | null = null;
+let prefixByCode = new Map<string, PrefixResult>();
+let mapInitGeneration = 0;
+let prefixIndexPromise: Promise<Map<string, PrefixResult>> | null = null;
+let mapStickObserver: ResizeObserver | null = null;
+
+function syncMapStickOffset(): void {
+  const layout = document.querySelector<HTMLElement>(".stats-scroll-layout");
+  const block = document.querySelector<HTMLElement>(".stats-map-block");
+  if (!layout) return;
+  if (!block) {
+    layout.style.removeProperty("--stats-map-stick-offset");
+    return;
+  }
+  layout.style.setProperty("--stats-map-stick-offset", `${block.offsetHeight}px`);
+}
+
+function observeMapStickOffset(): void {
+  mapStickObserver?.disconnect();
+  mapStickObserver = null;
+  const block = document.querySelector(".stats-map-block");
+  if (!block || typeof ResizeObserver === "undefined") {
+    syncMapStickOffset();
+    return;
+  }
+  mapStickObserver = new ResizeObserver(() => syncMapStickOffset());
+  mapStickObserver.observe(block);
+  syncMapStickOffset();
+}
+
+function stopMapStickObserver(): void {
+  mapStickObserver?.disconnect();
+  mapStickObserver = null;
+  document
+    .querySelector<HTMLElement>(".stats-scroll-layout")
+    ?.style.removeProperty("--stats-map-stick-offset");
+}
 
 function canFocusInput(): boolean {
   return (
@@ -287,22 +336,11 @@ function renderPrefixDetailRows(items: PrefixResult[]): string {
 
 function updateStatsBtnState(): void {
   const open = els.statsBtn.getAttribute("aria-pressed") === "true";
-  const blMode = open && Boolean(statsDrilldown);
-
-  els.statsBtn.innerHTML = blMode ? STATS_ICON_CLOSE : STATS_ICON_CHART;
-
-  if (!open) {
-    els.statsBtn.dataset.mode = "closed";
-    els.statsBtn.setAttribute("aria-label", "Bundesland stats");
-    return;
-  }
-  if (statsDrilldown) {
-    els.statsBtn.dataset.mode = "bl";
-    els.statsBtn.setAttribute("aria-label", "Back to stats overview");
-    return;
-  }
-  els.statsBtn.dataset.mode = "overview";
-  els.statsBtn.setAttribute("aria-label", "Close Bundesland stats");
+  els.statsBtn.innerHTML = STATS_ICON_CHART;
+  els.statsBtn.setAttribute(
+    "aria-label",
+    open ? "Hide Bundesland stats" : "Show Bundesland stats",
+  );
 }
 
 function setStatsScrollLock(active: boolean): void {
@@ -310,10 +348,348 @@ function setStatsScrollLock(active: boolean): void {
   els.statsView.classList.toggle("stats-view-scroll", active);
 }
 
-function renderStatsPage(stats: StatsResult): void {
-  cachedStats = stats;
-  statsDrilldown = null;
+function destroyProgressMap(): void {
+  stopMapStickObserver();
+  progressMap?.destroy();
+  progressMap = null;
+  mapInitGeneration += 1;
+}
+
+function ensurePrefixIndex(stats: StatsResult): Promise<Map<string, PrefixResult>> {
+  if (prefixByCode.size > 0) return Promise.resolve(prefixByCode);
+  if (prefixIndexPromise) return prefixIndexPromise;
+  prefixIndexPromise = (async () => {
+    const bls = (stats.bundeslaender ?? []).map((row) => row.bundesland);
+    const batches = await Promise.all(
+      bls.map((bl) =>
+        fetchPrefixesByBundesland(bl).catch(() => [] as PrefixResult[]),
+      ),
+    );
+    const map = new Map<string, PrefixResult>();
+    for (const items of batches) {
+      for (const item of items) map.set(item.code, item);
+    }
+    prefixByCode = map;
+    return map;
+  })();
+  return prefixIndexPromise;
+}
+
+function landPctMap(stats: StatsResult): Map<string, number | null> {
+  const map = new Map<string, number | null>();
+  for (const row of stats.bundeslaender ?? []) {
+    map.set(row.bundesland, row.total === 0 ? null : row.percent / 100);
+  }
+  return map;
+}
+
+function renderViewToggle(): string {
+  return `
+    <div class="stats-view-toggle" role="group" aria-label="Stats view">
+      <button type="button" class="stats-view-toggle-btn" data-stats-mode="list" aria-pressed="${statsViewMode === "list" ? "true" : "false"}">List</button>
+      <button type="button" class="stats-view-toggle-btn" data-stats-mode="map" aria-pressed="${statsViewMode === "map" ? "true" : "false"}">Map</button>
+    </div>`;
+}
+
+function regionPrefixLabel(props: MapFeatureProps): string {
+  const haupt = props.haupt?.trim();
+  if (haupt) return haupt;
+  const codes = props.kfz ?? [];
+  if (codes.length === 1) return codes[0]!;
+  if (codes.length > 1) return codes[0]!;
+  return props.name || "—";
+}
+
+function regionPlaceLabel(props: MapFeatureProps): string | null {
+  if (props.unmapped) {
+    const codes = props.kfz ?? [];
+    if (codes.length > 1) return `${codes.length} prefixes not on KFZ250 map`;
+    return "not on KFZ250 map";
+  }
+  const name = props.name?.trim();
+  if (!name || name === regionPrefixLabel(props)) return null;
+  return name;
+}
+
+function renderFeatureDetail(props: MapFeatureProps, items: PrefixResult[]): void {
+  const panel = document.getElementById("stats-feature-detail");
+  if (!panel) return;
+  const found = items.filter((i) => i.count > 0).length;
+  const total = items.length;
+  const pctLabel = total === 0 ? "—" : formatPercent((found / total) * 100);
+  const prefix = regionPrefixLabel(props);
+  const place = regionPlaceLabel(props);
+  const meta = [place, props.land, `${found}/${total} (${pctLabel})`]
+    .filter(Boolean)
+    .join(" · ");
+  panel.hidden = false;
+  panel.innerHTML = `
+    <div class="stats-feature-detail-card">
+      <div class="stats-feature-detail-head">
+        <strong>${escapeHtml(prefix)}</strong>
+        <span class="muted">${escapeHtml(meta)}</span>
+        <button type="button" class="btn stats-feature-close" data-close-feature>Close</button>
+      </div>
+    </div>
+  `;
+}
+
+function hideFeatureDetail(): void {
+  const panel = document.getElementById("stats-feature-detail");
+  if (!panel) return;
+  panel.hidden = true;
+  panel.innerHTML = "";
+  mapFeatureKey = null;
+  progressMap?.highlightKey(null);
   updateStatsBtnState();
+}
+
+function mapRegionCrumbLabel(row: RegionSummary | undefined): string {
+  if (!row) return "—";
+  return regionPrefixLabel(row.props);
+}
+
+function currentStatsLand(): string | null {
+  return statsViewMode === "map" ? mapLand : statsDrilldown;
+}
+
+function renderStatsBreadcrumb(): string {
+  const land = currentStatsLand();
+  const regionKey = statsViewMode === "map" ? mapFeatureKey : null;
+  const parts: string[] = [];
+  parts.push(
+    land || regionKey
+      ? `<button type="button" class="stats-crumb-link" data-stats-nav="country">Deutschland</button>`
+      : `<span class="stats-crumb-current">Deutschland</span>`,
+  );
+  if (land) {
+    parts.push(`<span class="stats-crumb-sep" aria-hidden="true">→</span>`);
+    if (regionKey) {
+      parts.push(
+        `<button type="button" class="stats-crumb-link" data-stats-nav="land">${escapeHtml(land)}</button>`,
+      );
+    } else {
+      parts.push(`<span class="stats-crumb-current">${escapeHtml(land)}</span>`);
+    }
+  }
+  if (regionKey) {
+    const row = mapRegionRows.find((r) => r.key === regionKey);
+    const label = mapRegionCrumbLabel(row);
+    parts.push(`<span class="stats-crumb-sep" aria-hidden="true">→</span>`);
+    parts.push(`<span class="stats-crumb-current">${escapeHtml(label)}</span>`);
+  }
+  return `<nav id="stats-breadcrumb" class="stats-breadcrumb" aria-label="Location">${parts.join("")}</nav>`;
+}
+
+function updateStatsBreadcrumb(): void {
+  const el = document.getElementById("stats-breadcrumb");
+  if (el) el.outerHTML = renderStatsBreadcrumb();
+}
+
+function navigateStatsCountry(): void {
+  hideFeatureDetail();
+  statsDrilldown = null;
+  mapLand = null;
+  mapRegionRows = [];
+  mapLandPrefixItems = [];
+  if (statsViewMode === "map") {
+    progressMap?.showCountry();
+    syncMapSummary();
+    return;
+  }
+  if (cachedStats) renderStatsBody();
+  else updateStatsBreadcrumb();
+}
+
+function navigateStatsLand(): void {
+  // Drop region selection; stay on Bundesland (map only).
+  hideFeatureDetail();
+  if (statsViewMode === "map") {
+    syncMapSummary();
+    return;
+  }
+  updateStatsBreadcrumb();
+}
+
+/** Prefix rows for the current map breadcrumb scope (same columns as list-view drill-in). */
+function mapScopePrefixItems(): PrefixResult[] {
+  if (!mapFeatureKey) {
+    return mapLandPrefixItems;
+  }
+  const row = mapRegionRows.find((r) => r.key === mapFeatureKey);
+  if (!row) return mapLandPrefixItems;
+  const codes = new Set((row.props.kfz ?? []).map((c) => c.toLocaleUpperCase("de-DE")));
+  return mapLandPrefixItems.filter((item) =>
+    codes.has(item.code.toLocaleUpperCase("de-DE")),
+  );
+}
+
+function renderMapPrefixTable(items: PrefixResult[]): void {
+  const head = document.getElementById("stats-map-table-head");
+  const body = document.getElementById("stats-map-table-body");
+  if (!head || !body) return;
+  head.innerHTML = `
+    <table class="stats-table stats-table-prefixes">
+      ${STATS_PREFIX_COLGROUP}
+      <thead>${STATS_PREFIX_HEAD}</thead>
+    </table>`;
+  body.innerHTML = `
+    <table class="stats-table stats-table-prefixes">
+      ${STATS_PREFIX_COLGROUP}
+      <thead aria-hidden="true">${STATS_PREFIX_HEAD}</thead>
+      <tbody>${renderPrefixDetailRows(items)}</tbody>
+    </table>`;
+}
+
+function renderMapSummaryTable(
+  kind: "land" | "region",
+  landRows: BundeslandStats[] | null,
+  _regionRows: RegionSummary[] | null,
+): void {
+  const head = document.getElementById("stats-map-table-head");
+  const body = document.getElementById("stats-map-table-body");
+  if (!head || !body) return;
+
+  if (kind === "land" && landRows) {
+    head.innerHTML = `
+      <table class="stats-table stats-table-overview">
+        ${STATS_OVERVIEW_COLGROUP}
+        <thead>${STATS_OVERVIEW_HEAD}</thead>
+      </table>`;
+    body.innerHTML = `
+      <table class="stats-table stats-table-overview">
+        ${STATS_OVERVIEW_COLGROUP}
+        <thead aria-hidden="true">${STATS_OVERVIEW_HEAD}</thead>
+        <tbody>${renderStatsTableRows(landRows)}</tbody>
+      </table>`;
+    return;
+  }
+
+  renderMapPrefixTable(mapScopePrefixItems());
+}
+
+function syncMapSummary(): void {
+  if (!cachedStats) return;
+  const summaryEl = document.getElementById("stats-summary");
+  if (mapLand) {
+    const bl = cachedStats.bundeslaender?.find((r) => r.bundesland === mapLand);
+    if (summaryEl) {
+      summaryEl.textContent = bl
+        ? `${formatProgress(bl.count, bl.total)} · ${mapLand}`
+        : mapLand;
+    }
+    renderMapSummaryTable("region", null, mapRegionRows);
+  } else {
+    if (summaryEl) {
+      summaryEl.textContent = formatProgress(cachedStats.found, cachedStats.total);
+    }
+    const all = cachedStats.bundeslaender ?? [];
+    const main = sortBundeslandRows(
+      all.filter((row) => !SPECIAL_BUNDESLAENDER.has(row.bundesland)),
+    );
+    const special = sortBundeslandRows(
+      all.filter((row) => SPECIAL_BUNDESLAENDER.has(row.bundesland)),
+    );
+    renderMapSummaryTable("land", [...main, ...special], null);
+  }
+  updateStatsBreadcrumb();
+  updateStatsBtnState();
+}
+
+async function ensureMapMounted(): Promise<void> {
+  if (!cachedStats) return;
+  const mapEl = document.getElementById("stats-map");
+  if (!mapEl) return;
+  if (progressMap) return;
+
+  const gen = mapInitGeneration;
+  const [byCode] = await Promise.all([ensurePrefixIndex(cachedStats)]);
+  if (gen !== mapInitGeneration) return;
+
+  progressMap = await createProgressMap(mapEl, {
+    onLandSelect: (land) => {
+      void enterMapLand(land);
+    },
+    onRegionSelect: (props, items) => {
+      selectMapRegion(props, items);
+    },
+  });
+  if (gen !== mapInitGeneration) {
+    progressMap.destroy();
+    progressMap = null;
+    return;
+  }
+  progressMap.setCounts(byCode);
+  progressMap.setLandPct(landPctMap(cachedStats));
+}
+
+async function enterMapLand(land: string): Promise<void> {
+  if (!progressMap) await ensureMapMounted();
+  if (!progressMap) return;
+  hideFeatureDetail();
+  mapLand = land;
+  statsDrilldown = land;
+  mapFeatureKey = null;
+  mapRegionRows = progressMap.showLand(land);
+  mapLandPrefixItems = [];
+  syncMapSummary();
+  try {
+    mapLandPrefixItems = await fetchPrefixesByBundesland(land);
+  } catch {
+    // Fall back to whatever the map regions already know.
+    const byCode = new Map<string, PrefixResult>();
+    for (const row of mapRegionRows) {
+      for (const item of row.items) byCode.set(item.code, item);
+    }
+    mapLandPrefixItems = [...byCode.values()].sort((a, b) =>
+      a.code.localeCompare(b.code, "de"),
+    );
+  }
+  if (mapLand !== land) return;
+  syncMapSummary();
+}
+
+function selectMapRegion(props: MapFeatureProps, items: PrefixResult[]): void {
+  mapFeatureKey = featureKey(props);
+  progressMap?.highlightKey(mapFeatureKey);
+  renderFeatureDetail(props, items);
+  syncMapSummary();
+}
+
+function renderListBody(stats: StatsResult): void {
+  destroyProgressMap();
+  mapFeatureKey = null;
+  mapRegionRows = [];
+  mapLandPrefixItems = [];
+  // Keep mapLand in sync with list drill so mode switches preserve level.
+  mapLand = statsDrilldown;
+  stopMapStickObserver();
+
+  const body = document.getElementById("stats-body");
+  if (!body) return;
+  body.classList.add("stats-body--list");
+  body.classList.remove("stats-body--map");
+
+  if (statsDrilldown) {
+    body.innerHTML = `<p class="muted">Loading…</p>`;
+    updateStatsBreadcrumb();
+    void (async () => {
+      try {
+        const items = await fetchPrefixesByBundesland(statsDrilldown!);
+        renderBundeslandDetail(statsDrilldown!, items);
+      } catch (error) {
+        statsDrilldown = null;
+        mapLand = null;
+        updateStatsBtnState();
+        updateStatsBreadcrumb();
+        body.innerHTML = `<p class="muted">${escapeHtml(
+          error instanceof Error ? error.message : "Could not load prefixes",
+        )}</p>`;
+      }
+    })();
+    return;
+  }
+
   const all = stats.bundeslaender ?? [];
   const main = sortBundeslandRows(
     all.filter((row) => !SPECIAL_BUNDESLAENDER.has(row.bundesland)),
@@ -323,11 +699,8 @@ function renderStatsPage(stats: StatsResult): void {
   );
 
   if (all.length === 0) {
-    setStatsScrollLock(false);
-    els.statsContent.innerHTML = `
-      <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
-      <p class="muted">Bundesland breakdown unavailable until the database is updated.</p>
-    `;
+    body.innerHTML = `<p class="muted">Bundesland breakdown unavailable until the database is updated.</p>`;
+    updateStatsBreadcrumb();
     return;
   }
 
@@ -341,33 +714,130 @@ function renderStatsPage(stats: StatsResult): void {
         </table>`
     : "";
 
+  body.innerHTML = `
+    <div class="stats-scroll-table-head">
+      <table class="stats-table stats-table-overview">
+        ${STATS_OVERVIEW_COLGROUP}
+        <thead>${STATS_OVERVIEW_HEAD}</thead>
+      </table>
+    </div>
+    <div class="stats-scroll-body">
+      <table class="stats-table stats-table-overview">
+        ${STATS_OVERVIEW_COLGROUP}
+        <thead aria-hidden="true">${STATS_OVERVIEW_HEAD}</thead>
+        <tbody>
+          ${renderStatsTableRows(main)}
+        </tbody>
+      </table>
+      ${specialTable}
+    </div>
+  `;
+  updateStatsBreadcrumb();
+}
+
+function renderMapBody(_stats: StatsResult): void {
+  const body = document.getElementById("stats-body");
+  if (!body) return;
+
+  const land = mapLand ?? statsDrilldown;
+  const featureKeySaved = mapFeatureKey;
+  mapLand = null;
+  mapFeatureKey = null;
+  mapRegionRows = [];
+  mapLandPrefixItems = [];
+  destroyProgressMap();
+
+  body.classList.add("stats-body--map");
+  body.classList.remove("stats-body--list");
+  body.innerHTML = `
+    <div class="stats-map-block">
+      <div id="stats-map" class="stats-map" role="img" aria-label="Germany KFZ progress map"></div>
+      ${legendHtml()}
+      <p class="stats-map-attr muted">Map: © GeoBasis-DE / BKG · Kraftfahrt-Bundesamt (DL-DE/BY-2.0). Basemap © OSM / CARTO.</p>
+    </div>
+    <div class="stats-map-lower">
+      <div id="stats-feature-detail" class="stats-feature-detail" hidden></div>
+      <div class="stats-scroll-table-head" id="stats-map-table-head"></div>
+      <div class="stats-scroll-body" id="stats-map-table-body"></div>
+    </div>
+  `;
+  updateStatsBreadcrumb();
+  observeMapStickOffset();
+
+  void (async () => {
+    try {
+      await ensureMapMounted();
+      if (!progressMap) return;
+      syncMapStickOffset();
+      if (land) {
+        await enterMapLand(land);
+        if (featureKeySaved) {
+          const row = mapRegionRows.find((r) => r.key === featureKeySaved);
+          if (row) selectMapRegion(row.props, row.items);
+        }
+      } else {
+        progressMap.showCountry();
+        syncMapSummary();
+      }
+      syncMapStickOffset();
+    } catch (error) {
+      const mapEl = document.getElementById("stats-map");
+      if (mapEl) {
+        mapEl.innerHTML = `<p class="muted">${escapeHtml(
+          error instanceof Error ? error.message : "Map failed to load",
+        )}</p>`;
+      }
+    }
+  })();
+}
+
+function renderStatsBody(): void {
+  if (!cachedStats) return;
+  const summaryEl = document.getElementById("stats-summary");
+  if (summaryEl && statsViewMode === "list" && !statsDrilldown) {
+    summaryEl.textContent = formatProgress(cachedStats.found, cachedStats.total);
+  }
+  if (statsViewMode === "list") {
+    renderListBody(cachedStats);
+  } else {
+    renderMapBody(cachedStats);
+  }
+  updateStatsBtnState();
+}
+
+function renderStatsPage(stats: StatsResult): void {
+  cachedStats = stats;
+  updateStatsBtnState();
+
+  const all = stats.bundeslaender ?? [];
+  if (all.length === 0 && statsViewMode === "list") {
+    setStatsScrollLock(false);
+    els.statsContent.innerHTML = `
+      <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
+      <p class="muted">Bundesland breakdown unavailable until the database is updated.</p>
+    `;
+    return;
+  }
+
   els.statsContent.innerHTML = `
     <div class="stats-scroll-layout">
-      <p class="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
-      <div class="stats-scroll-table-head">
-        <table class="stats-table stats-table-overview">
-          ${STATS_OVERVIEW_COLGROUP}
-          <thead>${STATS_OVERVIEW_HEAD}</thead>
-        </table>
+      <div class="stats-toolbar">
+        <p class="stats-summary" id="stats-summary">${escapeHtml(formatProgress(stats.found, stats.total))}</p>
+        ${renderViewToggle()}
       </div>
-      <div class="stats-scroll-body">
-        <table class="stats-table stats-table-overview">
-          ${STATS_OVERVIEW_COLGROUP}
-          <thead aria-hidden="true">${STATS_OVERVIEW_HEAD}</thead>
-          <tbody>
-            ${renderStatsTableRows(main)}
-          </tbody>
-        </table>
-        ${specialTable}
-      </div>
+      ${renderStatsBreadcrumb()}
+      <div id="stats-body" class="stats-body"></div>
     </div>
   `;
   setStatsScrollLock(true);
+  renderStatsBody();
 }
 
 function renderBundeslandDetail(bundesland: string, items: PrefixResult[]): void {
   statsDrilldown = bundesland;
+  mapLand = bundesland;
   updateStatsBtnState();
+  updateStatsBreadcrumb();
 
   const blStats = cachedStats?.bundeslaender?.find(
     (row) => row.bundesland === bundesland,
@@ -376,31 +846,58 @@ function renderBundeslandDetail(bundesland: string, items: PrefixResult[]): void
     ? formatProgress(blStats.count, blStats.total)
     : bundesland;
 
-  els.statsContent.innerHTML = `
-    <div class="stats-scroll-layout">
-      <p class="stats-summary">${escapeHtml(summary)} · ${escapeHtml(bundesland)}</p>
-      <div class="stats-scroll-table-head">
-        <table class="stats-table stats-table-prefixes">
-          ${STATS_PREFIX_COLGROUP}
-          <thead>${STATS_PREFIX_HEAD}</thead>
-        </table>
-      </div>
-      <div class="stats-scroll-body">
-        <table class="stats-table stats-table-prefixes">
-          ${STATS_PREFIX_COLGROUP}
-          <thead aria-hidden="true">${STATS_PREFIX_HEAD}</thead>
-          <tbody>
-            ${renderPrefixDetailRows(items)}
-          </tbody>
-        </table>
-      </div>
+  const summaryEl = document.getElementById("stats-summary");
+  if (summaryEl) {
+    summaryEl.textContent = `${summary} · ${bundesland}`;
+  }
+
+  const body = document.getElementById("stats-body");
+  if (!body) {
+    // Fallback if shell missing
+    els.statsContent.innerHTML = `
+      <div class="stats-scroll-layout">
+        <div class="stats-toolbar">
+          <p class="stats-summary" id="stats-summary">${escapeHtml(summary)} · ${escapeHtml(bundesland)}</p>
+          ${renderViewToggle()}
+        </div>
+        ${renderStatsBreadcrumb()}
+        <div id="stats-body" class="stats-body"></div>
+      </div>`;
+  }
+  const target = document.getElementById("stats-body");
+  if (!target) return;
+  target.classList.add("stats-body--list");
+  target.classList.remove("stats-body--map");
+
+  target.innerHTML = `
+    <div class="stats-scroll-table-head">
+      <table class="stats-table stats-table-prefixes">
+        ${STATS_PREFIX_COLGROUP}
+        <thead>${STATS_PREFIX_HEAD}</thead>
+      </table>
+    </div>
+    <div class="stats-scroll-body">
+      <table class="stats-table stats-table-prefixes">
+        ${STATS_PREFIX_COLGROUP}
+        <thead aria-hidden="true">${STATS_PREFIX_HEAD}</thead>
+        <tbody>
+          ${renderPrefixDetailRows(items)}
+        </tbody>
+      </table>
     </div>
   `;
   setStatsScrollLock(true);
 }
 
 async function showBundeslandDetail(bundesland: string): Promise<void> {
-  els.statsContent.innerHTML = `<p class="muted">Loading…</p>`;
+  if (statsViewMode === "map") {
+    void enterMapLand(bundesland);
+    return;
+  }
+
+  const body = document.getElementById("stats-body");
+  if (body) body.innerHTML = `<p class="muted">Loading…</p>`;
+  else els.statsContent.innerHTML = `<p class="muted">Loading…</p>`;
 
   try {
     const items = await fetchPrefixesByBundesland(bundesland);
@@ -409,13 +906,20 @@ async function showBundeslandDetail(bundesland: string): Promise<void> {
     statsDrilldown = null;
     setStatsScrollLock(false);
     updateStatsBtnState();
-    els.statsContent.innerHTML = `<p class="muted">${escapeHtml(
+    const msg = `<p class="muted">${escapeHtml(
       error instanceof Error ? error.message : "Could not load prefixes",
     )}</p>`;
+    if (body) body.innerHTML = msg;
+    else els.statsContent.innerHTML = msg;
   }
 }
 
 function showStatsOverview(): void {
+  statsDrilldown = null;
+  mapLand = null;
+  mapFeatureKey = null;
+  mapRegionRows = [];
+  mapLandPrefixItems = [];
   if (cachedStats) {
     renderStatsPage(cachedStats);
     return;
@@ -439,7 +943,10 @@ function setStatsOpen(open: boolean): void {
   els.statsBtn.setAttribute("aria-pressed", open ? "true" : "false");
 
   if (!open) {
-    statsDrilldown = null;
+    // Keep list/map mode + drill level for the next toggle; tear down map DOM only.
+    destroyProgressMap();
+    mapRegionRows = [];
+    mapLandPrefixItems = [];
     setStatsScrollLock(false);
     updateStatsBtnState();
     focusInput();
@@ -467,15 +974,65 @@ function setStatsOpen(open: boolean): void {
 }
 
 function toggleStatsView(): void {
-  if (!els.statsView.hidden && statsDrilldown) {
-    showStatsOverview();
-    return;
-  }
   setStatsOpen(els.statsView.hidden);
+}
+
+function setStatsViewMode(mode: "list" | "map"): void {
+  if (statsViewMode === mode) return;
+
+  if (mode === "map") {
+    // Preserve list drill level in map.
+    if (statsDrilldown) mapLand = statsDrilldown;
+    // List has no region level — land overview in map.
+    mapFeatureKey = null;
+  } else {
+    // Preserve map land in list; drop region selection.
+    if (mapLand) statsDrilldown = mapLand;
+    mapFeatureKey = null;
+    destroyProgressMap();
+  }
+
+  statsViewMode = mode;
+
+  if (cachedStats) {
+    const toggle = els.statsContent.querySelector(".stats-view-toggle");
+    if (toggle) {
+      toggle.querySelectorAll<HTMLButtonElement>("[data-stats-mode]").forEach((btn) => {
+        btn.setAttribute(
+          "aria-pressed",
+          btn.dataset.statsMode === mode ? "true" : "false",
+        );
+      });
+    }
+    renderStatsBody();
+  }
 }
 
 function handleStatsContentClick(event: Event): void {
   const target = event.target as HTMLElement;
+
+  const modeBtn = target.closest<HTMLElement>("[data-stats-mode]");
+  if (modeBtn?.dataset.statsMode === "list" || modeBtn?.dataset.statsMode === "map") {
+    setStatsViewMode(modeBtn.dataset.statsMode);
+    return;
+  }
+
+  if (target.closest("[data-close-feature]")) {
+    hideFeatureDetail();
+    syncMapSummary();
+    return;
+  }
+
+  const crumb = target.closest<HTMLElement>("[data-stats-nav]");
+  if (crumb?.dataset.statsNav === "country") {
+    navigateStatsCountry();
+    return;
+  }
+  if (crumb?.dataset.statsNav === "land") {
+    navigateStatsLand();
+    return;
+  }
+
   const row = target.closest<HTMLElement>(".stats-bl-row");
   if (!row?.dataset.bundesland) return;
   void showBundeslandDetail(row.dataset.bundesland);

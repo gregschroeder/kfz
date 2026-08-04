@@ -36,6 +36,7 @@
     "env:local": "node scripts/write-local-env.mjs",
     "data:local:seed": "KFZ_ENV=local node scripts/seed-from-list.mjs",
     "data:local:seed:counts": "KFZ_ENV=local node scripts/seed-from-list.mjs --counts tmp/kfz_stats.json",
+    "data:local:seed:from-prod": "bash scripts/seed-local-from-prod.sh",
     "data:local:fix-count": "KFZ_ENV=local node scripts/fix-count.mjs",
     "dev:local": "bash scripts/dev-local.sh",
     "web:dev": "KFZ_ENV=local node scripts/write-web-env.mjs && node scripts/sync-web-assets.mjs && pnpm --dir web dev",
@@ -43,6 +44,7 @@
     "web:preview": "pnpm --dir web preview",
     "pages:prod:setup": "bash scripts/setup-github-pages.sh",
     "assets:sync": "node scripts/sync-web-assets.mjs",
+    "geo:kfz250": "node scripts/fetch-kfz250.mjs",
     "shortcuts:assets": "node scripts/sync-kzq-assets.mjs",
     "shortcuts:build": "node scripts/sync-kzq-assets.mjs && node scripts/build-shortcut.mjs",
     "test": "pnpm test:integration",
@@ -50,10 +52,15 @@
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.49.1",
+    "@turf/bbox": "^7.3.5",
+    "@turf/centroid": "^7.3.5",
+    "@turf/helpers": "^7.3.5",
+    "@turf/simplify": "^7.3.5",
+    "@turf/union": "^7.3.5",
     "dotenv": "^17.3.1",
     "pg": "^8.12.0",
     "sharp": "^0.34.5",
-    "supabase": "^2.107.0",
+    "supabase": "^2.111.0",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   }

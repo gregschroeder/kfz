@@ -60,11 +60,13 @@ All CLI tools (`supabase`, etc.) are **devDependencies** — use `pnpm run …` 
 | `pnpm env:local` | local | Write `.env.local`, `web/.env.local`, etc. |
 | `pnpm data:local:seed` | local | Upsert prefixes locally |
 | `pnpm data:local:seed:counts` | local | Same + legacy counts |
+| `pnpm data:local:seed:from-prod` | local | Dump prod `kfz` data → reset local empty → load |
 | `pnpm data:local:fix-count` | local | Fix one count locally |
 | `pnpm dev:local` | local | Supabase + functions + PWA `:5173` |
 | `pnpm web:dev` | local | PWA dev server |
 | `pnpm test:integration` | local | API integration tests |
 | **Other** | | |
+| `pnpm geo:kfz250` | — | Refresh BKG KFZ250 map polygons → `data/geo/` + `web/public/geo/` |
 | `pnpm assets:sync` | — | Icons → `web/public/` |
 | `pnpm web:preview` | — | Preview built PWA |
 
@@ -77,6 +79,7 @@ Prod scripts print `→ prod Supabase (wchzccrcqlxgsftjbpgn)` and verify the lin
 | **Edge function** (`supabase/functions/`) | Nothing extra if `pnpm dev:local` is running — **hot reload**. Otherwise restart `dev:local` or run `functions:local:deploy`. | `pnpm prod:up` or `pnpm functions:prod:deploy` |
 | **SQL migration** (`supabase/migrations/`) | `pnpm local:up` or `pnpm db:local:push` | `pnpm prod:up` or `pnpm db:prod:push` |
 | **PWA** (`web/`) | Auto reload via Vite while `dev:local` / `web:dev` runs | `pnpm web:build` then redeploy `web/dist/` to static host |
+| **Map polygons** (BKG KFZ250) | `pnpm geo:kfz250` | Same; commit `data/geo/` + `web/public/geo/` (districts, dissolved Länder, pseudo islands) |
 | **Prefix list / scrape** (`scripts/kfz.py`) | `pnpm data:local:seed` | `pnpm data:prod:refresh` |
 | **Secrets** (`.env` keys for functions) | `pnpm env:local` | `pnpm db:prod:secrets:push` |
 
