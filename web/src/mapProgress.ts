@@ -138,8 +138,9 @@ export async function createProgressMap(
   const map = L.map(container, {
     zoomControl: true,
     attributionControl: true,
-    // Page scroll owns the wheel; zoom with +/-.
+    // Page scroll owns one-finger gestures; zoom with +/- / pinch.
     scrollWheelZoom: false,
+    dragging: false,
   });
   // Slightly tighter than full OVERVIEW_BOUNDS so Deutschland fills the frame more.
   map.fitBounds(L.latLngBounds([47.2, 5.8], [55.1, 15.5]), { padding: [4, 4] });

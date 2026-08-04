@@ -112,39 +112,6 @@ let progressMap: ProgressMap | null = null;
 let prefixByCode = new Map<string, PrefixResult>();
 let mapInitGeneration = 0;
 let prefixIndexPromise: Promise<Map<string, PrefixResult>> | null = null;
-let mapStickObserver: ResizeObserver | null = null;
-
-function syncMapStickOffset(): void {
-  const layout = document.querySelector<HTMLElement>(".stats-scroll-layout");
-  const block = document.querySelector<HTMLElement>(".stats-map-block");
-  if (!layout) return;
-  if (!block) {
-    layout.style.removeProperty("--stats-map-stick-offset");
-    return;
-  }
-  layout.style.setProperty("--stats-map-stick-offset", `${block.offsetHeight}px`);
-}
-
-function observeMapStickOffset(): void {
-  mapStickObserver?.disconnect();
-  mapStickObserver = null;
-  const block = document.querySelector(".stats-map-block");
-  if (!block || typeof ResizeObserver === "undefined") {
-    syncMapStickOffset();
-    return;
-  }
-  mapStickObserver = new ResizeObserver(() => syncMapStickOffset());
-  mapStickObserver.observe(block);
-  syncMapStickOffset();
-}
-
-function stopMapStickObserver(): void {
-  mapStickObserver?.disconnect();
-  mapStickObserver = null;
-  document
-    .querySelector<HTMLElement>(".stats-scroll-layout")
-    ?.style.removeProperty("--stats-map-stick-offset");
-}
 
 function canFocusInput(): boolean {
   return (
@@ -349,7 +316,6 @@ function setStatsScrollLock(active: boolean): void {
 }
 
 function destroyProgressMap(): void {
-  stopMapStickObserver();
   progressMap?.destroy();
   progressMap = null;
   mapInitGeneration += 1;
@@ -663,7 +629,6 @@ function renderListBody(stats: StatsResult): void {
   mapLandPrefixItems = [];
   // Keep mapLand in sync with list drill so mode switches preserve level.
   mapLand = statsDrilldown;
-  stopMapStickObserver();
 
   const body = document.getElementById("stats-body");
   if (!body) return;
@@ -762,13 +727,11 @@ function renderMapBody(_stats: StatsResult): void {
     </div>
   `;
   updateStatsBreadcrumb();
-  observeMapStickOffset();
 
   void (async () => {
     try {
       await ensureMapMounted();
       if (!progressMap) return;
-      syncMapStickOffset();
       if (land) {
         await enterMapLand(land);
         if (featureKeySaved) {
@@ -779,7 +742,6 @@ function renderMapBody(_stats: StatsResult): void {
         progressMap.showCountry();
         syncMapSummary();
       }
-      syncMapStickOffset();
     } catch (error) {
       const mapEl = document.getElementById("stats-map");
       if (mapEl) {
