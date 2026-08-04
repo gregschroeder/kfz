@@ -1,6 +1,6 @@
 /* global self, caches, fetch */
 
-const CACHE_VERSION = "v12";
+const CACHE_VERSION = "0.1.0";
 const STATIC_CACHE = `kfz-static-${CACHE_VERSION}`;
 
 const PRECACHE_URLS = [

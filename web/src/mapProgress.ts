@@ -364,16 +364,20 @@ export async function createProgressMap(
     if (!key || !activeLayer) return;
     activeLayer.eachLayer((layer) => {
       const feature = (layer as L.Layer & { feature?: GeoFeature }).feature;
-      if (feature && featureKey(feature.properties) === key) {
-        const path = layer as L.Path;
-        if (typeof path.bringToFront === "function") path.bringToFront();
-        if (typeof (layer as L.Polygon).getBounds === "function") {
-          map.fitBounds((layer as L.Polygon).getBounds(), {
+      if (!feature || featureKey(feature.properties) !== key) return;
+      const path = layer as L.Path;
+      if (typeof path.bringToFront === "function") path.bringToFront();
+      try {
+        const bounds = (layer as L.Polygon).getBounds?.();
+        if (bounds?.isValid()) {
+          map.fitBounds(bounds, {
             padding: [28, 28],
             animate: true,
             maxZoom: 11,
           });
         }
+      } catch {
+        // Keep selection even if zoom fails.
       }
     });
   }
@@ -395,8 +399,8 @@ export async function createProgressMap(
 
   function invalidateSize(): void {
     map.invalidateSize({ animate: false });
-    // Re-fit after height changes (e.g. 40% pane) so we aren't stuck zoomed in.
-    fitCurrentView(false);
+    // Don't undo a region zoom while something is selected.
+    if (!selectedKey) fitCurrentView(false);
   }
 
   function destroy(): void {

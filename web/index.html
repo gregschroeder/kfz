@@ -38,9 +38,21 @@
       </div>
     </div>
 
+    <div id="about-modal" class="modal" hidden>
+      <div class="modal-card about-card" role="dialog" aria-labelledby="about-title" aria-modal="true">
+        <h1 id="about-title">KFZ</h1>
+        <p id="about-version" class="about-line"></p>
+        <p id="about-url" class="about-line about-url"></p>
+        <p id="about-copy" class="about-line muted"></p>
+        <button type="button" id="about-close" class="btn primary">Close</button>
+      </div>
+    </div>
+
     <div id="app" hidden>
       <header class="topbar">
-        <img class="logo" src="/icons/logo-plate.png" alt="KFZ" width="114" height="36" />
+        <button type="button" id="about-btn" class="logo-btn" aria-label="About KFZ">
+          <img class="logo" src="/icons/logo-plate.png" alt="" width="114" height="36" />
+        </button>
         <div class="topbar-meta">
           <p id="progress" class="progress" aria-live="polite">—</p>
           <button id="stats-btn" type="button" class="btn icon stats-btn" aria-pressed="false" aria-label="Show Bundesland stats"></button>

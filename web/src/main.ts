@@ -37,6 +37,7 @@ import {
   type ProgressMap,
   type RegionSummary,
 } from "./mapProgress";
+import { APP_VERSION } from "./version";
 import "./main.css";
 
 const STATS_ICON_CHART = `<svg class="icon-svg stats-icon-chart" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="13" width="4" height="7" rx="1" fill="currentColor" /><rect x="10" y="9" width="4" height="11" rx="1" fill="currentColor" /><rect x="16" y="5" width="4" height="15" rx="1" fill="currentColor" /></svg>`;
@@ -92,6 +93,12 @@ const els = {
   statsView: document.getElementById("stats-view")!,
   statsContent: document.getElementById("stats-content")!,
   mainView: document.getElementById("main-view")!,
+  aboutBtn: document.getElementById("about-btn") as HTMLButtonElement,
+  aboutModal: document.getElementById("about-modal")!,
+  aboutVersion: document.getElementById("about-version")!,
+  aboutUrl: document.getElementById("about-url")!,
+  aboutCopy: document.getElementById("about-copy")!,
+  aboutClose: document.getElementById("about-close") as HTMLButtonElement,
 };
 
 let pendingQueue: PendingItem[] = [];
@@ -164,6 +171,7 @@ function canFocusInput(): boolean {
     !els.app.hidden &&
     els.queueModal.hidden &&
     els.setupModal.hidden &&
+    els.aboutModal.hidden &&
     els.statsView.hidden
   );
 }
@@ -472,6 +480,11 @@ function hideFeatureDetail(): void {
   updateStatsBtnState();
 }
 
+function selectedMapRegion(): RegionSummary | undefined {
+  if (!mapFeatureKey) return undefined;
+  return mapRegionRows.find((r) => r.key === mapFeatureKey);
+}
+
 function mapRegionCrumbLabel(row: RegionSummary | undefined): string {
   if (!row) return "—";
   return regionPrefixLabel(row.props);
@@ -542,15 +555,16 @@ function navigateStatsLand(): void {
 
 /** Prefix rows for the current map breadcrumb scope (same columns as list-view drill-in). */
 function mapScopePrefixItems(): PrefixResult[] {
-  if (!mapFeatureKey) {
-    return mapLandPrefixItems;
-  }
-  const row = mapRegionRows.find((r) => r.key === mapFeatureKey);
-  if (!row) return mapLandPrefixItems;
-  const codes = new Set((row.props.kfz ?? []).map((c) => c.toLocaleUpperCase("de-DE")));
-  return mapLandPrefixItems.filter((item) =>
+  const region = selectedMapRegion();
+  if (!region) return mapLandPrefixItems;
+  const codes = new Set(
+    (region.props.kfz ?? []).map((c) => c.toLocaleUpperCase("de-DE")),
+  );
+  const scoped = mapLandPrefixItems.filter((item) =>
     codes.has(item.code.toLocaleUpperCase("de-DE")),
   );
+  // If the land prefix index isn't loaded yet, fall back to region items.
+  return scoped.length ? scoped : region.items;
 }
 
 function renderMapPrefixTable(items: PrefixResult[]): void {
@@ -600,7 +614,8 @@ function renderMapSummaryTable(
 function renderMapMissingLine(): void {
   const lower = document.querySelector(".stats-map-lower");
   const existing = document.getElementById("stats-map-missing");
-  if (!lower || !mapLand) {
+  if (!lower || !mapLand || mapFeatureKey) {
+    // Hide while a region is selected — the filtered table is the source of truth.
     existing?.remove();
     return;
   }
@@ -716,10 +731,19 @@ async function enterMapLand(land: string): Promise<void> {
 }
 
 function selectMapRegion(props: MapFeatureProps, items: PrefixResult[]): void {
-  mapFeatureKey = featureKey(props);
-  progressMap?.highlightKey(mapFeatureKey);
-  renderFeatureDetail(props, items);
+  const key = featureKey(props);
+  const region =
+    mapRegionRows.find((r) => r.key === key) ??
+    mapRegionRows.find((r) => {
+      const a = new Set((r.props.kfz ?? []).map((c) => c.toLocaleUpperCase("de-DE")));
+      return (props.kfz ?? []).some((c) => a.has(c.toLocaleUpperCase("de-DE")));
+    });
+
+  mapFeatureKey = region?.key ?? key;
+  // Update table + breadcrumb first so UI matches even if map zoom throws.
+  renderFeatureDetail(region?.props ?? props, region?.items?.length ? region.items : items);
   syncMapSummary();
+  progressMap?.highlightKey(mapFeatureKey);
 }
 
 function findRegionForPrefix(code: string): RegionSummary | undefined {
@@ -735,6 +759,7 @@ function findRegionForPrefix(code: string): RegionSummary | undefined {
 function selectMapRegionForPrefix(code: string): void {
   const region = findRegionForPrefix(code);
   if (!region) return;
+  // Same path as a map polygon click.
   selectMapRegion(region.props, region.items);
 }
 
@@ -1497,6 +1522,20 @@ function registerServiceWorker(): void {
   void navigator.serviceWorker.register("/sw.js");
 }
 
+function openAboutModal(): void {
+  const url = window.location.origin;
+  els.aboutVersion.textContent = `version ${APP_VERSION}`;
+  els.aboutUrl.textContent = url;
+  els.aboutCopy.textContent = `Copyright (C) ${new Date().getFullYear()} schroeder.org`;
+  els.aboutModal.hidden = false;
+  els.aboutClose.focus();
+}
+
+function closeAboutModal(): void {
+  els.aboutModal.hidden = true;
+  focusInput();
+}
+
 async function init(): Promise<void> {
   registerServiceWorker();
   registerInputFocusHandlers();
@@ -1599,6 +1638,22 @@ async function bootstrap(): Promise<void> {
   });
   els.statsContent.addEventListener("click", handleStatsContentClick);
   els.statsContent.addEventListener("keydown", handleStatsContentKeydown);
+
+  els.aboutBtn.addEventListener("click", () => {
+    openAboutModal();
+  });
+  els.aboutClose.addEventListener("click", () => {
+    closeAboutModal();
+  });
+  els.aboutModal.addEventListener("click", (event) => {
+    if (event.target === els.aboutModal) closeAboutModal();
+  });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !els.aboutModal.hidden) {
+      event.preventDefault();
+      closeAboutModal();
+    }
+  });
 
   focusInput();
 }

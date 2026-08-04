@@ -687,6 +687,24 @@ p {
   letter-spacing: 0.04em;
 }
 
+.logo-btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  flex-shrink: 1;
+  min-width: 0;
+  line-height: 0;
+}
+
+.logo-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .logo {
   display: block;
   height: 36px;
@@ -694,6 +712,34 @@ p {
   max-width: min(52vw, 170px);
   flex-shrink: 1;
   min-width: 0;
+}
+
+.about-card {
+  text-align: center;
+  display: grid;
+  gap: 8px;
+}
+
+.about-card h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
+}
+
+.about-line {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.about-url {
+  word-break: break-all;
+  color: #93c5fd;
+}
+
+.about-card .btn {
+  margin-top: 12px;
 }
 
 .conn-status {
