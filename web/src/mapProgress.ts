@@ -83,6 +83,7 @@ export type ProgressMap = {
   showCountry: () => void;
   showLand: (land: string) => RegionSummary[];
   highlightKey: (key: string | null) => void;
+  invalidateSize: () => void;
   destroy: () => void;
 };
 
@@ -355,6 +356,10 @@ export async function createProgressMap(
     restyle();
   }
 
+  function invalidateSize(): void {
+    map.invalidateSize({ animate: false });
+  }
+
   function destroy(): void {
     clearLabels();
     map.remove();
@@ -368,6 +373,7 @@ export async function createProgressMap(
     showCountry,
     showLand,
     highlightKey,
+    invalidateSize,
     destroy,
   };
 }

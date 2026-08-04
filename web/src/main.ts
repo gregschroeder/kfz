@@ -118,9 +118,17 @@ function syncMapDockLayout(): void {
   const layout = document.querySelector<HTMLElement>(".stats-scroll-layout");
   const block = document.querySelector<HTMLElement>(".stats-map-block");
   const lower = document.querySelector<HTMLElement>(".stats-map-lower");
+  const mapEl = document.getElementById("stats-map");
   if (!layout || !block || !lower) return;
-  const lowerHeight = Math.max(140, layout.clientHeight - block.offsetHeight);
-  lower.style.height = `${lowerHeight}px`;
+
+  // Half of the stats scroll viewport (below the topbar), in px — reliable on iOS PWAs.
+  if (mapEl) {
+    mapEl.style.height = `${Math.round(layout.clientHeight * 0.5)}px`;
+  }
+  // Reflow before measuring the sticky block (map + legend + attribution).
+  void block.offsetHeight;
+  lower.style.height = `${Math.max(140, layout.clientHeight - block.offsetHeight)}px`;
+  progressMap?.invalidateSize();
 }
 
 function observeMapDockLayout(): void {
@@ -148,6 +156,7 @@ function stopMapDockObserver(): void {
   document
     .querySelector<HTMLElement>(".stats-map-lower")
     ?.style.removeProperty("height");
+  document.getElementById("stats-map")?.style.removeProperty("height");
 }
 
 function canFocusInput(): boolean {

@@ -236,6 +236,7 @@ p {
 }
 
 .stats-map {
+  /* Fallback before JS measures; syncMapDockLayout sets an explicit px height */
   height: 50vh;
   height: 50dvh;
   width: 100%;
