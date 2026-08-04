@@ -237,8 +237,8 @@ p {
 
 .stats-map {
   /* Fallback before JS measures; syncMapDockLayout sets an explicit px height */
-  height: 50vh;
-  height: 50dvh;
+  height: 40vh;
+  height: 40dvh;
   width: 100%;
   border-radius: 14px;
   overflow: hidden;
@@ -329,8 +329,38 @@ p {
   white-space: nowrap;
 }
 
-.stats-map-lower {
-  overflow: visible;
+.stats-map-missing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  color: var(--muted, #9aa3b5);
+}
+
+.stats-map-missing-label {
+  font-weight: 600;
+  color: var(--text, #e8ecf4);
+}
+
+.stats-missing-code {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, #f97316 55%, #2a3348);
+  border-radius: 8px;
+  padding: 2px 8px;
+  background: color-mix(in srgb, #f97316 16%, var(--surface));
+  color: #ffd7a8;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.stats-missing-code:hover,
+.stats-missing-code:focus-visible {
+  border-color: #f97316;
+  background: color-mix(in srgb, #f97316 28%, var(--surface));
 }
 
 /* After the map docks, this pane fills the remaining viewport and owns table scroll */
@@ -605,6 +635,15 @@ p {
 
 .stats-bl-row {
   cursor: pointer;
+}
+
+.stats-prefix-row {
+  cursor: pointer;
+}
+
+.stats-prefix-row:hover td,
+.stats-prefix-row:focus-visible td {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
 }
 
 .stats-bl-row:hover td,

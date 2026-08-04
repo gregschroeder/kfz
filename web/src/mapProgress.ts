@@ -83,6 +83,7 @@ export type ProgressMap = {
   showCountry: () => void;
   showLand: (land: string) => RegionSummary[];
   highlightKey: (key: string | null) => void;
+  highlightLand: (land: string | null) => void;
   invalidateSize: () => void;
   destroy: () => void;
 };
@@ -94,8 +95,8 @@ function pathStyle(
   return {
     fillColor: fill,
     fillOpacity: opts.nullPct ? 0.35 : 0.85,
-    color: opts.selected ? "#f8fafc" : "#1f2937",
-    weight: opts.selected ? 2.5 : opts.pseudo ? 2 : 0.9,
+    color: opts.selected ? "#f97316" : "#1f2937",
+    weight: opts.selected ? 3 : opts.pseudo ? 2 : 0.9,
     opacity: 0.95,
   };
 }
@@ -139,19 +140,20 @@ export async function createProgressMap(
   const map = L.map(container, {
     zoomControl: true,
     attributionControl: true,
-    // Page scroll owns one-finger gestures; zoom with +/- / pinch.
+    // Page scroll owns one-finger pan; pinch / +/- to zoom.
     scrollWheelZoom: false,
     dragging: false,
+    touchZoom: true,
+    minZoom: 4,
+    maxZoom: 12,
   });
-  // Slightly tighter than full OVERVIEW_BOUNDS so Deutschland fills the frame more.
-  map.fitBounds(L.latLngBounds([47.2, 5.8], [55.1, 15.5]), { padding: [4, 4] });
 
   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: "abcd",
     maxZoom: 12,
-    minZoom: 5,
+    minZoom: 4,
   }).addTo(map);
 
   const attr = meta.attribution ?? "© GeoBasis-DE / BKG, Kraftfahrt-Bundesamt";
@@ -246,9 +248,25 @@ export async function createProgressMap(
     }).addTo(map);
 
     addPseudoLabels(nationalPseudo.features);
-    // Fit to rendered features (Länder + pseudo islands), with a bit less padding.
-    map.fitBounds(activeLayer.getBounds(), { padding: [10, 10], animate: true });
-    requestAnimationFrame(() => map.invalidateSize());
+    fitCurrentView(true);
+  }
+
+  function fitCurrentView(animate = false): void {
+    if (activeLayer && activeLayer.getLayers().length) {
+      const opts: L.FitBoundsOptions = {
+        padding: mode === "land" ? [16, 16] : [10, 10],
+        animate,
+      };
+      if (mode === "land") {
+        opts.maxZoom =
+          currentLand === "bundesweit" || currentLand === "Filmproduktion"
+            ? 8
+            : 10;
+      }
+      map.fitBounds(activeLayer.getBounds(), opts);
+      return;
+    }
+    map.fitBounds(OVERVIEW_BOUNDS, { padding: [10, 10], animate });
   }
 
   function regionsForLand(land: string): GeoFeature[] {
@@ -317,18 +335,7 @@ export async function createProgressMap(
     }).addTo(map);
 
     addPseudoLabels(features.filter((f) => f.properties.pseudo));
-
-    if (features.length) {
-      const bounds = L.geoJSON(collection).getBounds();
-      map.fitBounds(bounds, {
-        padding: [16, 16],
-        animate: true,
-        maxZoom: land === "bundesweit" || land === "Filmproduktion" ? 8 : 10,
-      });
-    } else {
-      map.fitBounds(OVERVIEW_BOUNDS, { padding: [10, 10], animate: true });
-    }
-    requestAnimationFrame(() => map.invalidateSize());
+    fitCurrentView(true);
     return summarizeRegions(features);
   }
 
@@ -354,10 +361,42 @@ export async function createProgressMap(
   function highlightKey(key: string | null): void {
     selectedKey = key;
     restyle();
+    if (!key || !activeLayer) return;
+    activeLayer.eachLayer((layer) => {
+      const feature = (layer as L.Layer & { feature?: GeoFeature }).feature;
+      if (feature && featureKey(feature.properties) === key) {
+        const path = layer as L.Path;
+        if (typeof path.bringToFront === "function") path.bringToFront();
+        if (typeof (layer as L.Polygon).getBounds === "function") {
+          map.fitBounds((layer as L.Polygon).getBounds(), {
+            padding: [28, 28],
+            animate: true,
+            maxZoom: 11,
+          });
+        }
+      }
+    });
+  }
+
+  function highlightLand(land: string | null): void {
+    if (!land || !activeLayer) {
+      highlightKey(null);
+      return;
+    }
+    let match: string | null = null;
+    activeLayer.eachLayer((layer) => {
+      const feature = (layer as L.Layer & { feature?: GeoFeature }).feature;
+      if (feature?.properties.land === land && !feature.properties.unmapped) {
+        match = featureKey(feature.properties);
+      }
+    });
+    highlightKey(match);
   }
 
   function invalidateSize(): void {
     map.invalidateSize({ animate: false });
+    // Re-fit after height changes (e.g. 40% pane) so we aren't stuck zoomed in.
+    fitCurrentView(false);
   }
 
   function destroy(): void {
@@ -373,6 +412,7 @@ export async function createProgressMap(
     showCountry,
     showLand,
     highlightKey,
+    highlightLand,
     invalidateSize,
     destroy,
   };

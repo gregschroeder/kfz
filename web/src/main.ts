@@ -121,9 +121,9 @@ function syncMapDockLayout(): void {
   const mapEl = document.getElementById("stats-map");
   if (!layout || !block || !lower) return;
 
-  // Half of the stats scroll viewport (below the topbar), in px — reliable on iOS PWAs.
+  // 40% of the stats scroll viewport (below the topbar), in px — reliable on iOS PWAs.
   if (mapEl) {
-    mapEl.style.height = `${Math.round(layout.clientHeight * 0.5)}px`;
+    mapEl.style.height = `${Math.round(layout.clientHeight * 0.4)}px`;
   }
   // Reflow before measuring the sticky block (map + legend + attribution).
   void block.offsetHeight;
@@ -329,15 +329,28 @@ function renderStatsTableRows(rows: BundeslandStats[]): string {
     .join("");
 }
 
-function renderPrefixDetailRows(items: PrefixResult[]): string {
+function renderPrefixDetailRows(
+  items: PrefixResult[],
+  opts?: { mapSelectable?: boolean },
+): string {
   return items
     .map((item) => {
       const queried =
         item.count > 0
           ? `<span class="stats-queried-at">${formatQueriedAtHtml(item.queried_at)}</span>`
           : "";
+      const selectable = Boolean(opts?.mapSelectable);
+      const rowClass = [
+        item.count > 0 ? "stats-prefix-found" : "stats-prefix-unfound",
+        selectable ? "stats-prefix-row" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      const attrs = selectable
+        ? ` data-prefix="${escapeHtml(item.code)}" role="button" tabindex="0"`
+        : "";
       return `
-          <tr class="${item.count > 0 ? "stats-prefix-found" : "stats-prefix-unfound"}">
+          <tr class="${rowClass}"${attrs}>
             <td>${escapeHtml(item.code)}</td>
             <td>${escapeHtml(formatHerleitung(item.ursprung))}</td>
             <td>${escapeHtml(item.landkreis)}</td>
@@ -455,6 +468,7 @@ function hideFeatureDetail(): void {
   panel.innerHTML = "";
   mapFeatureKey = null;
   progressMap?.highlightKey(null);
+  if (mapLand) progressMap?.invalidateSize();
   updateStatsBtnState();
 }
 
@@ -519,6 +533,7 @@ function navigateStatsLand(): void {
   // Drop region selection; stay on Bundesland (map only).
   hideFeatureDetail();
   if (statsViewMode === "map") {
+    progressMap?.invalidateSize();
     syncMapSummary();
     return;
   }
@@ -551,7 +566,7 @@ function renderMapPrefixTable(items: PrefixResult[]): void {
     <table class="stats-table stats-table-prefixes">
       ${STATS_PREFIX_COLGROUP}
       <thead aria-hidden="true">${STATS_PREFIX_HEAD}</thead>
-      <tbody>${renderPrefixDetailRows(items)}</tbody>
+      <tbody>${renderPrefixDetailRows(items, { mapSelectable: true })}</tbody>
     </table>`;
 }
 
@@ -582,6 +597,41 @@ function renderMapSummaryTable(
   renderMapPrefixTable(mapScopePrefixItems());
 }
 
+function renderMapMissingLine(): void {
+  const lower = document.querySelector(".stats-map-lower");
+  const existing = document.getElementById("stats-map-missing");
+  if (!lower || !mapLand) {
+    existing?.remove();
+    return;
+  }
+  const missing = mapLandPrefixItems
+    .filter((item) => item.count <= 0)
+    .sort((a, b) => a.code.localeCompare(b.code, "de"));
+  if (!missing.length) {
+    existing?.remove();
+    return;
+  }
+  const html = `
+    <span class="stats-map-missing-label">Missing (${missing.length}):</span>
+    ${missing
+      .map(
+        (item) =>
+          `<button type="button" class="stats-missing-code" data-prefix="${escapeHtml(item.code)}">${escapeHtml(item.code)}</button>`,
+      )
+      .join("")}`;
+  if (existing) {
+    existing.innerHTML = html;
+    return;
+  }
+  const el = document.createElement("p");
+  el.id = "stats-map-missing";
+  el.className = "stats-map-missing";
+  el.innerHTML = html;
+  const head = document.getElementById("stats-map-table-head");
+  if (head) lower.insertBefore(el, head);
+  else lower.prepend(el);
+}
+
 function syncMapSummary(): void {
   if (!cachedStats) return;
   const summaryEl = document.getElementById("stats-summary");
@@ -593,6 +643,7 @@ function syncMapSummary(): void {
         : mapLand;
     }
     renderMapSummaryTable("region", null, mapRegionRows);
+    renderMapMissingLine();
   } else {
     if (summaryEl) {
       summaryEl.textContent = formatProgress(cachedStats.found, cachedStats.total);
@@ -605,6 +656,7 @@ function syncMapSummary(): void {
       all.filter((row) => SPECIAL_BUNDESLAENDER.has(row.bundesland)),
     );
     renderMapSummaryTable("land", [...main, ...special], null);
+    document.getElementById("stats-map-missing")?.remove();
   }
   updateStatsBreadcrumb();
   updateStatsBtnState();
@@ -668,6 +720,22 @@ function selectMapRegion(props: MapFeatureProps, items: PrefixResult[]): void {
   progressMap?.highlightKey(mapFeatureKey);
   renderFeatureDetail(props, items);
   syncMapSummary();
+}
+
+function findRegionForPrefix(code: string): RegionSummary | undefined {
+  const needle = code.toLocaleUpperCase("de-DE");
+  const matches = mapRegionRows.filter((row) =>
+    (row.props.kfz ?? []).some((c) => c.toLocaleUpperCase("de-DE") === needle),
+  );
+  if (!matches.length) return undefined;
+  // Prefer a real district over the Unmapped bucket when both list the code.
+  return matches.find((row) => !row.unmapped) ?? matches[0];
+}
+
+function selectMapRegionForPrefix(code: string): void {
+  const region = findRegionForPrefix(code);
+  if (!region) return;
+  selectMapRegion(region.props, region.items);
 }
 
 function renderListBody(stats: StatsResult): void {
@@ -905,6 +973,9 @@ function renderBundeslandDetail(bundesland: string, items: PrefixResult[]): void
 
 async function showBundeslandDetail(bundesland: string): Promise<void> {
   if (statsViewMode === "map") {
+    if (!mapLand) {
+      progressMap?.highlightLand(bundesland);
+    }
     void enterMapLand(bundesland);
     return;
   }
@@ -1047,6 +1118,18 @@ function handleStatsContentClick(event: Event): void {
     return;
   }
 
+  const prefixRow = target.closest<HTMLElement>(".stats-prefix-row");
+  if (prefixRow?.dataset.prefix) {
+    selectMapRegionForPrefix(prefixRow.dataset.prefix);
+    return;
+  }
+
+  const missingCode = target.closest<HTMLElement>(".stats-missing-code");
+  if (missingCode?.dataset.prefix) {
+    selectMapRegionForPrefix(missingCode.dataset.prefix);
+    return;
+  }
+
   const row = target.closest<HTMLElement>(".stats-bl-row");
   if (!row?.dataset.bundesland) return;
   void showBundeslandDetail(row.dataset.bundesland);
@@ -1055,6 +1138,12 @@ function handleStatsContentClick(event: Event): void {
 function handleStatsContentKeydown(event: KeyboardEvent): void {
   if (event.key !== "Enter" && event.key !== " ") return;
   const target = event.target as HTMLElement;
+  const prefixRow = target.closest<HTMLElement>(".stats-prefix-row");
+  if (prefixRow?.dataset.prefix) {
+    event.preventDefault();
+    selectMapRegionForPrefix(prefixRow.dataset.prefix);
+    return;
+  }
   const row = target.closest<HTMLElement>(".stats-bl-row");
   if (!row?.dataset.bundesland) return;
   event.preventDefault();
