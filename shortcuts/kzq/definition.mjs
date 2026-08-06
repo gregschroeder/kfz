@@ -10,13 +10,15 @@
  *        Menu — Queue / Retry / Edit / Cancel
  *          Queue → POST + exit
  *          Retry → next dictate attempt
- *          Edit  → Ask → POST + exit
+ *          Edit  → Ask (scribble/keyboard on Watch; no skip-to-dictation) → POST + exit
  *          Cancel → exit
  *      Otherwise:
  *        Ask for Input (blank) → strip → POST + exit
  *
  * Replace Text WFInput must be WFTextTokenString (not Attachment).
  * Do not init Prefix to "" — blank can count as “has value”.
+ *
+ * opts.debug → Show Result after major steps (Watch-friendly; tap to continue).
  */
 
 const OBJ = "\uFFFC";
@@ -53,6 +55,16 @@ export const IDS = {
   noteBlank:      "A1000047-0000-4000-8000-000000000047",
   exitBlank:      "A1000048-0000-4000-8000-000000000048",
   repeatEnd:      "A1000049-0000-4000-8000-000000000049",
+  // Debug Show Result actions (only emitted when opts.debug)
+  dbgDictate:     "A1000050-0000-4000-8000-000000000050",
+  dbgSpoken:      "A1000051-0000-4000-8000-000000000051",
+  dbgPrefix:      "A1000052-0000-4000-8000-000000000052",
+  dbgHas:         "A1000053-0000-4000-8000-000000000053",
+  dbgEmpty:       "A1000054-0000-4000-8000-000000000054",
+  dbgPostQueue:   "A1000055-0000-4000-8000-000000000055",
+  dbgPostEdit:    "A1000056-0000-4000-8000-000000000056",
+  dbgPostBlank:   "A1000057-0000-4000-8000-000000000057",
+  dbgAskBlank:    "A1000058-0000-4000-8000-000000000058",
 };
 
 const GROUPS = {
@@ -221,7 +233,28 @@ function sanitizeToPrefix({ inputAtt, stripId, setId }) {
   ];
 }
 
-function postNotifyExit(functionsUrl, { postId, noteId, exitId }) {
+/** Show Result — works on Watch (tap to continue). Empty vars show as Spoken=[] */
+function showDebug(uuid, label, att) {
+  const head = `${label}: [`;
+  const range = `{${head.length}, 1}`;
+  return action(
+    "is.workflow.actions.showresult",
+    `<key>UUID</key><string>${uuid}</string>
+      <key>Text</key>${textToken(`${head}${OBJ}]`, {
+        [range]: att,
+      })}`,
+  );
+}
+
+function showDebugText(uuid, text) {
+  return action(
+    "is.workflow.actions.showresult",
+    `<key>UUID</key><string>${uuid}</string>
+      <key>Text</key>${plainText(text)}`,
+  );
+}
+
+function postNotifyExit(functionsUrl, { postId, noteId, exitId, debug, dbgPostId }) {
   const headers = dictField(`
               ${dictStringItem("Content-Type", plainText("application/json"))}
               ${dictStringItem("x-kfz-key", attachOutput(IDS.apiKeyText))}
@@ -230,7 +263,11 @@ function postNotifyExit(functionsUrl, { postId, noteId, exitId }) {
               ${dictStringItem("prefix", attachVariable("Prefix"))}
               ${dictStringItem("source", plainText("watch"))}
             `);
-  return [
+  const out = [];
+  if (debug && dbgPostId) {
+    out.push(showDebug(dbgPostId, "POST Prefix", variableRef("Prefix")));
+  }
+  out.push(
     action(
       "is.workflow.actions.downloadurl",
       `<key>UUID</key><string>${postId}</string>
@@ -252,15 +289,18 @@ function postNotifyExit(functionsUrl, { postId, noteId, exitId }) {
       "is.workflow.actions.exit",
       `<key>UUID</key><string>${exitId}</string>`,
     ),
-  ];
+  );
+  return out;
 }
 
 /**
- * @param {{ functionsUrl?: string }} [opts]
+ * @param {{ functionsUrl?: string, debug?: boolean, name?: string }} [opts]
  * @returns {string} XML plist
  */
 export function buildShortcutPlist(opts = {}) {
   const functionsUrl = opts.functionsUrl ?? DEFAULT_FUNCTIONS_URL;
+  const debug = Boolean(opts.debug);
+  const workflowName = opts.name ?? (debug ? "KZQ Debug" : "KZQ");
   const actions = [];
 
   actions.push(
@@ -291,6 +331,12 @@ export function buildShortcutPlist(opts = {}) {
     ),
   );
 
+  if (debug) {
+    actions.push(
+      showDebug(IDS.dbgDictate, "1 Dictate out", actionOutput(IDS.dictate, "Dictated Text")),
+    );
+  }
+
   actions.push(
     action(
       "is.workflow.actions.setvariable",
@@ -299,6 +345,10 @@ export function buildShortcutPlist(opts = {}) {
         <key>WFInput</key>${attachmentOnly(actionOutput(IDS.dictate, "Dictated Text"))}`,
     ),
   );
+
+  if (debug) {
+    actions.push(showDebug(IDS.dbgSpoken, "2 Spoken var", variableRef("Spoken")));
+  }
 
   actions.push(
     action(
@@ -316,6 +366,10 @@ export function buildShortcutPlist(opts = {}) {
     }),
   );
 
+  if (debug) {
+    actions.push(showDebug(IDS.dbgPrefix, "3 After strip Prefix", variableRef("Prefix")));
+  }
+
   actions.push(
     action(
       "is.workflow.actions.conditional",
@@ -326,10 +380,14 @@ export function buildShortcutPlist(opts = {}) {
     ),
   );
 
-  const QUEUE_LABEL = "✅  QUEUE";
-  const RETRY_LABEL = "🔄  RETRY";
-  const EDIT_LABEL = "✏️  EDIT";
-  const CANCEL_LABEL = "❌  CANCEL";
+  if (debug) {
+    actions.push(showDebugText(IDS.dbgHas, "4 Branch: HAS Prefix"));
+  }
+
+  const QUEUE_LABEL = "Queue";
+  const RETRY_LABEL = "Retry";
+  const EDIT_LABEL = "Edit";
+  const CANCEL_LABEL = "Cancel";
 
   actions.push(
     action(
@@ -374,6 +432,8 @@ export function buildShortcutPlist(opts = {}) {
       postId: IDS.postQueue,
       noteId: IDS.noteQueue,
       exitId: IDS.exitQueue,
+      debug,
+      dbgPostId: IDS.dbgPostQueue,
     }),
   );
 
@@ -388,7 +448,7 @@ export function buildShortcutPlist(opts = {}) {
     ),
   );
 
-  // Edit → Ask → POST + exit
+  // Edit → Ask (Watch: scribble/keyboard UI, not skip-to-dictation) → POST + exit
   actions.push(
     action(
       "is.workflow.actions.choosefrommenu",
@@ -402,10 +462,10 @@ export function buildShortcutPlist(opts = {}) {
     action(
       "is.workflow.actions.ask",
       `<key>UUID</key><string>${IDS.askEdit}</string>
-        <key>WFAskActionPrompt</key>
-        ${textToken(`Prefix: ${OBJ}`, { "{8, 1}": variableRef("Prefix") })}
+        <key>WFAskActionPrompt</key>${plainText("Edit prefix:")}
         <key>WFAskActionDefaultAnswer</key>${attachVariable("Prefix")}
-        <key>WFInputType</key><string>Text</string>`,
+        <key>WFInputType</key><string>Text</string>
+        <key>WFAskActionImmediateDictation</key><false/>`,
     ),
   );
   actions.push(
@@ -420,6 +480,8 @@ export function buildShortcutPlist(opts = {}) {
       postId: IDS.postEdit,
       noteId: IDS.noteEdit,
       exitId: IDS.exitEdit,
+      debug,
+      dbgPostId: IDS.dbgPostEdit,
     }),
   );
 
@@ -457,6 +519,9 @@ export function buildShortcutPlist(opts = {}) {
         <key>WFControlFlowMode</key><integer>1</integer>`,
     ),
   );
+  if (debug) {
+    actions.push(showDebugText(IDS.dbgEmpty, "4 Branch: EMPTY Prefix"));
+  }
   actions.push(
     action(
       "is.workflow.actions.ask",
@@ -472,11 +537,16 @@ export function buildShortcutPlist(opts = {}) {
       setId: IDS.setBlankPrefix,
     }),
   );
+  if (debug) {
+    actions.push(showDebug(IDS.dbgAskBlank, "5 After Ask Prefix", variableRef("Prefix")));
+  }
   actions.push(
     ...postNotifyExit(functionsUrl, {
       postId: IDS.postBlank,
       noteId: IDS.noteBlank,
       exitId: IDS.exitBlank,
+      debug,
+      dbgPostId: IDS.dbgPostBlank,
     }),
   );
 
@@ -510,7 +580,7 @@ export function buildShortcutPlist(opts = {}) {
   <key>WFWorkflowMinimumClientVersionString</key>
   <string>900</string>
   <key>WFWorkflowName</key>
-  <string>KZQ</string>
+  <string>${esc(workflowName)}</string>
   <key>WFWorkflowHasOutputFallback</key>
   <false/>
   <key>WFWorkflowHasShortcutInputVariables</key>

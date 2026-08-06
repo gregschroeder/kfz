@@ -13,6 +13,7 @@ Dictate → **materialize into Spoken** (Text + Set Variable) → parse → menu
 | `definition.mjs` | Source of truth |
 | `parse-spoken-prefix.mjs` | Parser algorithm (keep in sync with shortcut) |
 | `KZQ.shortcut` | Signed installable (generated) |
+| `KZQ.debug.shortcut` | Debug build with Show Result steps (generated, gitignored) |
 | `KZQ.unsigned.shortcut` | Pre-sign plist (generated, gitignored) |
 
 ### Build (macOS)
@@ -20,6 +21,7 @@ Dictate → **materialize into Spoken** (Text + Set Variable) → parse → menu
 ```bash
 pnpm shortcuts:build              # prod → KZQ.shortcut (+ Pages)
 pnpm shortcuts:build -- --local   # local stack → KZQ.local.shortcut
+pnpm shortcuts:build -- --debug   # prod + Show Result steps → KZQ.debug.shortcut
 ```
 
 Local build needs Supabase running (`pnpm dev:local`). Import key: `local-dev-key`.
@@ -28,7 +30,36 @@ Local build needs Supabase running (`pnpm dev:local`). Import key: `local-dev-ke
 open shortcuts/kzq/KZQ.local.shortcut
 ```
 
-### Install
+### Debug on Watch (LAN install)
+
+You don’t install onto the Watch from a URL. Phone downloads/imports → **Show on Apple Watch** → run on Watch.
+
+```bash
+pnpm shortcuts:build -- --debug
+pnpm web:dev   # serves web/public/shortcuts/ on :5173 (host: true)
+```
+
+On the phone (same Wi‑Fi as the Mac), open:
+
+```
+http://<mac-lan-ip>:5173/shortcuts/KZQ.debug.shortcut
+```
+
+Import as **KZQ Debug**, enter the household API key, then on iPhone: Shortcuts → KZQ Debug → ⓘ → **Show on Apple Watch**.
+
+On Watch, each major step shows a **Show Result** screen (tap to continue):
+
+1. Dictate out — raw Dictate Text action output  
+2. Spoken var — after Set Variable  
+3. After strip Prefix — letters-only Prefix  
+4. Branch: HAS Prefix | EMPTY Prefix  
+5. POST Prefix — value about to be sent (and After Ask if empty branch)
+
+Blank values render as `label: []`.
+
+`--debug --local` points capture at the Mac’s LAN IP (not `127.0.0.1`) so the phone/Watch can reach local Supabase functions.
+
+### Install (prod)
 
 After deploy: **[https://kfz.schroeder.org/shortcuts/](https://kfz.schroeder.org/shortcuts/)**
 
